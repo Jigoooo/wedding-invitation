@@ -1,6 +1,12 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+  InternalAxiosRequestConfig,
+} from 'axios';
 
-import { getToken, logOnDev } from '@/shared/lib';
+import { logOnDev } from '@/shared/lib';
 
 const onRequest = (config: AxiosRequestConfig): Promise<InternalAxiosRequestConfig> => {
   const { method, url, headers } = config;
@@ -11,7 +17,7 @@ const onRequest = (config: AxiosRequestConfig): Promise<InternalAxiosRequestConf
     throw new Error(`axios header is undefined`);
   }
 
-  const token = getToken();
+  const token = '';
 
   if (!!token) {
     // headers.Authorization = `Bearer ${token}`;
@@ -54,7 +60,9 @@ const onErrorResponse = (error: AxiosError | Error) => {
     const { method, url } = error.config as AxiosRequestConfig;
     const { status, statusText } = error.response as AxiosResponse;
 
-    logOnDev(`onErrorResponse [API] ${method?.toUpperCase?.()} ${url} | Error ${status} ${statusText} | ${message}`);
+    logOnDev(
+      `onErrorResponse [API] ${method?.toUpperCase?.()} ${url} | Error ${status} ${statusText} | ${message}`,
+    );
   } else if (error.name === 'TimeoutError') {
     logOnDev(`[API] | TimeError ${error.toString()}`);
   } else {

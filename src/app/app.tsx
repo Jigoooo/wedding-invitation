@@ -1,10 +1,15 @@
 import '@/app/providers/css';
-import '@/app/providers/chart';
 
 import { RouterProvider } from 'react-router-dom';
 
 import { browserRouter } from '@/app/router';
-import { LoadingProvider, ThemeProvider, ErrorProvider, QueryProvider, AlertProvider } from '@/app/providers';
+import {
+  LoadingProvider,
+  ThemeProvider,
+  ErrorProvider,
+  QueryProvider,
+  AlertProvider,
+} from '@/app/providers';
 
 function App() {
   return (

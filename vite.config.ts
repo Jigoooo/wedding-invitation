@@ -11,11 +11,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
-  build: {
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
-  },
   server: {
     proxy: {
       // '/api': {

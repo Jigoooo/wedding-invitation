@@ -5,7 +5,5 @@ export * from './error';
 export * from './loader';
 export * from './tab';
 export * from './address';
-export * from './chart';
 export * from './table';
 export * from './file';
-export * from './text-editor';
