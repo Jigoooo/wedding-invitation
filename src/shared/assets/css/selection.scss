@@ -1,0 +1,32 @@
+//$selection-bg: #D7624E;
+//@function shadow($s-color,$s-start,$s-width) {
+//  $output: '';
+//  $a: $s-start;
+//  $x: $a;
+//  $y: $a;
+//  $i: 0.0025em;
+//  $s-size: $s-width + $s-start;
+//  @while  $x <= ($s-size + $i) {
+//    $output: $output + '#{$x} #{$y} 0 #{$s-color}';
+//    @if ($s-size + 0) >=  $x {
+//      $output: $output + ', ';
+//    }
+//    $y: $y + $i;
+//    $x: $x + $i;
+//  }
+//  @return unquote($output);
+//}
+//
+//@mixin text-shadow($shadows) {
+//  text-shadow: $shadows;
+//}
+//
+//::selection {
+//  @include text-shadow(shadow( $selection-bg,0,0.1em));
+//}
+
+::selection {
+  color: #ffffff;
+  background-color: #437ADC;
+  //text-shadow: 1px 1px 0 #3cc475;
+}

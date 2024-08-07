@@ -1,0 +1,108 @@
+.calendar {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(7, minmax(50px, 1fr));
+    overflow: auto;
+    user-select: none;
+
+    &-container {
+        width: 100%;
+        padding-bottom: 30px;
+        overflow: hidden;
+        border-radius: 10px;
+        user-select: none;
+    }
+
+    &-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px 15px;
+        align-items: center;
+        //background: linear-gradient(to bottom, rgb(250, 251, 253) 0%,rgba(255,255,255,0) 100%);
+        border-bottom: 2px solid rgba(141, 142, 145, 0.12);
+        user-select: none;
+
+        h1 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        p {
+            margin: 5px 0 0 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(#51565d, .4);
+        }
+    }
+}
+
+.day {
+    letter-spacing: 1px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+
+    &:nth-of-type(n + 1):nth-of-type(-n + 7) {
+        grid-row: 2;
+    }
+
+    &:nth-of-type(n + 8):nth-of-type(-n + 14) {
+        grid-row: 3;
+    }
+
+    &:nth-of-type(n + 15):nth-of-type(-n + 21) {
+        grid-row: 4;
+    }
+
+    &:nth-of-type(n + 22):nth-of-type(-n + 28) {
+        grid-row: 5;
+    }
+
+    &:nth-of-type(n + 29):nth-of-type(-n + 35) {
+        grid-row: 6;
+    }
+
+    &:nth-of-type(7n + 1) {
+        grid-column: 1/1;
+    }
+
+    &:nth-of-type(7n + 2) {
+        grid-column: 2/2;
+    }
+
+    &:nth-of-type(7n + 3) {
+        grid-column: 3/3;
+    }
+
+    &:nth-of-type(7n + 4) {
+        grid-column: 4/4;
+    }
+
+    &:nth-of-type(7n + 5) {
+        grid-column: 5/5;
+    }
+
+    &:nth-of-type(7n + 6) {
+        grid-column: 6/6;
+    }
+    &:nth-of-type(7n + 7) {
+        grid-column: 7/7;
+    }
+
+    &--disabled__light {
+        color: rgba(#98a0a6, 0.6);
+        background-color: #efefef;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &--disabled__dark {
+        color: rgba(#a1a1a1, 0.6);
+        background-color: #1c1c1c;
+        cursor: not-allowed;
+        margin-left: -2px;
+        pointer-events: none;
+    }
+}
