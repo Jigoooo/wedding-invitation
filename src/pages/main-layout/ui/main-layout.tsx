@@ -14,9 +14,11 @@ export function MainLayout() {
   return (
     <Stack
       sx={{
-        height: '100vh',
+        minHeight: '100vh',
         width: '100vw',
+        justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#eaeaea',
       }}
     >
       <Outlet />

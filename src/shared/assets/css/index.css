@@ -40,13 +40,8 @@ select:-webkit-autofill:focus {
   -webkit-user-select: none;
 }
 
-.hide-scroll::-webkit-scrollbar {
-  display: none;
-}
-
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {
