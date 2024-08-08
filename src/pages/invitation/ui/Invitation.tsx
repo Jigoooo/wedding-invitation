@@ -1,36 +1,24 @@
-import { CircularProgress, Stack, Typography } from '@mui/joy';
-import Snowfall from 'react-snowfall';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import HeaderImage from '@/shared/assets/images/wedding-image/header-image.webp';
 import { useEffect, useState } from 'react';
+import { Stack, Typography } from '@mui/joy';
+import Snowfall from 'react-snowfall';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+
+import HeaderImage from '@/shared/assets/images/wedding-image/header-image-origin.webp';
 
 const WEDDING_DATE = '2024.12.14';
 const WEDDING_DAY = 'SATURDAY';
 
 export function Invitation() {
   const imagesLoaded = useImageLoader(HeaderImage);
-
-  if (!imagesLoaded) {
-    return (
-      <Stack
-        sx={{
-          height: '100%',
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '#f4f4f4',
-        }}
-      >
-        <CircularProgress />
-      </Stack>
-    );
-  }
+  console.log(imagesLoaded);
 
   return (
     <Stack
       sx={{
         minWidth: 360,
-        maxWidth: 420,
+        maxWidth: 450,
         height: '100%',
         width: '100%',
         alignItems: 'center',
@@ -84,7 +72,12 @@ export function Invitation() {
               {WEDDING_DAY}
             </Typography>
           </Stack>
-          <img src={HeaderImage} alt='Header' style={{ width: '100%', height: 'auto' }} />
+          <LazyLoadImage
+            style={{ width: '100%', minHeight: 560, maxHeight: 630 }}
+            alt={'Header'}
+            effect='blur'
+            src={HeaderImage}
+          />
           <Stack sx={{ width: '100%', gap: 1 }}>
             <Typography
               sx={{
