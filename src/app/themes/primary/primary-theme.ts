@@ -37,8 +37,8 @@ export const primaryTheme = extendTheme({
     },
   },
   fontFamily: {
-    body: 'Pretendard',
-    display: 'Pretendard',
+    body: 'Maruburi',
+    display: 'Maruburi',
   },
   components: {
     JoyInput: {
