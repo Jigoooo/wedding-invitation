@@ -1,11 +1,31 @@
-import { Stack, Typography } from '@mui/joy';
+import { CircularProgress, Stack, Typography } from '@mui/joy';
+import Snowfall from 'react-snowfall';
 
-import HeaderImage from '@/shared/assets/images/wedding-image/header-image.jpeg';
+import HeaderImage from '@/shared/assets/images/wedding-image/header-image.webp';
+import { useEffect, useState } from 'react';
 
 const WEDDING_DATE = '2024.12.14';
 const WEDDING_DAY = 'SATURDAY';
 
 export function Invitation() {
+  const imagesLoaded = useImageLoader(HeaderImage);
+
+  if (!imagesLoaded) {
+    return (
+      <Stack
+        sx={{
+          height: '100%',
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#f4f4f4',
+        }}
+      >
+        <CircularProgress />
+      </Stack>
+    );
+  }
+
   return (
     <Stack
       sx={{
@@ -17,8 +37,25 @@ export function Invitation() {
         backgroundColor: '#f4f4f4',
         boxShadow: '0 0 30px rgba(0, 0, 0, 0.1)',
         overflowY: 'auto',
+        position: 'relative',
       }}
     >
+      <Snowfall
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 999,
+          height: '100%',
+          width: '100%',
+          background: 'transparent',
+        }}
+        radius={[1, 2]}
+        rotationSpeed={[-1.0, 1.0]}
+        speed={[1.0, 2.0]}
+        wind={[-0.5, 1.0]}
+        snowflakeCount={100}
+      />
       <Stack component={'section'} sx={{ height: '100%', width: '100%', alignItems: 'center' }}>
         <Stack
           component={'header'}
@@ -104,3 +141,17 @@ export function Invitation() {
     </Stack>
   );
 }
+
+const useImageLoader = (imageSrc: string): boolean => {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => {
+      setImagesLoaded(true);
+    };
+  }, [imageSrc]);
+
+  return imagesLoaded;
+};
