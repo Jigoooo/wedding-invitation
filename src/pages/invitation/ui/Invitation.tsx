@@ -1,6 +1,5 @@
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { useEffect, useState } from 'react';
 import { Stack, Typography } from '@mui/joy';
 import Snowfall from 'react-snowfall';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
@@ -11,9 +10,6 @@ const WEDDING_DATE = '2024.12.14';
 const WEDDING_DAY = 'SATURDAY';
 
 export function Invitation() {
-  const imagesLoaded = useImageLoader(HeaderImage);
-  console.log(imagesLoaded);
-
   return (
     <Stack
       sx={{
@@ -73,10 +69,13 @@ export function Invitation() {
             </Typography>
           </Stack>
           <LazyLoadImage
-            style={{ width: '100%', minHeight: 560, maxHeight: 630 }}
+            style={{ width: '100%' }}
             alt={'Header'}
             effect='blur'
             src={HeaderImage}
+            height={630}
+            width={420}
+            // visibleByDefault={true}
           />
           <Stack sx={{ width: '100%', gap: 1 }}>
             <Typography
@@ -134,17 +133,3 @@ export function Invitation() {
     </Stack>
   );
 }
-
-const useImageLoader = (imageSrc: string): boolean => {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  useEffect(() => {
-    const img = new Image();
-    img.src = imageSrc;
-    img.onload = () => {
-      setImagesLoaded(true);
-    };
-  }, [imageSrc]);
-
-  return imagesLoaded;
-};
