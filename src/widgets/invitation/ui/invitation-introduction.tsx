@@ -24,7 +24,7 @@ export function InvitationIntroduction() {
 
   const closeCallInfo = () => {
     toggleCallInfo();
-    navigate(-1);
+    navigate(RouterName.INVITATION);
   };
 
   return (
@@ -71,7 +71,7 @@ export function InvitationIntroduction() {
       <AnimatedSection>
         <Box sx={{ width: '100%', px: 2 }}>
           <img
-            style={{ width: '100%', borderRadius: 12 }}
+            style={{ width: '100%', borderRadius: 6 }}
             src={getWeddingImageSrc('info-image-origin.webp')}
             alt={'Info'}
           />
@@ -119,8 +119,8 @@ export function InvitationIntroduction() {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <SoftButton
             onClick={openCallInfo}
-            sx={{ width: '60%', color: '#666666', border: '1px solid #eeeeee' }}
-            buttonColor={'#f8f8f8'}
+            sx={{ width: '60%', color: '#666666', border: '1px solid #eaeaea' }}
+            buttonColor={'#ffffff'}
             startDecorator={<CallIcon />}
           >
             연락하기

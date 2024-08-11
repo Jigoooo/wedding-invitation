@@ -13,8 +13,12 @@ import {
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
 import { parse } from 'date-fns';
 
-const WEDDING_DATE = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
+const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
+const GROOM_NAME = '김지우';
+const BRIDE_NAME = '김지영';
+const WEDDING_ADDRESS = '충남 천안시 서북구 천안대로 1198-30';
+const WEDDING_LOCATION_NAME = '천안 비렌티 신관 3F, 루체오홀';
 const MAX_WIDTH = 430;
 
 export function Invitation() {
@@ -44,41 +48,55 @@ export function Invitation() {
       >
         <IntroAnimation />
         <FallingAnimation />
-        <InvitationHeader weddingDate={WEDDING_DATE} />
+
+        <InvitationHeader
+          weddingDate={weddingDate}
+          weddingLocationName={WEDDING_LOCATION_NAME}
+          groomName={GROOM_NAME}
+          brideName={BRIDE_NAME}
+        />
+
         <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14 }}>
           <InvitationIntroduction />
+
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
               <SectionHeader engTitle={'GALLERY'} korTitle={'갤러리'} />
             </Stack>
           </AnimatedSection>
-          <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-            <WeddingCalendar weddingDate={WEDDING_DATE} />
-          </Stack>
-          <AnimatedSection>
-            <InvitationLocationInfo />
-          </AnimatedSection>
+
+          <WeddingCalendar weddingDate={weddingDate} />
+
+          <InvitationLocationInfo
+            weddingAddress={WEDDING_ADDRESS}
+            weddingLocationName={WEDDING_LOCATION_NAME}
+          />
+
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
               <SectionHeader engTitle={'INFORMATION'} korTitle={'예식정보 및 안내사항'} />
             </Stack>
           </AnimatedSection>
+
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
               <SectionHeader engTitle={'ACCOUNT'} korTitle={'마음 전하실 곳'} />
             </Stack>
           </AnimatedSection>
+
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
               <SectionHeader engTitle={'GUESTBOOK'} korTitle={'방명록'} />
             </Stack>
           </AnimatedSection>
+
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
               참석의사 전달
             </Stack>
           </AnimatedSection>
         </Stack>
+
         <Stack component={'footer'} sx={{ width: '100%', mt: 'auto', alignItems: 'center' }}>
           Footer - 카톡공유, 링크주소 복사 등
         </Stack>

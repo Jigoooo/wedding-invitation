@@ -1,41 +1,57 @@
 import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { getWeddingImageSrc } from '@/entities/invitation';
 import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
-const maskLinearGradientStyle = {
-  maskImage: `linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(0, 0, 0, 0.1) 2%, 
-    rgba(0, 0, 0, 0.3) 4%, 
-    rgba(0, 0, 0, 0.5) 6%, 
-    rgba(0, 0, 0, 0.7) 8%, 
-    rgba(0, 0, 0, 0.9) 10%, 
-    #000 12%, 
-    #000 88%, 
-    rgba(0, 0, 0, 0.9) 90%, 
-    rgba(0, 0, 0, 0.7) 92%, 
-    rgba(0, 0, 0, 0.5) 94%, 
-    rgba(0, 0, 0, 0.3) 96%, 
-    rgba(0, 0, 0, 0.1) 98%, 
-    transparent 100%)`,
-  WebkitMaskImage: `linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(0, 0, 0, 0.1) 2%, 
-    rgba(0, 0, 0, 0.3) 4%, 
-    rgba(0, 0, 0, 0.5) 6%, 
-    rgba(0, 0, 0, 0.7) 8%, 
-    rgba(0, 0, 0, 0.9) 10%, 
-    #000 12%, 
-    #000 88%, 
-    rgba(0, 0, 0, 0.9) 90%, 
-    rgba(0, 0, 0, 0.7) 92%, 
-    rgba(0, 0, 0, 0.5) 94%, 
-    rgba(0, 0, 0, 0.3) 96%, 
-    rgba(0, 0, 0, 0.1) 98%, 
-    transparent 100%)`,
-};
+// const maskLinearGradientStyle = {
+//   maskImage: `linear-gradient(180deg,
+//     transparent 0%,
+//     rgba(0, 0, 0, 0.1) 2%,
+//     rgba(0, 0, 0, 0.3) 4%,
+//     rgba(0, 0, 0, 0.5) 6%,
+//     rgba(0, 0, 0, 0.7) 8%,
+//     rgba(0, 0, 0, 0.9) 10%,
+//     #000 12%,
+//     #000 88%,
+//     rgba(0, 0, 0, 0.9) 90%,
+//     rgba(0, 0, 0, 0.7) 92%,
+//     rgba(0, 0, 0, 0.5) 94%,
+//     rgba(0, 0, 0, 0.3) 96%,
+//     rgba(0, 0, 0, 0.1) 98%,
+//     transparent 100%)`,
+//   WebkitMaskImage: `linear-gradient(180deg,
+//     transparent 0%,
+//     rgba(0, 0, 0, 0.1) 2%,
+//     rgba(0, 0, 0, 0.3) 4%,
+//     rgba(0, 0, 0, 0.5) 6%,
+//     rgba(0, 0, 0, 0.7) 8%,
+//     rgba(0, 0, 0, 0.9) 10%,
+//     #000 12%,
+//     #000 88%,
+//     rgba(0, 0, 0, 0.9) 90%,
+//     rgba(0, 0, 0, 0.7) 92%,
+//     rgba(0, 0, 0, 0.5) 94%,
+//     rgba(0, 0, 0, 0.3) 96%,
+//     rgba(0, 0, 0, 0.1) 98%,
+//     transparent 100%)`,
+// };
 
-export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
+export function InvitationHeader({
+  weddingDate,
+  weddingLocationName,
+  groomName,
+  brideName,
+}: {
+  weddingDate: Date;
+  weddingLocationName: string;
+  groomName: string;
+  brideName: string;
+}) {
+  const formattedDate = format(weddingDate, 'yyyy년 M월 d일', { locale: ko });
+  const formattedTime = format(weddingDate, 'a h시', { locale: ko });
+
+  const fullFormattedDate = `${formattedDate} ${formattedTime}`;
+
   return (
     <Stack
       component={'header'}
@@ -68,7 +84,7 @@ export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
         style={{
           width: '100%',
           borderRadius: 3,
-          ...maskLinearGradientStyle,
+          // ...maskLinearGradientStyle,
         }}
         alt={'Header'}
         src={getWeddingImageSrc('header-image-origin.webp')}
@@ -90,7 +106,7 @@ export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
             textAlign: 'center',
           }}
         >
-          김지우
+          {groomName}
         </Typography>
         <Divider sx={{ mx: 0.3, backgroundColor: '#999999' }} orientation='vertical' />
         <Typography
@@ -100,7 +116,7 @@ export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
             textAlign: 'center',
           }}
         >
-          김지영
+          {brideName}
         </Typography>
       </Box>
       <Stack sx={{ width: '100%', gap: 1 }}>
@@ -113,9 +129,9 @@ export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
             lineHeight: 2,
           }}
         >
-          2024년 12월 14일 오후 1시
+          {fullFormattedDate}
           <br />
-          천안 비렌티 신관 3F, 루체오홀
+          {weddingLocationName}
         </Typography>
       </Stack>
     </Stack>
