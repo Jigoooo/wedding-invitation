@@ -9,7 +9,10 @@ export function InvitationHeader({
   weddingDay: string;
 }) {
   return (
-    <Stack component={'header'} sx={{ width: '100%', alignItems: 'center', pt: 4, gap: 2.5 }}>
+    <Stack
+      component={'header'}
+      sx={{ width: '100%', height: 950, alignItems: 'center', pt: 4, gap: 2.5 }}
+    >
       <Stack sx={{ width: '100%', alignItems: 'center' }}>
         <Typography
           sx={{

@@ -13,4 +13,6 @@ export {
   generateRandomNumber,
   setScreenSize,
   transformArrayToDictByKey,
+  openPhoneApp,
+  openSmsApp,
 } from './common-lib.ts';

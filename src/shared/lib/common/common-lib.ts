@@ -72,7 +72,10 @@ export function setScreenSize() {
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
-export function transformArrayToDictByKey<T, K extends keyof T>(array: T[], key: K): { [key: string]: T } {
+export function transformArrayToDictByKey<T, K extends keyof T>(
+  array: T[],
+  key: K,
+): { [key: string]: T } {
   return array.reduce((acc: { [key: string]: T }, cur: T) => {
     const keyValue = String(cur[key]);
 
@@ -114,3 +117,11 @@ export const scrollToTopNoneSmooth = () => {
     top: 0,
   });
 };
+
+export function openPhoneApp(phoneNumber: string) {
+  window.location.href = `tel:${phoneNumber}`;
+}
+
+export function openSmsApp(phoneNumber: string, message: string = '') {
+  window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+}

@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { RouterName } from '@/shared/enum';
 import { RouteErrorPage } from '@/shared/components';
-import { Invitation } from '@/pages/invitation';
+import { Invitation, InvitationCallInfo } from '@/pages/invitation';
 
 export const browserRouter = createBrowserRouter([
   {
@@ -12,7 +12,7 @@ export const browserRouter = createBrowserRouter([
     children: [
       {
         path: RouterName.CALL_INFO,
-        element: <div></div>,
+        element: <InvitationCallInfo />,
       },
     ],
   },

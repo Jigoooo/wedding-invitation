@@ -1,27 +1,17 @@
 import { ReactNode, useEffect } from 'react';
-import { Box, Divider, IconButton, Tooltip } from '@mui/joy';
+import { Box, Divider, Tooltip } from '@mui/joy';
 import { AnimatePresence, motion } from 'framer-motion';
 import CloseIcon from '@mui/icons-material/Close';
 
 import { MODAL_Z_INDEX } from '@/shared/constants';
 import { SxProps } from '@mui/joy/styles/types';
+import { useBackKeyToClose } from '@/shared/hooks';
+import { IconButton } from '@/shared/ui';
 
 type ModalType = {
   isOpen: boolean;
   onClose: () => void;
   title: ReactNode;
-  defaultSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
-  minSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
-  maxSize?: {
-    width?: number | string;
-    height?: number | string;
-  };
   sx?: SxProps;
   children: ReactNode;
 };
@@ -29,21 +19,7 @@ type ModalType = {
 const modalHeaderHeight = 80;
 
 export function TranslucentMobileModal({ isOpen, onClose, title, sx, children }: ModalType) {
-  useEffect(() => {
-    const handleBackKey = (event: PopStateEvent) => {
-      if (isOpen) {
-        onClose();
-        event.preventDefault();
-        window.history.pushState(null, '', window.location.pathname);
-      }
-    };
-
-    window.addEventListener('popstate', handleBackKey);
-
-    return () => {
-      window.removeEventListener('popstate', handleBackKey);
-    };
-  }, [isOpen, onClose]);
+  useBackKeyToClose(isOpen, onClose);
 
   useEffect(() => {
     if (isOpen) {
@@ -134,7 +110,7 @@ function ModalHeader({ title, onClose }: { title: ReactNode; onClose: () => void
       {title}
       <Tooltip title={'닫기'} placement={'top'}>
         <IconButton onClick={onClose} color={'neutral'}>
-          <CloseIcon style={{ fontSize: 32 }} />
+          <CloseIcon style={{ color: '#ffffff', fontSize: 32 }} />
         </IconButton>
       </Tooltip>
     </Box>
