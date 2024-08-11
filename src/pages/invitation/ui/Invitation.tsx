@@ -39,7 +39,7 @@ export function Invitation() {
           boxShadow: '0 0 30px rgba(0, 0, 0, 0.1)',
           overflowY: 'auto',
           position: 'relative',
-          px: 1,
+          // px: 1,
         }}
       >
         <IntroAnimation />
@@ -52,11 +52,9 @@ export function Invitation() {
               <SectionHeader engTitle={'GALLERY'} korTitle={'갤러리'} />
             </Stack>
           </AnimatedSection>
-          <AnimatedSection>
-            <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              <WeddingCalendar weddingDate={WEDDING_DATE} />
-            </Stack>
-          </AnimatedSection>
+          <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
+            <WeddingCalendar weddingDate={WEDDING_DATE} />
+          </Stack>
           <AnimatedSection>
             <InvitationLocationInfo />
           </AnimatedSection>

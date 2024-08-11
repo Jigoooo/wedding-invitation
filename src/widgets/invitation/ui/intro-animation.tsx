@@ -40,22 +40,41 @@ export function IntroAnimation() {
               gap: 0.8,
             }}
           >
-            {['지우, ', '지영의 ', '결혼식에 ', '초대합니다.'].map((text, index) => (
-              <Typography
-                component={motion.span}
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 + index * 0.5, duration: 0.3 }}
-                style={{
-                  display: 'inline-block',
-                  color: '#ffffff',
-                  fontSize: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                {text}
-              </Typography>
+            {['지우', '지영의 ', '결혼식에 ', '초대합니다.'].map((text, index) => (
+              <Box key={index}>
+                <Typography
+                  component={motion.span}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 + index * 0.5, duration: 0.3 }}
+                  style={{
+                    display: 'inline-block',
+                    color: '#ffffff',
+                    fontSize: '1.1rem',
+                    fontWeight: 800,
+                    textAlign: 'center',
+                  }}
+                >
+                  {text}
+                </Typography>
+                {index === 0 && (
+                  <Typography
+                    component={motion.span}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1, duration: 0.3 }}
+                    style={{
+                      display: 'inline-block',
+                      color: '#ec6e6e',
+                      fontSize: '1.1rem',
+                      fontWeight: 800,
+                      textAlign: 'center',
+                    }}
+                  >
+                    &nbsp;&hearts;
+                  </Typography>
+                )}
+              </Box>
             ))}
           </Box>
         </Stack>

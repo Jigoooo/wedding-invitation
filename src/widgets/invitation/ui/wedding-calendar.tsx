@@ -9,6 +9,7 @@ import {
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
+import { AnimatedSection } from '@/entities/invitation';
 
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 const calendarData = [
@@ -34,76 +35,85 @@ export function WeddingCalendar({ weddingDate }: { weddingDate: Date }) {
         py: 6,
       }}
     >
-      <Box sx={{ textAlign: 'center', mb: 3 }}>
-        <Typography sx={{ fontSize: '1.3rem', letterSpacing: 1.8, fontWeight: 'bold' }}>
-          {format(weddingDate, 'yyyy. MM. dd.')}
-        </Typography>
-        <Typography sx={{ fontSize: '0.9rem', letterSpacing: 1.8, marginTop: 1 }}>
-          {`${format(weddingDate, 'EEEE', { locale: ko })} 오후 1시`}
-        </Typography>
-      </Box>
-      <Divider />
+      <AnimatedSection>
+        <Box sx={{ textAlign: 'center', mb: 3 }}>
+          <Typography sx={{ fontSize: '1.3rem', letterSpacing: 1.8, fontWeight: 'bold' }}>
+            {format(weddingDate, 'yyyy. MM. dd.')}
+          </Typography>
+          <Typography sx={{ fontSize: '0.9rem', letterSpacing: 1.8, marginTop: 1 }}>
+            {`${format(weddingDate, 'EEEE', { locale: ko })} 오후 1시`}
+          </Typography>
+        </Box>
+      </AnimatedSection>
+      <AnimatedSection>
+        <Divider />
+      </AnimatedSection>
       <Stack
         sx={{
           width: '100%',
           py: 2,
         }}
       >
-        <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
-          {daysOfWeek.map((day) => (
-            <Typography
-              key={day}
-              sx={{
-                fontWeight: 'bold',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: 32,
-                height: 32,
-                color: day === '일' ? 'crimson' : 'inherit',
-              }}
-            >
-              {day}
-            </Typography>
-          ))}
-        </Box>
+        <AnimatedSection>
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+            {daysOfWeek.map((day) => (
+              <Typography
+                key={day}
+                sx={{
+                  fontWeight: 'bold',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: 32,
+                  height: 32,
+                  color: day === '일' ? 'crimson' : 'inherit',
+                }}
+              >
+                {day}
+              </Typography>
+            ))}
+          </Box>
+        </AnimatedSection>
 
         {calendarData.map((week, index) => (
-          <Box
-            key={index}
-            sx={{ mt: 1, display: 'flex', width: '100%', justifyContent: 'space-between' }}
-          >
-            {week.map((day, dayIndex) =>
-              day ? (
-                <Box
-                  key={dayIndex}
-                  sx={{
-                    pl: 0.3,
-                    width: 32,
-                    height: 32,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    borderRadius: '50%',
-                    backgroundColor: day === weddingDay ? '#f79e9e' : 'transparent',
-                    color: dayIndex === 0 ? 'crimson' : day === weddingDay ? 'white' : 'inherit',
-                    fontWeight: day === weddingDay ? 'bold' : 'normal',
-                    letterSpacing: 1.2,
-                  }}
-                >
-                  {day}
-                </Box>
-              ) : (
-                <Box key={dayIndex} sx={{ pl: 0.3, width: 32, height: 32, letterSpacing: 1.2 }} />
-              ),
-            )}
-          </Box>
+          <AnimatedSection key={index}>
+            <Box sx={{ mt: 1, display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+              {week.map((day, dayIndex) =>
+                day ? (
+                  <Box
+                    key={dayIndex}
+                    sx={{
+                      pl: 0.3,
+                      width: 32,
+                      height: 32,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      borderRadius: '50%',
+                      backgroundColor: day === weddingDay ? '#f79e9e' : 'transparent',
+                      color: dayIndex === 0 ? 'crimson' : day === weddingDay ? 'white' : 'inherit',
+                      fontWeight: day === weddingDay ? 'bold' : 'normal',
+                      letterSpacing: 1.2,
+                    }}
+                  >
+                    {day}
+                  </Box>
+                ) : (
+                  <Box key={dayIndex} sx={{ pl: 0.3, width: 32, height: 32, letterSpacing: 1.2 }} />
+                ),
+              )}
+            </Box>
+          </AnimatedSection>
         ))}
       </Stack>
-      <Divider />
+      <AnimatedSection>
+        <Divider />
+      </AnimatedSection>
 
-      <WeddingCountdownTimer weddingDate={weddingDate} />
+      <AnimatedSection>
+        <WeddingCountdownTimer weddingDate={weddingDate} />
+      </AnimatedSection>
     </Stack>
   );
 }

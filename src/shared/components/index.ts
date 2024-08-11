@@ -7,3 +7,4 @@ export * from './tab';
 export * from './address';
 export * from './table';
 export * from './file';
+export * from './image';

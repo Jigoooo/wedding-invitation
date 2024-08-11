@@ -2,6 +2,39 @@ import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { getWeddingImageSrc } from '@/entities/invitation';
 import { format } from 'date-fns';
 
+const maskLinearGradientStyle = {
+  maskImage: `linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.1) 2%, 
+    rgba(0, 0, 0, 0.3) 4%, 
+    rgba(0, 0, 0, 0.5) 6%, 
+    rgba(0, 0, 0, 0.7) 8%, 
+    rgba(0, 0, 0, 0.9) 10%, 
+    #000 12%, 
+    #000 88%, 
+    rgba(0, 0, 0, 0.9) 90%, 
+    rgba(0, 0, 0, 0.7) 92%, 
+    rgba(0, 0, 0, 0.5) 94%, 
+    rgba(0, 0, 0, 0.3) 96%, 
+    rgba(0, 0, 0, 0.1) 98%, 
+    transparent 100%)`,
+  WebkitMaskImage: `linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.1) 2%, 
+    rgba(0, 0, 0, 0.3) 4%, 
+    rgba(0, 0, 0, 0.5) 6%, 
+    rgba(0, 0, 0, 0.7) 8%, 
+    rgba(0, 0, 0, 0.9) 10%, 
+    #000 12%, 
+    #000 88%, 
+    rgba(0, 0, 0, 0.9) 90%, 
+    rgba(0, 0, 0, 0.7) 92%, 
+    rgba(0, 0, 0, 0.5) 94%, 
+    rgba(0, 0, 0, 0.3) 96%, 
+    rgba(0, 0, 0, 0.1) 98%, 
+    transparent 100%)`,
+};
+
 export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
   return (
     <Stack
@@ -32,7 +65,11 @@ export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
         </Typography>
       </Stack>
       <img
-        style={{ width: '100%', borderRadius: 10 }}
+        style={{
+          width: '100%',
+          borderRadius: 3,
+          ...maskLinearGradientStyle,
+        }}
         alt={'Header'}
         src={getWeddingImageSrc('header-image-origin.webp')}
       />
