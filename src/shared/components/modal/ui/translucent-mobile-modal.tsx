@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { Box, Divider, IconButton, Tooltip } from '@mui/joy';
 import { AnimatePresence, motion } from 'framer-motion';
 import CloseIcon from '@mui/icons-material/Close';
@@ -29,6 +29,28 @@ type ModalType = {
 const modalHeaderHeight = 80;
 
 export function TranslucentMobileModal({ isOpen, onClose, title, sx, children }: ModalType) {
+  useEffect(() => {
+    const handleBackKey = (event: PopStateEvent) => {
+      if (isOpen) {
+        onClose();
+        event.preventDefault();
+        window.history.pushState(null, '', window.location.pathname);
+      }
+    };
+
+    window.addEventListener('popstate', handleBackKey);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackKey);
+    };
+  }, [isOpen, onClose]);
+
+  useEffect(() => {
+    if (isOpen) {
+      window.history.pushState(null, '', window.location.pathname);
+    }
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (
