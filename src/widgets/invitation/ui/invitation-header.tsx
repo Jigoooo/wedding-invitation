@@ -1,13 +1,8 @@
 import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { getWeddingImageSrc } from '@/entities/invitation';
+import { format } from 'date-fns';
 
-export function InvitationHeader({
-  weddingDate,
-  weddingDay,
-}: {
-  weddingDate: string;
-  weddingDay: string;
-}) {
+export function InvitationHeader({ weddingDate }: { weddingDate: Date }) {
   return (
     <Stack
       component={'header'}
@@ -16,13 +11,13 @@ export function InvitationHeader({
       <Stack sx={{ width: '100%', alignItems: 'center' }}>
         <Typography
           sx={{
-            fontSize: '2rem',
+            fontSize: '1.6rem',
             fontWeight: 500,
             fontFamily: 'Crimson Pro',
-            letterSpacing: 2,
+            letterSpacing: 1.6,
           }}
         >
-          {weddingDate}
+          {format(weddingDate, 'yyyy / MM / dd')}
         </Typography>
         <Typography
           sx={{
@@ -33,7 +28,7 @@ export function InvitationHeader({
             letterSpacing: 2,
           }}
         >
-          {weddingDay}
+          {format(weddingDate, 'EEEE').toUpperCase()}
         </Typography>
       </Stack>
       <img

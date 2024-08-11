@@ -16,14 +16,14 @@ export function AnimatedSection({
 }) {
   const scrollVariants: Variants = {
     offscreen: {
-      y: 100,
+      y: 60,
       opacity: 0,
     },
     onscreen: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 1,
+        duration: 0.8,
       },
     },
   };
@@ -33,7 +33,7 @@ export function AnimatedSection({
       style={{ width: '100%' }}
       initial='offscreen'
       whileInView='onscreen'
-      viewport={{ once: true, amount: 0.8, margin, root: scrollRef }}
+      viewport={{ once: true, amount: 1, margin, root: scrollRef }}
       onViewportEnter={onViewportEnter}
       onViewportLeave={onViewportLeave}
     >

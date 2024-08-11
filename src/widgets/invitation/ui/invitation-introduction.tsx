@@ -115,14 +115,18 @@ export function InvitationIntroduction() {
           </Typography>
         </Stack>
       </AnimatedSection>
-      <SoftButton
-        onClick={openCallInfo}
-        sx={{ width: '60%', color: '#666666', border: '1px solid #eeeeee' }}
-        buttonColor={'#f8f8f8'}
-        startDecorator={<CallIcon />}
-      >
-        연락하기
-      </SoftButton>
+      <AnimatedSection>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <SoftButton
+            onClick={openCallInfo}
+            sx={{ width: '60%', color: '#666666', border: '1px solid #eeeeee' }}
+            buttonColor={'#f8f8f8'}
+            startDecorator={<CallIcon />}
+          >
+            연락하기
+          </SoftButton>
+        </Box>
+      </AnimatedSection>
       <CallInfoModal isCallInfoOpen={isCallInfoOpen} onClose={closeCallInfo} />
     </Stack>
   );

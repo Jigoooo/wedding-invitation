@@ -11,9 +11,9 @@ import {
   WeddingCalendar,
 } from '@/widgets/invitation';
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
+import { parse } from 'date-fns';
 
-const WEDDING_DATE = '2024.12.14';
-const WEDDING_DAY = 'SATURDAY';
+const WEDDING_DATE = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
 const MAX_WIDTH = 430;
 
@@ -44,7 +44,7 @@ export function Invitation() {
       >
         <IntroAnimation />
         <FallingAnimation />
-        <InvitationHeader weddingDate={WEDDING_DATE} weddingDay={WEDDING_DAY} />
+        <InvitationHeader weddingDate={WEDDING_DATE} />
         <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14 }}>
           <InvitationIntroduction />
           <AnimatedSection>
@@ -54,7 +54,7 @@ export function Invitation() {
           </AnimatedSection>
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              <WeddingCalendar />
+              <WeddingCalendar weddingDate={WEDDING_DATE} />
             </Stack>
           </AnimatedSection>
           <AnimatedSection>
@@ -81,7 +81,7 @@ export function Invitation() {
             </Stack>
           </AnimatedSection>
         </Stack>
-        <Stack component={'footer'} sx={{ width: '100%', height: 150, alignItems: 'center' }}>
+        <Stack component={'footer'} sx={{ width: '100%', mt: 'auto', alignItems: 'center' }}>
           Footer - 카톡공유, 링크주소 복사 등
         </Stack>
       </Stack>
