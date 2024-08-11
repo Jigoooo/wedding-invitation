@@ -41,8 +41,10 @@ export function OutlinedButton({
           borderColor: buttonColor,
           color: buttonColor,
           [`&.${buttonClasses.root}`]: {
-            '&:hover': {
-              backgroundColor: `${lighten(0.4, buttonColor)} !important`,
+            '@media (hover: hover) and (pointer: fine)': {
+              '&:hover': {
+                backgroundColor: `${lighten(0.4, buttonColor)} !important`,
+              },
             },
             '&:focus': {
               backgroundColor: 'none !important',

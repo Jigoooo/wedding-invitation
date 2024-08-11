@@ -3,3 +3,4 @@ export { AnimatedModal } from './animated-modal.tsx';
 export { FramerMotionModal } from './framer-motion-modal.tsx';
 export { TransformAnimatedModal } from './transform-animated-modal.tsx';
 export { Modal } from './modal.tsx';
+export { TranslucentMobileModal } from './translucent-mobile-modal.tsx';

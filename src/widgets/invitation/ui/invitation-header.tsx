@@ -1,23 +1,19 @@
 import { Box, Divider, Stack, Typography } from '@mui/joy';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-
-import HeaderImage from '@/shared/assets/images/wedding-image/header-image-origin.webp';
+import { getWeddingImageSrc } from '@/entities/invitation';
 
 export function InvitationHeader({
   weddingDate,
   weddingDay,
-  headerImageHeight,
 }: {
   weddingDate: string;
   weddingDay: string;
-  headerImageHeight: number;
 }) {
   return (
     <Stack component={'header'} sx={{ width: '100%', alignItems: 'center', pt: 4, gap: 2.5 }}>
       <Stack sx={{ width: '100%', alignItems: 'center' }}>
         <Typography
           sx={{
-            fontSize: '1.8rem',
+            fontSize: '2rem',
             fontWeight: 500,
             fontFamily: 'Crimson Pro',
             letterSpacing: 2,
@@ -27,7 +23,7 @@ export function InvitationHeader({
         </Typography>
         <Typography
           sx={{
-            fontSize: '1rem',
+            fontSize: '1.1rem',
             fontWeight: 400,
             fontFamily: 'Crimson Pro',
             textAlign: 'center',
@@ -37,12 +33,10 @@ export function InvitationHeader({
           {weddingDay}
         </Typography>
       </Stack>
-      <LazyLoadImage
+      <img
         style={{ width: '100%', borderRadius: 10 }}
         alt={'Header'}
-        effect='blur'
-        src={HeaderImage}
-        height={headerImageHeight}
+        src={getWeddingImageSrc('header-image-origin.webp')}
       />
       <Box
         sx={{

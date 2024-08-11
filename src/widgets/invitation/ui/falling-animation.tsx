@@ -15,7 +15,7 @@ export function FallingAnimation() {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 999,
+        zIndex: 300,
         height: '100%',
         width: '100%',
         background: 'transparent',
@@ -25,7 +25,7 @@ export function FallingAnimation() {
       speed={snowSpeed}
       wind={[-0.5, 1.0]}
       snowflakeCount={100}
-      color={'#cad3f4'}
+      color={'#d3d9f3'}
     />
   );
 }

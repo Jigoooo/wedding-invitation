@@ -1,39 +1,40 @@
+import { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Stack, Typography } from '@mui/joy';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-import InfoImage from '@/shared/assets/images/wedding-image/info-image-origin.webp';
+import CallIcon from '@mui/icons-material/Call';
 
-export function InvitationIntroduction({ infoImageHeight }: { infoImageHeight: number }) {
+import { SoftButton } from '@/shared/ui';
+import { RouterName } from '@/shared/enum';
+import { getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
+import { TranslucentMobileModal } from '@/shared/components';
+
+export function InvitationIntroduction() {
+  const navigate = useNavigate();
+
+  const [isCallInfoOpen, setIsCallInfoOpen] = useState(false);
+  const toggleCallInfo = () => {
+    setIsCallInfoOpen(!isCallInfoOpen);
+  };
+
+  const openCallInfo = () => {
+    toggleCallInfo();
+    navigate(RouterName.CALL_INFO);
+  };
+
+  const closeCallInfo = () => {
+    toggleCallInfo();
+    navigate(-1);
+  };
+
   return (
     <Stack component={'section'} sx={{ width: '100%', alignItems: 'center', gap: 4 }}>
-      <Stack sx={{ width: '100%', alignItems: 'center', gap: 1 }}>
-        <Typography
-          sx={{
-            fontSize: '0.9rem',
-            fontWeight: 300,
-            fontFamily: 'Crimson Pro',
-            color: '#f79e9e',
-            letterSpacing: 3,
-          }}
-        >
-          INVITATION
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: '1rem',
-            fontWeight: 800,
-            color: '#f79e9e',
-            letterSpacing: 3,
-          }}
-        >
-          소중한 분들을 초대합니다
-        </Typography>
-      </Stack>
+      <SectionHeader engTitle={'INVITATION'} korTitle={'소중한 분들을 초대합니다'} />
       <Stack sx={{ gap: 6 }}>
         <Typography
           sx={{
             fontSize: '0.85rem',
-            fontWeight: 600,
+            fontWeight: 700,
             letterSpacing: 1.4,
             textAlign: 'center',
             lineHeight: 2,
@@ -49,7 +50,7 @@ export function InvitationIntroduction({ infoImageHeight }: { infoImageHeight: n
         <Typography
           sx={{
             fontSize: '0.85rem',
-            fontWeight: 600,
+            fontWeight: 700,
             letterSpacing: 1.4,
             textAlign: 'center',
             lineHeight: 2,
@@ -63,12 +64,10 @@ export function InvitationIntroduction({ infoImageHeight }: { infoImageHeight: n
           더없는 기쁨으로 간직하겠습니다.
         </Typography>
       </Stack>
-      <LazyLoadImage
-        style={{ width: '100%', borderRadius: 10 }}
+      <img
+        style={{ width: '90%', borderRadius: 12 }}
+        src={getWeddingImageSrc('info-image-origin.webp')}
         alt={'Info'}
-        effect='blur'
-        src={InfoImage}
-        height={infoImageHeight}
       />
       <Stack sx={{ width: '100%', alignItems: 'center', gap: 1 }}>
         <Typography
@@ -108,6 +107,41 @@ export function InvitationIntroduction({ infoImageHeight }: { infoImageHeight: n
           김지영
         </Typography>
       </Stack>
+      <SoftButton
+        onClick={openCallInfo}
+        sx={{ width: '60%', color: '#666666', border: '1px solid #eeeeee' }}
+        buttonColor={'#f8f8f8'}
+        startDecorator={<CallIcon />}
+      >
+        연락하기
+      </SoftButton>
+      <CallInfoModal isCallInfoOpen={isCallInfoOpen} onClose={closeCallInfo} />
     </Stack>
+  );
+}
+
+function CallInfoModal({
+  isCallInfoOpen,
+  onClose,
+}: {
+  isCallInfoOpen: boolean;
+  onClose: () => void;
+}) {
+  return (
+    <TranslucentMobileModal
+      title={
+        <Stack>
+          <Typography sx={{ color: '#eeeeee', fontFamily: 'Crimson Pro', fontSize: '1.2rem' }}>
+            Contact
+          </Typography>
+          <Typography sx={{ color: '#eeeeee', fontSize: '1.4rem' }}>연락처 정보</Typography>
+        </Stack>
+      }
+      isOpen={isCallInfoOpen}
+      onClose={onClose}
+      sx={{ backgroundColor: 'rgba(128,128,128,0.5)', backdropFilter: 'blur(10px)' }}
+    >
+      <Outlet />
+    </TranslucentMobileModal>
   );
 }

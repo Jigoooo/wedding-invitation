@@ -1,6 +1,6 @@
 export const RouterName = {
-  MAIN: '/',
-  INVITATION: 'invitation',
+  INVITATION: '/',
+  CALL_INFO: 'call-info',
 } as const;
 
 export type RouterNameKey = keyof typeof RouterName;
