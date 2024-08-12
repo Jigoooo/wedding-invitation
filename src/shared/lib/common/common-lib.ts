@@ -1,4 +1,5 @@
 import { endOfYear, format, subYears } from 'date-fns';
+import { openDialog } from '@/shared/components';
 
 export const currentYear = new Date().getFullYear();
 
@@ -124,4 +125,65 @@ export function openPhoneApp(phoneNumber: string) {
 
 export function openSmsApp(phoneNumber: string, message: string = '') {
   window.location.href = `sms:${phoneNumber}?body=${encodeURIComponent(message)}`;
+}
+
+export function openKakaoMap({
+  latitude,
+  longitude,
+  webUrl,
+}: {
+  latitude: number;
+  longitude: number;
+  webUrl: string;
+}) {
+  const { isMobile } = detectDeviceTypeAndOS();
+
+  if (isMobile) {
+    // window.location.href = `kakaomap://look?p=${latitude},${longitude}`;
+    window.location.href = `kakaomap://route?ep=${latitude},${longitude}&by=CAR`;
+  } else {
+    window.open(webUrl);
+  }
+}
+
+export function openTMap({
+  latitude,
+  longitude,
+  placeName,
+}: {
+  latitude: number;
+  longitude: number;
+  placeName: string;
+}) {
+  const { isMobile } = detectDeviceTypeAndOS();
+
+  if (isMobile) {
+    window.location.href = `tmap://search?name=${encodeURIComponent(placeName)}&lon=${longitude}&lat=${latitude}`;
+  } else {
+    openDialog({
+      contents: '모바일에서만 지원됩니다.',
+      color: 'warning',
+    });
+  }
+}
+
+export function openNaverMap({
+  latitude,
+  longitude,
+  placeName,
+  webUrl,
+}: {
+  latitude: number;
+  longitude: number;
+  placeName: string;
+  webUrl: string;
+}) {
+  const { isMobile } = detectDeviceTypeAndOS();
+
+  if (isMobile) {
+    // window.location.href = `nmap://place?lat=${latitude}&lng=${longitude}&name=${encodeURIComponent(placeName)}&appname=com.example.myapp`;
+    window.location.href = `nmap://navigation?dlat=${latitude}&dlng=${longitude}&dname=${encodeURIComponent(placeName)}&appname=com.example.myapp`;
+  } else {
+    window.open(webUrl);
+  }
 }

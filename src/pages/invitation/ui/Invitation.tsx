@@ -19,6 +19,7 @@ const GROOM_NAME = '김지우';
 const BRIDE_NAME = '김지영';
 const WEDDING_ADDRESS = '충남 천안시 서북구 천안대로 1198-30';
 const WEDDING_LOCATION_NAME = '천안 비렌티 신관 3F, 루체오홀';
+const WEDDING_PLACE_NAME = '천안 비렌티';
 const MAX_WIDTH = 430;
 
 export function Invitation() {
@@ -39,11 +40,10 @@ export function Invitation() {
           maxWidth: MAX_WIDTH,
           width: '100%',
           alignItems: 'center',
-          backgroundColor: '#fefefe',
+          backgroundColor: '#f9f9f9',
           boxShadow: '0 0 30px rgba(0, 0, 0, 0.1)',
           overflowY: 'auto',
           position: 'relative',
-          // px: 1,
         }}
       >
         <IntroAnimation />
@@ -70,6 +70,7 @@ export function Invitation() {
           <InvitationLocationInfo
             weddingAddress={WEDDING_ADDRESS}
             weddingLocationName={WEDDING_LOCATION_NAME}
+            weddingPlaceName={WEDDING_PLACE_NAME}
           />
 
           <AnimatedSection>

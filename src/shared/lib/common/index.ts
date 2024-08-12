@@ -15,4 +15,7 @@ export {
   transformArrayToDictByKey,
   openPhoneApp,
   openSmsApp,
+  openKakaoMap,
+  openTMap,
+  openNaverMap,
 } from './common-lib.ts';
