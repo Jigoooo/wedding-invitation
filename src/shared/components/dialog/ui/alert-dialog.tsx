@@ -10,7 +10,12 @@ import WarningIcon from '@mui/icons-material/Warning';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import InfoIcon from '@mui/icons-material/Info';
 
-import { AnimatedDialogModal, closeDialog, useDialogInfos, useDialogOpen } from '@/shared/components';
+import {
+  AnimatedDialogModal,
+  closeDialog,
+  useDialogInfos,
+  useDialogOpen,
+} from '@/shared/components';
 import { PlainButton, SolidButton } from '@/shared/ui';
 import { ModalClose } from '@mui/joy';
 

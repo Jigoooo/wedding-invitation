@@ -1,4 +1,12 @@
-import { useState, Children, ReactNode, isValidElement, cloneElement, ReactElement, ChangeEvent } from 'react';
+import {
+  useState,
+  Children,
+  ReactNode,
+  isValidElement,
+  cloneElement,
+  ReactElement,
+  ChangeEvent,
+} from 'react';
 import Box from '@mui/joy/Box';
 import FormControl, { FormControlProps } from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
@@ -23,7 +31,7 @@ export function CustomedFormControl({
   labelColor = '#777777',
   errorMessage,
   isLabelHorizontal = false,
-  labelGap = 0,
+  labelGap = 0.7,
   isExternalTouched = false,
   children,
   ...props
@@ -62,14 +70,18 @@ export function CustomedFormControl({
       {isLabelHorizontal ? (
         <Box sx={{ display: 'flex', width: '100%', alignItems: 'center' }}>
           {label !== undefined && label !== null && (
-            <FormLabel sx={{ mr: 1.5, mt: 0.3, color: labelColor }}>{label}</FormLabel>
+            <FormLabel sx={{ mr: 1.5, mt: 0.3, color: labelColor, fontFamily: 'Pretendard' }}>
+              {label}
+            </FormLabel>
           )}
           {clonedChildren}
         </Box>
       ) : (
         <>
           {label !== undefined && label !== null && (
-            <FormLabel sx={{ color: labelColor, marginBottom: labelGap }}>{label}</FormLabel>
+            <FormLabel sx={{ color: labelColor, marginBottom: labelGap, fontFamily: 'Pretendard' }}>
+              {label}
+            </FormLabel>
           )}
           {clonedChildren}
         </>

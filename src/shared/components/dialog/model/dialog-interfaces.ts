@@ -2,6 +2,7 @@ import { AnyFunction } from '@/shared/types';
 import { OverridableStringUnion } from '@mui/types';
 import { ColorPaletteProp } from '@mui/joy/styles/types';
 import { SnackbarPropsColorOverrides } from '@mui/joy/Snackbar/SnackbarProps';
+import { ReactNode } from 'react';
 
 export interface DialogCustomButtons {
   label: string;
@@ -11,7 +12,7 @@ export interface DialogCustomButtons {
 
 export interface DialogInfoStates {
   header?: string;
-  contents: string;
+  contents: ReactNode;
   confirmButtonColor?: 'primary' | 'neutral' | 'danger' | 'success' | 'warning';
   confirmText?: string;
   cancelText?: string;

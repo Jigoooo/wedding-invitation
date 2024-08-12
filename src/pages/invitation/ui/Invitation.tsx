@@ -3,6 +3,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Stack } from '@mui/joy';
 
 import {
+  AttendanceSection,
   FallingAnimation,
   IntroAnimation,
   InvitationHeader,
@@ -56,7 +57,7 @@ export function Invitation() {
           brideName={BRIDE_NAME}
         />
 
-        <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14 }}>
+        <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14, pb: 10 }}>
           <InvitationIntroduction />
 
           <AnimatedSection>
@@ -91,11 +92,7 @@ export function Invitation() {
             </Stack>
           </AnimatedSection>
 
-          <AnimatedSection>
-            <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              참석의사 전달
-            </Stack>
-          </AnimatedSection>
+          <AttendanceSection />
         </Stack>
 
         <Stack component={'footer'} sx={{ width: '100%', mt: 'auto', alignItems: 'center' }}>

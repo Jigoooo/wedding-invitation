@@ -6,10 +6,10 @@ export function SectionHeader({ engTitle, korTitle }: { engTitle: string; korTit
       <Typography
         sx={{
           fontSize: '0.9rem',
-          fontWeight: 300,
+          fontWeight: 400,
           fontFamily: 'Crimson Pro',
           color: '#f79e9e',
-          letterSpacing: 3,
+          letterSpacing: 2,
         }}
       >
         {engTitle}

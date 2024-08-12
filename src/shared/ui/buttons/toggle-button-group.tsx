@@ -8,22 +8,26 @@ export function ToggleButtonGroup({
   groupKey,
   onChange,
   buttonWidth = 100,
+  colors = {},
 }: {
   label: string;
   options: { key: string | number; value: string | number }[];
   groupKey: string | number;
   onChange?: (value: string | number) => void;
   buttonWidth?: number;
+  colors?: { [key: string]: string };
 }) {
   const [selectedKey, setSelectedKey] = useState<string | number>(groupKey);
   const [bgPosition, setBgPosition] = useState(0);
+  const [bgColor, setBgColor] = useState(colors[groupKey] || '#1976d2');
 
   useEffect(() => {
     const selectedIndex = options.findIndex((option) => option.key === selectedKey);
     if (selectedIndex !== -1) {
       setBgPosition(selectedIndex * buttonWidth);
+      setBgColor(colors[selectedKey] || '#1976d2');
     }
-  }, [selectedKey, options, buttonWidth]);
+  }, [selectedKey, options, buttonWidth, colors]);
 
   const handleChange = (newValue: string | number) => {
     setSelectedKey(newValue);
@@ -34,7 +38,9 @@ export function ToggleButtonGroup({
 
   return (
     <Stack className={'selection-none'}>
-      <Typography sx={{ fontSize: '0.8rem', color: '#888888', fontWeight: 700 }}>{label}</Typography>
+      <Typography sx={{ fontSize: '0.8rem', color: '#888888', fontWeight: 700 }}>
+        {label}
+      </Typography>
       <Box
         sx={{
           display: 'flex',
@@ -45,18 +51,17 @@ export function ToggleButtonGroup({
           position: 'relative',
         }}
       >
-        <AnimatePresence>
+        <AnimatePresence initial={false}>
           <motion.div
             key={selectedKey}
-            initial={{ x: bgPosition }}
-            animate={{ x: bgPosition }}
+            initial={{ x: bgPosition, backgroundColor: bgColor }}
+            animate={{ x: bgPosition, backgroundColor: bgColor }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             style={{
               position: 'absolute',
               left: 0,
               width: buttonWidth,
               height: '100%',
-              backgroundColor: '#1976d2',
               borderRadius: 6,
             }}
           />
@@ -68,9 +73,10 @@ export function ToggleButtonGroup({
             sx={{
               position: 'relative',
               zIndex: 1,
-              py: 0.6,
+              py: 1,
               borderRadius: 4,
               cursor: 'pointer',
+              fontFamily: 'Pretendard',
               fontWeight: 500,
               fontSize: '0.9rem',
               color: selectedKey === option.key ? '#ffffff' : '#000000',

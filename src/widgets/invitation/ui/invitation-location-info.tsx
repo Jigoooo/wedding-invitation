@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatedSection, SectionHeader } from '@/entities/invitation';
+import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
 import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { Container as MapDiv, Marker, NaverMap, useNavermaps } from 'react-naver-maps';
 import { SoftButton } from '@/shared/ui';
@@ -98,94 +98,108 @@ export function InvitationLocationInfo({
         </Box>
       </AnimatedSection>
       <Stack sx={{ width: '100%', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
-        <SoftButton
-          onClick={() => {}}
-          sx={{ width: '90%', height: 45, color: '#666666', border: '1px solid #dadada' }}
-          buttonColor={'#ffffff'}
-          startDecorator={<ExploreIcon />}
-        >
-          약도 보기
-        </SoftButton>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '90%',
-            gap: 1,
-          }}
-        >
-          <SoftButton
-            onClick={() =>
-              openNaverMap({
-                latitude: center.lat(),
-                longitude: center.lng(),
-                placeName: weddingPlaceName,
-                webUrl: 'https://map.naver.com/p/entry/place/1150314863?c=15.00,0,0,0,dh',
-              })
-            }
-            sx={{
-              width: '33.3%',
-              fontSize: '0.75rem',
-              fontWeight: 900,
-              height: 40,
-              color: '#666666',
-              border: '1px solid #dadada',
-              px: 0,
-            }}
-            buttonColor={'#ffffff'}
-            startDecorator={
-              <img style={{ width: 22, height: 22 }} src={NaverMapIcon} alt={'Naver Map'} />
-            }
+        <AnimatedSection>
+          <Box
+            sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}
           >
-            네이버지도
-          </SoftButton>
-          <SoftButton
-            onClick={() =>
-              openTMap({
-                latitude: center.lat(),
-                longitude: center.lng(),
-                placeName: weddingPlaceName,
-              })
-            }
-            sx={{
-              width: '33.3%',
-              fontSize: '0.75rem',
-              fontWeight: 900,
-              height: 40,
-              color: '#666666',
-              border: '1px solid #dadada',
-              px: 0,
-            }}
-            buttonColor={'#ffffff'}
-            startDecorator={<img style={{ width: 22, height: 22 }} src={TMapIcon} alt={'T Map'} />}
+            <SoftButton
+              onClick={() => window.open(getWeddingImageSrc('sketch-map.png'))}
+              sx={{ width: '90%', height: 45, color: '#666666', border: '1px solid #dadada' }}
+              buttonColor={'#ffffff'}
+              startDecorator={<ExploreIcon />}
+            >
+              약도 보기
+            </SoftButton>
+          </Box>
+        </AnimatedSection>
+        <AnimatedSection>
+          <Box
+            sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}
           >
-            티맵
-          </SoftButton>
-          <SoftButton
-            onClick={() =>
-              openKakaoMap({
-                latitude: center.lat(),
-                longitude: center.lng(),
-                webUrl: 'https://place.map.kakao.com/m/245466707',
-              })
-            }
-            sx={{
-              width: '33.3%',
-              fontSize: '0.75rem',
-              fontWeight: 900,
-              height: 40,
-              color: '#666666',
-              border: '1px solid #dadada',
-              px: 0,
-            }}
-            buttonColor={'#ffffff'}
-            startDecorator={
-              <img style={{ width: 20, height: 20 }} src={KakaoMapIcon} alt={'Kakao Map'} />
-            }
-          >
-            카카오내비
-          </SoftButton>
-        </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '90%',
+                gap: 1,
+              }}
+            >
+              <SoftButton
+                onClick={() =>
+                  openNaverMap({
+                    latitude: center.lat(),
+                    longitude: center.lng(),
+                    placeName: weddingPlaceName,
+                    webUrl: 'https://map.naver.com/p/entry/place/1150314863?c=15.00,0,0,0,dh',
+                  })
+                }
+                sx={{
+                  width: '33.3%',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  height: 40,
+                  color: '#666666',
+                  border: '1px solid #dadada',
+                  px: 0,
+                }}
+                buttonColor={'#ffffff'}
+                startDecorator={
+                  <img style={{ width: 22, height: 22 }} src={NaverMapIcon} alt={'Naver Map'} />
+                }
+              >
+                네이버지도
+              </SoftButton>
+              <SoftButton
+                onClick={() =>
+                  openTMap({
+                    latitude: center.lat(),
+                    longitude: center.lng(),
+                    placeName: weddingPlaceName,
+                  })
+                }
+                sx={{
+                  width: '33.3%',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  height: 40,
+                  color: '#666666',
+                  border: '1px solid #dadada',
+                  px: 0,
+                }}
+                buttonColor={'#ffffff'}
+                startDecorator={
+                  <img style={{ width: 22, height: 22 }} src={TMapIcon} alt={'T Map'} />
+                }
+              >
+                티맵
+              </SoftButton>
+              <SoftButton
+                onClick={() =>
+                  openKakaoMap({
+                    latitude: center.lat(),
+                    longitude: center.lng(),
+                    webUrl: 'https://place.map.kakao.com/m/245466707',
+                  })
+                }
+                sx={{
+                  width: '33.3%',
+                  fontSize: '0.75rem',
+                  fontWeight: 900,
+                  height: 40,
+                  color: '#666666',
+                  border: '1px solid #dadada',
+                  px: 0,
+                }}
+                buttonColor={'#ffffff'}
+                startDecorator={
+                  <img style={{ width: 20, height: 20 }} src={KakaoMapIcon} alt={'Kakao Map'} />
+                }
+              >
+                카카오내비
+              </SoftButton>
+            </Box>
+          </Box>
+        </AnimatedSection>
       </Stack>
       <Stack sx={{ width: '90%', pt: 4, gap: 3.5 }}>
         <Divider />

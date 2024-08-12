@@ -13,12 +13,20 @@ type ModalType = {
   onClose: () => void;
   title: ReactNode;
   sx?: SxProps;
+  closeIconColor?: string;
   children: ReactNode;
 };
 
 const modalHeaderHeight = 80;
 
-export function TranslucentMobileModal({ isOpen, onClose, title, sx, children }: ModalType) {
+export function TranslucentMobileModal({
+  isOpen,
+  onClose,
+  title,
+  sx,
+  closeIconColor,
+  children,
+}: ModalType) {
   useBackKeyToClose(isOpen, onClose);
 
   useEffect(() => {
@@ -76,7 +84,7 @@ export function TranslucentMobileModal({ isOpen, onClose, title, sx, children }:
                 ...(Array.isArray(sx) ? sx : [sx]),
               ]}
             >
-              <ModalHeader title={title} onClose={onClose} />
+              <ModalHeader title={title} onClose={onClose} closeIconColor={closeIconColor} />
               <Divider />
               <Box
                 sx={{
@@ -94,7 +102,15 @@ export function TranslucentMobileModal({ isOpen, onClose, title, sx, children }:
   );
 }
 
-function ModalHeader({ title, onClose }: { title: ReactNode; onClose: () => void }) {
+function ModalHeader({
+  title,
+  onClose,
+  closeIconColor = '#ffffff',
+}: {
+  title: ReactNode;
+  onClose: () => void;
+  closeIconColor?: string;
+}) {
   return (
     <Box
       sx={{
@@ -110,7 +126,7 @@ function ModalHeader({ title, onClose }: { title: ReactNode; onClose: () => void
       {title}
       <Tooltip title={'닫기'} placement={'top'}>
         <IconButton onClick={onClose} color={'neutral'}>
-          <CloseIcon style={{ color: '#ffffff', fontSize: 32 }} />
+          <CloseIcon style={{ color: closeIconColor, fontSize: 28 }} />
         </IconButton>
       </Tooltip>
     </Box>

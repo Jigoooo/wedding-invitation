@@ -16,10 +16,22 @@ export function FuturRadioGroup({
   options = [],
 }: Readonly<FuturRadioGroupProps>) {
   return (
-    <RadioGroup className={'selection-none'} defaultValue={defaultValue} name={name} orientation={orientation}>
+    <RadioGroup
+      className={'selection-none'}
+      defaultValue={defaultValue}
+      name={name}
+      orientation={orientation}
+    >
       {options.map((value) => {
         return (
-          <Radio key={value.key} label={value.label} value={value.value} onChange={value.onChange} variant='soft' />
+          <Radio
+            key={value.key}
+            label={value.label}
+            value={value.value}
+            onChange={value.onChange}
+            variant='soft'
+            sx={{ fontFamily: 'Pretendard' }}
+          />
         );
       })}
     </RadioGroup>
