@@ -35,6 +35,19 @@ export function TranslucentMobileModal({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      window.history.pushState(null, '', window.location.pathname);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   return (
     <AnimatePresence>
       {isOpen && (

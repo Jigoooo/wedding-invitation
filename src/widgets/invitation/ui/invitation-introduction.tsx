@@ -119,7 +119,13 @@ export function InvitationIntroduction() {
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <SoftButton
             onClick={openCallInfo}
-            sx={{ width: '90%', height: 45, color: '#666666', border: '1px solid #dadada' }}
+            sx={{
+              width: '60%',
+              height: 45,
+              borderRadius: 25,
+              color: '#666666',
+              border: '1px solid #dadada',
+            }}
             buttonColor={'#ffffff'}
             startDecorator={<CallIcon />}
           >

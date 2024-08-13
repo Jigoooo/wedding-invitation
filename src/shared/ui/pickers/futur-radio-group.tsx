@@ -14,6 +14,7 @@ export function FuturRadioGroup({
   name = '',
   orientation = 'horizontal',
   options = [],
+  color,
 }: Readonly<FuturRadioGroupProps>) {
   return (
     <RadioGroup
@@ -30,6 +31,7 @@ export function FuturRadioGroup({
             value={value.value}
             onChange={value.onChange}
             variant='soft'
+            color={color}
             sx={{ fontFamily: 'Pretendard' }}
           />
         );

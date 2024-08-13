@@ -187,3 +187,23 @@ export function openNaverMap({
     window.open(webUrl);
   }
 }
+
+export function copyToClipboard(text: string, successCallback?: () => void) {
+  if (navigator.clipboard) {
+    navigator.clipboard
+      .writeText(text)
+      .then(successCallback)
+      .catch((err) => console.log('err: ', err));
+  } else {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+
+    if (successCallback) {
+      successCallback();
+    }
+  }
+}

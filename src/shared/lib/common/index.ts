@@ -18,4 +18,5 @@ export {
   openKakaoMap,
   openTMap,
   openNaverMap,
+  copyToClipboard,
 } from './common-lib.ts';

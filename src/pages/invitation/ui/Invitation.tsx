@@ -1,11 +1,12 @@
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
-import { Stack } from '@mui/joy';
+import { Divider, Stack } from '@mui/joy';
 
 import {
   AttendanceSection,
   FallingAnimation,
   IntroAnimation,
+  InvitationFooter,
   InvitationHeader,
   InvitationIntroduction,
   InvitationLocationInfo,
@@ -16,6 +17,7 @@ import { parse } from 'date-fns';
 
 const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
+const LINK_URL = 'http://wedding-invitation.futur-cloud.com:4050';
 const GROOM_NAME = '김지우';
 const BRIDE_NAME = '김지영';
 const WEDDING_ADDRESS = '충남 천안시 서북구 천안대로 1198-30';
@@ -95,8 +97,12 @@ export function Invitation() {
           <AttendanceSection />
         </Stack>
 
-        <Stack component={'footer'} sx={{ width: '100%', mt: 'auto', alignItems: 'center' }}>
-          Footer - 카톡공유, 링크주소 복사 등
+        <Stack
+          component={'footer'}
+          sx={{ width: '100%', mt: 'auto', alignItems: 'center', gap: 3 }}
+        >
+          <Divider />
+          <InvitationFooter linkUrl={LINK_URL} />
         </Stack>
       </Stack>
     </Stack>

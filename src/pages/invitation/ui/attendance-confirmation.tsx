@@ -6,13 +6,13 @@ import {
   SolidButton,
   ToggleButtonGroup,
 } from '@/shared/ui';
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 export function AttendanceConfirmation() {
   const stackRef = useRef<HTMLDivElement>(null);
-  const [stackWidth, setStackWidth] = useState(0);
+  const [stackWidth, setStackWidth] = useState(180);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleResize = () => {
       if (stackRef.current) {
         setStackWidth(stackRef.current.offsetWidth);
@@ -90,9 +90,6 @@ export function AttendanceConfirmation() {
           placeholder={'대표자 분의 연락처를 입력해 주세요.'}
         />
       </CustomedFormControl>
-      <CustomedFormControl label={'전달사항'}>
-        <OutlinedInput sx={{ fontFamily: 'Pretendard', fontWeight: 500 }} focusWithin={false} />
-      </CustomedFormControl>
       <CustomedFormControl label={'총 인원'} required={true}>
         <OutlinedInput
           sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
@@ -109,10 +106,14 @@ export function AttendanceConfirmation() {
             { key: 2, value: 2, label: '안함' },
             { key: 3, value: 3, label: '미정' },
           ]}
+          color={'neutral'}
         />
       </CustomedFormControl>
       <Box sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2, backgroundColor: '#ffffff' }}>
-        <SolidButton sx={{ width: '100%', fontFamily: 'Pretendard', fontSize: '0.9rem' }}>
+        <SolidButton
+          sx={{ width: '100%', height: 50, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
+          buttonColor={'#000000'}
+        >
           전송
         </SolidButton>
       </Box>

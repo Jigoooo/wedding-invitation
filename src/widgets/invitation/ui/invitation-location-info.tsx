@@ -58,7 +58,7 @@ export function InvitationLocationInfo({
       <AnimatedSection>
         <Stack sx={{ width: '100%', alignItems: 'center', gap: 1 }}>
           <Typography
-            sx={{ color: '#333333', fontSize: '1.2rem', fontWeight: 800, letterSpacing: 1.2 }}
+            sx={{ color: '#3f3f3f', fontSize: '1.2rem', fontWeight: 800, letterSpacing: 1.2 }}
           >
             {weddingLocationName}
           </Typography>

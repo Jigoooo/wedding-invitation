@@ -73,11 +73,11 @@ export function ToggleButtonGroup({
             sx={{
               position: 'relative',
               zIndex: 1,
-              py: 1,
+              py: 1.4,
               borderRadius: 4,
               cursor: 'pointer',
               fontFamily: 'Pretendard',
-              fontWeight: 500,
+              fontWeight: 400,
               fontSize: '0.9rem',
               color: selectedKey === option.key ? '#ffffff' : '#000000',
               width: buttonWidth,
