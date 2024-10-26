@@ -26,12 +26,18 @@ export function useCustomedNavigate() {
       return;
     }
 
-    navigate(routeName, { unstable_viewTransition: false, ...options });
+    navigate(routeName, { viewTransition: false, ...options });
     const routeNameSplit = routeName.split('/');
     const currentRouteName = routeNameSplit[routeNameSplit.length - 1] as RouterNameBase;
 
     navigationActions.setCurrentPath(currentRouteName);
   };
 
-  return { handleNavigate, prevRouter: navInfos.prevRouter, currentPath, currentAllPath, isContainedPath };
+  return {
+    handleNavigate,
+    prevRouter: navInfos.prevRouter,
+    currentPath,
+    currentAllPath,
+    isContainedPath,
+  };
 }

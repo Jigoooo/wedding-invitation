@@ -5,12 +5,17 @@ import FuturIcon from '@/shared/assets/images/futur_logo.svg?react';
 import LinkIcon from '@mui/icons-material/Link';
 import { copyToClipboard } from '@/shared/lib';
 import { showSnackBar } from '@/shared/components';
+import { useShareKakao } from '@/entities/kakao';
 
 export function InvitationFooter({ linkUrl }: { linkUrl: string }) {
+  const shareKakao = useShareKakao({
+    targetUrl: linkUrl,
+  });
+
   return (
     <Stack sx={{ width: '100%', alignItems: 'center', gap: 3, py: 2 }}>
       <Stack sx={{ width: '100%', alignItems: 'center', gap: 1 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }} onClick={shareKakao}>
           <img src={KakaoTalkIcon} style={{ width: 16 }} alt={''} />
           <Typography sx={{ fontSize: '0.85rem', fontWeight: 500 }}>
             카카오톡으로 초대장 공유하기

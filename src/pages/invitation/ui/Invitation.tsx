@@ -1,6 +1,7 @@
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import { Divider, Stack } from '@mui/joy';
+import { parse } from 'date-fns';
 
 import {
   AttendanceSection,
@@ -13,11 +14,10 @@ import {
   WeddingCalendar,
 } from '@/widgets/invitation';
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
-import { parse } from 'date-fns';
 
 const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
-const LINK_URL = 'http://wedding-invitation.futur-cloud.com:4050';
+const LINK_URL = import.meta.env.VITE_INVITATION_SERVER_URL;
 const GROOM_NAME = '김지우';
 const BRIDE_NAME = '김지영';
 const WEDDING_ADDRESS = '충남 천안시 서북구 천안대로 1198-30';
