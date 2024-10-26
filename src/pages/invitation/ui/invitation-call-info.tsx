@@ -1,35 +1,19 @@
-import React from 'react';
 import { Box, Divider, Stack, Typography } from '@mui/joy';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import Face6Icon from '@mui/icons-material/Face6';
 import Face3Icon from '@mui/icons-material/Face3';
 import { openPhoneApp, openSmsApp } from '@/shared/lib';
+import { CallInfo } from '@/entities/invitation';
+import { callInfoBride, callInfoGroom } from '@/entities/invitation/lib/constant.ts';
+import React from 'react';
 
-interface CallInfo {
-  role: string;
-  name: string;
-  phoneNumber: string;
-}
-
-interface CallInfoSectionProps {
+export type CallInfoSectionProps = {
   title: string;
   icon: React.ElementType;
   color: string;
   callInfo: CallInfo[];
-}
-
-const callInfoGroom: CallInfo[] = [
-  { role: '신랑', name: '김지우', phoneNumber: '010-2355-7934' },
-  { role: '신랑 아버지', name: '김광태', phoneNumber: '010-9800-7934' },
-  { role: '신랑 어머니', name: '최정남', phoneNumber: '010-2634-7934' },
-];
-
-const callInfoBride: CallInfo[] = [
-  { role: '신부', name: '김지영', phoneNumber: '010-2355-7934' },
-  { role: '신부 아버지', name: '김상돈', phoneNumber: '010-6404-1618' },
-  { role: '신부 어머니', name: '박지효', phoneNumber: '010-2856-3567' },
-];
+};
 
 function CallInfoSection({ title, icon: Icon, color, callInfo }: CallInfoSectionProps) {
   return (
@@ -63,6 +47,11 @@ function CallInfoSection({ title, icon: Icon, color, callInfo }: CallInfoSection
           </Box>
           <Typography sx={{ color: '#f1f1f1', fontSize: '1rem', fontWeight: 800 }}>
             {info.name}
+            {info.subName !== '' && (
+              <Typography sx={{ color: '#f1f1f1', fontSize: '0.8rem', fontWeight: 800 }}>
+                ({info.subName})
+              </Typography>
+            )}
           </Typography>
           <Box
             sx={{

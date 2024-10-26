@@ -6,10 +6,15 @@ import CallIcon from '@mui/icons-material/Call';
 
 import { SoftButton } from '@/shared/ui';
 import { RouterName } from '@/shared/enum';
-import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
+import {
+  AnimatedSection,
+  getWeddingImageSrc,
+  MarriedPersons,
+  SectionHeader,
+} from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
 
-export function InvitationIntroduction() {
+export function InvitationIntroduction({ marriedPersons }: { marriedPersons: MarriedPersons }) {
   const navigate = useNavigate();
 
   const [isCallInfoOpen, setIsCallInfoOpen] = useState(false);
@@ -84,7 +89,31 @@ export function InvitationIntroduction() {
               letterSpacing: 1.4,
             }}
           >
-            김광태 &middot; 최정남
+            {marriedPersons.groomsFather.name}
+            {marriedPersons.groomsFather.subName !== '' && (
+              <Typography
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  letterSpacing: 1.4,
+                }}
+              >
+                ({marriedPersons.groomsFather.subName})
+              </Typography>
+            )}
+            &nbsp;&middot;&nbsp;
+            {marriedPersons.groomsMother.name}
+            {marriedPersons.groomsMother.subName !== '' && (
+              <Typography
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  letterSpacing: 1.4,
+                }}
+              >
+                ({marriedPersons.groomsMother.subName})
+              </Typography>
+            )}
             <Typography
               sx={{
                 fontSize: '0.9rem',
@@ -93,7 +122,7 @@ export function InvitationIntroduction() {
             >
               &nbsp;의 장남&nbsp;
             </Typography>
-            김지우
+            {marriedPersons.groom.name}
           </Typography>
           <Typography
             sx={{
@@ -102,7 +131,31 @@ export function InvitationIntroduction() {
               letterSpacing: 1.4,
             }}
           >
-            김상돈 &middot; 박지효
+            {marriedPersons.bridesFather.name}
+            {marriedPersons.bridesFather.subName !== '' && (
+              <Typography
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  letterSpacing: 1.4,
+                }}
+              >
+                ({marriedPersons.bridesFather.subName})
+              </Typography>
+            )}
+            &nbsp;&middot;&nbsp;
+            {marriedPersons.bridesMother.name}
+            {marriedPersons.bridesMother.subName !== '' && (
+              <Typography
+                sx={{
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  letterSpacing: 1.4,
+                }}
+              >
+                ({marriedPersons.bridesMother.subName})
+              </Typography>
+            )}
             <Typography
               sx={{
                 fontSize: '0.9rem',
@@ -111,7 +164,7 @@ export function InvitationIntroduction() {
             >
               &nbsp;의 장녀&nbsp;
             </Typography>
-            김지영
+            {marriedPersons.bride.name}
           </Typography>
         </Stack>
       </AnimatedSection>

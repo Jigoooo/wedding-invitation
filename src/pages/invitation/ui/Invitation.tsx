@@ -13,13 +13,11 @@ import {
   InvitationLocationInfo,
   WeddingCalendar,
 } from '@/widgets/invitation';
-import { AnimatedSection, SectionHeader } from '@/entities/invitation';
+import { AnimatedSection, marriedPersons, SectionHeader } from '@/entities/invitation';
 
 const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
 const LINK_URL = import.meta.env.VITE_INVITATION_SERVER_URL;
-const GROOM_NAME = '김지우';
-const BRIDE_NAME = '김지영';
 const WEDDING_ADDRESS = '충남 천안시 서북구 천안대로 1198-30';
 const WEDDING_LOCATION_NAME = '천안 비렌티 신관 3F, 루체오홀';
 const WEDDING_PLACE_NAME = '천안 비렌티';
@@ -55,12 +53,11 @@ export function Invitation() {
         <InvitationHeader
           weddingDate={weddingDate}
           weddingLocationName={WEDDING_LOCATION_NAME}
-          groomName={GROOM_NAME}
-          brideName={BRIDE_NAME}
+          marriedPersons={marriedPersons}
         />
 
         <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14, pb: 10 }}>
-          <InvitationIntroduction />
+          <InvitationIntroduction marriedPersons={marriedPersons} />
 
           <AnimatedSection>
             <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>

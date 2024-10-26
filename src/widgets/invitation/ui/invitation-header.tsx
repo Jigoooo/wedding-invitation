@@ -1,7 +1,8 @@
 import { Box, Divider, Stack, Typography } from '@mui/joy';
-import { getWeddingImageSrc } from '@/entities/invitation';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
+
+import { getWeddingImageSrc, MarriedPersons } from '@/entities/invitation';
 
 // const maskLinearGradientStyle = {
 //   maskImage: `linear-gradient(180deg,
@@ -39,13 +40,11 @@ import { ko } from 'date-fns/locale';
 export function InvitationHeader({
   weddingDate,
   weddingLocationName,
-  groomName,
-  brideName,
+  marriedPersons,
 }: {
   weddingDate: Date;
   weddingLocationName: string;
-  groomName: string;
-  brideName: string;
+  marriedPersons: MarriedPersons;
 }) {
   const formattedDate = format(weddingDate, 'yyyy년 M월 d일', { locale: ko });
   const formattedTime = format(weddingDate, 'a h시', { locale: ko });
@@ -106,7 +105,7 @@ export function InvitationHeader({
             textAlign: 'center',
           }}
         >
-          {groomName}
+          {marriedPersons.groom.name}
         </Typography>
         <Divider sx={{ mx: 0.3, backgroundColor: '#999999' }} orientation='vertical' />
         <Typography
@@ -116,7 +115,7 @@ export function InvitationHeader({
             textAlign: 'center',
           }}
         >
-          {brideName}
+          {marriedPersons.bride.name}
         </Typography>
       </Box>
       <Stack sx={{ width: '100%', gap: 1 }}>
