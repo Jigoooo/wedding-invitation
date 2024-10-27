@@ -1,10 +1,14 @@
-import { Stack, Typography } from '@mui/joy';
+import { useState } from 'react';
+import { Box, Stack, Typography } from '@mui/joy';
+import { Outlet, useNavigate } from 'react-router-dom';
+
+import EditIcon from '@mui/icons-material/Edit';
+
+import { RouterName } from '@/shared/enum';
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { RouterName } from '@/shared/enum';
-import { OutlinedButton } from '@/shared/ui';
+import { SoftButton } from '@/shared/ui';
+import Card from '@mui/joy/Card';
 
 export function Guestbook() {
   const navigate = useNavigate();
@@ -29,10 +33,30 @@ export function Guestbook() {
       <AnimatedSection>
         <SectionHeader engTitle={'GUESTBOOK'} korTitle={'방명록'} />
       </AnimatedSection>
-
-      <OutlinedButton onClick={openGuestbook} buttonColor={'#cccccc'} sx={{ color: '#888888' }}>
-        작성하기
-      </OutlinedButton>
+      <Stack sx={{ width: '100%', px: 3, gap: 2 }}>
+        <AnimatedSection>
+          <Stack sx={{ width: '100%' }}>
+            <Card>test</Card>
+          </Stack>
+        </AnimatedSection>
+        <AnimatedSection>
+          <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+            <SoftButton
+              onClick={openGuestbook}
+              sx={{
+                height: 45,
+                borderRadius: 25,
+                color: '#666666',
+                border: '1px solid #dadada',
+              }}
+              buttonColor={'#ffffff'}
+              startDecorator={<EditIcon style={{ color: '#999999' }} />}
+            >
+              작성하기
+            </SoftButton>
+          </Box>
+        </AnimatedSection>
+      </Stack>
 
       <GuestbookModal isGuestbookOpen={isGuestbookOpen} onClose={closeGuestbook} />
     </Stack>

@@ -47,7 +47,7 @@ export function AttendanceSection() {
             정성껏 모시고자 합니다.
             <br />
             <br />
-            참석 의사를 미리 전달해 주시면
+            참석의사를 미리 전달해 주시면
             <br />
             정말 감사하겠습니다.
           </Typography>
@@ -67,7 +67,7 @@ export function AttendanceSection() {
             buttonColor={'#ffffff'}
             startDecorator={<AssignmentTurnedInIcon style={{ color: '#999999' }} />}
           >
-            참석 의사 전달하기
+            참석의사 전달하기
           </SoftButton>
         </Box>
         <AttendanceConfirmationModal
@@ -91,7 +91,7 @@ function AttendanceConfirmationModal({
       title={
         <Stack>
           <Typography sx={{ color: '#333333', fontSize: '1.1rem', fontWeight: 800 }}>
-            참석 의사 전달
+            참석의사 전달
           </Typography>
         </Stack>
       }
