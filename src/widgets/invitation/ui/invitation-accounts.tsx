@@ -16,8 +16,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import { AnimatedSection, marriedPersons, SectionHeader } from '@/entities/invitation';
-import { OutlinedButton, SolidButton } from '@/shared/ui';
-import KakaoPayIcon from '@/shared/assets/images/kakao-pay-icon.svg?react';
+import { OutlinedButton } from '@/shared/ui';
+// import KakaoPayIcon from '@/shared/assets/images/kakao-pay-icon.svg?react';
+import { copyToClipboard } from '@/shared/lib';
+import { showSnackBar } from '@/shared/components';
 
 function AccountAccordion({
   accordionTitle,
@@ -90,21 +92,30 @@ function AccountAccordion({
               </Stack>
               {index !== accounts.length - 1 && <Divider />}
 
-              <Stack sx={{ position: 'absolute', width: 80, top: 4, right: 10, gap: 0.6 }}>
+              <Stack sx={{ position: 'absolute', width: 80, top: 20, right: 10, gap: 0.6 }}>
                 <OutlinedButton
                   sx={{ minHeight: 0, height: 28, color: '#333333', fontSize: '0.8rem' }}
                   buttonColor={'#dddddd'}
                   startDecorator={<ContentCopyIcon sx={{ color: '#333333', fontSize: 14 }} />}
+                  onClick={() =>
+                    copyToClipboard(account.accountNumber, () => {
+                      showSnackBar({
+                        message: '계좌번호가 복사되었습니다.',
+                        variant: 'plain',
+                        duration: 1500,
+                      });
+                    })
+                  }
                 >
                   복사
                 </OutlinedButton>
-                <SolidButton
-                  sx={{ minHeight: 0, height: 28, paddingBlock: 0 }}
-                  buttonColor={'#ffe000'}
-                  noHighlight={true}
-                >
-                  <KakaoPayIcon style={{ width: '100%', height: '100%', display: 'block' }} />
-                </SolidButton>
+                {/*<SolidButton*/}
+                {/*  sx={{ minHeight: 0, height: 28, paddingBlock: 0 }}*/}
+                {/*  buttonColor={'#ffe000'}*/}
+                {/*  noHighlight={true}*/}
+                {/*>*/}
+                {/*  <KakaoPayIcon style={{ width: '100%', height: '100%', display: 'block' }} />*/}
+                {/*</SolidButton>*/}
               </Stack>
             </Stack>
           );

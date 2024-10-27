@@ -9,6 +9,33 @@ import NaverMapIcon from '@/shared/assets/images/naver-map-icon.png';
 import TMapIcon from '@/shared/assets/images/t-map-icon.png';
 import KakaoMapIcon from '@/shared/assets/images/kakao-map-icon.png';
 import { openKakaoMap, openNaverMap, openTMap } from '@/shared/lib';
+import { SxProps } from '@mui/joy/styles/types';
+
+function ListItem({
+  icon,
+  text,
+  pt,
+  textSx,
+}: {
+  icon: string;
+  text: string;
+  pt?: number;
+  textSx?: SxProps;
+}) {
+  return (
+    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 0.6, pt }}>
+      <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>{icon}</Typography>
+      <Typography
+        sx={[
+          { fontSize: '0.75rem', fontWeight: 900, pt: 0.2 },
+          ...(Array.isArray(textSx) ? textSx : [textSx]),
+        ]}
+      >
+        {text}
+      </Typography>
+    </Box>
+  );
+}
 
 export function InvitationLocationInfo({
   weddingAddress,
@@ -208,42 +235,17 @@ export function InvitationLocationInfo({
             자가용
           </Typography>
           <Stack sx={{ width: '100%', gap: 0.6 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➀</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
-                천안 IC 진출 후 평택/천안아산 방향으로 고가 진입
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➁</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
-                천안터널 통과 후 평택/성환 방면 고가 옆길전로 진입하여 곧바로 우회전
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➂</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
-                평택방향으로 직진 후 육교 지나서 300m 전방에 비렌티웨딩홀 입구 안내 보이면 우회전
-              </Typography>
-            </Box>
+            <ListItem icon={'➀'} text={'천안 IC 진출 후 평택/천안아산 방향으로 고가 진입'} />
+            <ListItem
+              icon={'➁'}
+              text={'천안터널 통과 후 평택/성환 방면 고가 옆길전로 진입하여 곧바로 우회전'}
+            />
+            <ListItem
+              icon={'➂'}
+              text={
+                '평택방향으로 직진 후 육교 지나서 300m 전방에 비렌티웨딩홀 입구 안내 보이면 우회전'
+              }
+            />
           </Stack>
           <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
             <Box
@@ -253,8 +255,8 @@ export function InvitationLocationInfo({
                 gap: 0.6,
               }}
             >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6 }}>
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6, pt: 0.2 }}>
                 주차
                 <br />
                 입구로 진입해서 루체오빌 쪽으로 이동하여 주차
@@ -268,31 +270,13 @@ export function InvitationLocationInfo({
             대중교통 (버스)
           </Typography>
           <Stack sx={{ width: '100%', gap: 0.6 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-                천안역 (이태리안경) - 100번, 110번
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-                천안고속버스터미널 (맥도날드앞) - 112번, 140번, 141번, 143번, 144번, 145, 150번,
-                151번
-              </Typography>
-            </Box>
+            <ListItem icon={'•'} text={'천안역 (이태리안경) - 100번, 110번'} />
+            <ListItem
+              icon={'•'}
+              text={
+                '천안고속버스터미널 (맥도날드앞) - 112번, 140번, 141번, 143번, 144번, 145, 150번, 151번'
+              }
+            />
             <Box
               sx={{
                 display: 'flex',
@@ -301,8 +285,8 @@ export function InvitationLocationInfo({
                 pt: 3,
               }}
             >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
                 성환방면 100번대 버스 이용 후 공주대 공과대학에서 하차 후 도보 5분
               </Typography>
             </Box>
@@ -314,18 +298,7 @@ export function InvitationLocationInfo({
             KTX, SRT
           </Typography>
           <Stack sx={{ width: '100%', gap: 0.6 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-                천안아산역에서 택시 이용 (20분정도 소요 예상)
-              </Typography>
-            </Box>
+            <ListItem icon={'•'} text={'천안아산역에서 택시 이용 (20분정도 소요 예상)'} />
           </Stack>
         </Stack>
         <Divider />
@@ -334,30 +307,14 @@ export function InvitationLocationInfo({
             셔틀버스
           </Typography>
           <Stack sx={{ width: '100%', gap: 0.6 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-                천안종합터미널 - 신세계백화점 - 올리브영 & 스타벅스 건물 앞 횡단보도
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 0.6,
-              }}
-            >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-                두정역 - 1번 출구에서 나와서 오른쪽으로 50m 지점 파란색 셔틀버스 승강장
-              </Typography>
-            </Box>
+            <ListItem
+              icon={'•'}
+              text={'천안종합터미널 - 신세계백화점 - 올리브영 & 스타벅스 건물 앞 횡단보도'}
+            />
+            <ListItem
+              icon={'•'}
+              text={'두정역 - 1번 출구에서 나와서 오른쪽으로 50m 지점 파란색 셔틀버스 승강장'}
+            />
           </Stack>
           <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
             <Box
@@ -367,8 +324,8 @@ export function InvitationLocationInfo({
                 gap: 0.6,
               }}
             >
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
-              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6 }}>
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6, pt: 0.2 }}>
                 예식시간 1시간 전부터 30분 간격으로 셔틀버스 이용 가능
                 <br />
                 시외버스터미널 ⭢ 두정역 ⭢ 비렌티
