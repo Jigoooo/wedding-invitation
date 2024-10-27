@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Grid, Stack, Typography } from '@mui/joy';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -21,6 +21,33 @@ export function Gallery() {
     { id: 9, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
     { id: 10, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
   ]);
+  const renderedGalleryItems = useMemo(() => {
+    return galleryItems.map((galleryItem) => {
+      return (
+        <Box
+          key={galleryItem.id}
+          sx={{
+            gridColumn: `span ${galleryItem.cols}`,
+            gridRow: `span ${galleryItem.rows}`,
+            overflow: 'hidden',
+            borderRadius: 6,
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          }}
+        >
+          <img
+            src={galleryItem.src}
+            alt={`gallery-item-${galleryItem.id}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </Box>
+      );
+    });
+  }, [galleryItems]);
+
   const [isExpanded, setIsExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState(defaultMaxHeight);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -48,7 +75,7 @@ export function Gallery() {
           width: '100%',
           overflow: 'hidden',
           maxHeight: isExpanded ? maxHeight : defaultMaxHeight,
-          transition: 'max-height 0.5s ease',
+          transition: 'max-height 0.5s ease-in',
         }}
         ref={containerRef}
       >
@@ -62,28 +89,7 @@ export function Gallery() {
             gap: '8px',
           }}
         >
-          {galleryItems.map((galleryItem) => (
-            <Box
-              key={galleryItem.id}
-              sx={{
-                gridColumn: `span ${galleryItem.cols}`,
-                gridRow: `span ${galleryItem.rows}`,
-                overflow: 'hidden',
-                borderRadius: 6,
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <img
-                src={galleryItem.src}
-                alt={`gallery-item-${galleryItem.id}`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-              />
-            </Box>
-          ))}
+          {renderedGalleryItems}
         </Grid>
       </Stack>
       <AnimatedSection>
