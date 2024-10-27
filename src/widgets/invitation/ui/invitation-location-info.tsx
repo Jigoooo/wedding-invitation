@@ -328,7 +328,7 @@ export function InvitationLocationInfo({
               <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6, pt: 0.2 }}>
                 예식시간 1시간 전부터 30분 간격으로 셔틀버스 이용 가능
                 <br />
-                시외버스터미널 ⭢ 두정역 ⭢ 비렌티
+                시외버스터미널 - 두정역 - 비렌티
                 <br />
                 자세한 운영시간은 문의 예약실 (041-554-5500)
               </Typography>
