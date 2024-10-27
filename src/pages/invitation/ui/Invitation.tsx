@@ -12,6 +12,7 @@ import {
   InvitationIntroduction,
   InvitationLocationInfo,
   WeddingCalendar,
+  WeddingInformationAndInstructions,
 } from '@/widgets/invitation';
 import { AnimatedSection, marriedPersons, SectionHeader } from '@/entities/invitation';
 import { InvitationAccounts } from '@/widgets/invitation/ui/invitation-accounts.tsx';
@@ -74,11 +75,7 @@ export function Invitation() {
             weddingPlaceName={WEDDING_PLACE_NAME}
           />
 
-          <AnimatedSection>
-            <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              <SectionHeader engTitle={'INFORMATION'} korTitle={'예식정보 및 안내사항'} />
-            </Stack>
-          </AnimatedSection>
+          <WeddingInformationAndInstructions />
 
           <InvitationAccounts />
 
