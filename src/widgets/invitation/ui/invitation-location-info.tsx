@@ -246,15 +246,87 @@ export function InvitationLocationInfo({
             </Box>
           </Stack>
           <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>※ 주차안내</Typography>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>주차</Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6 }}>
+                주차
+                <br />
+                입구로 진입해서 루체오빌 쪽으로 이동하여 주차
+              </Typography>
+            </Box>
           </Stack>
         </Stack>
         <Divider />
-        <Stack sx={{ width: '100%' }}>
+        <Stack sx={{ width: '100%', gap: 1 }}>
           <Typography sx={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'left' }}>
-            대중교통
+            대중교통 (버스)
           </Typography>
+          <Stack sx={{ width: '100%', gap: 0.6 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                천안역 (이태리안경) - 100번, 110번
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                천안고속버스터미널 (맥도날드앞) - 112번, 140번, 141번, 143번, 144번, 145, 150번,
+                151번
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+                pt: 3,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                성환방면 100번대 버스 이용 후 공주대 공과대학에서 하차 후 도보 5분
+              </Typography>
+            </Box>
+          </Stack>
+        </Stack>
+        <Divider />
+        <Stack sx={{ width: '100%', gap: 1 }}>
+          <Typography sx={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'left' }}>
+            KTX, SRT
+          </Typography>
+          <Stack sx={{ width: '100%', gap: 0.6 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                천안아산역에서 택시 이용 (20분정도 소요 예상)
+              </Typography>
+            </Box>
+          </Stack>
         </Stack>
         <Divider />
         <Stack sx={{ width: '100%', gap: 1 }}>
@@ -288,15 +360,22 @@ export function InvitationLocationInfo({
             </Box>
           </Stack>
           <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-              ※ 예식시간 1시간 전부터 30분 간격으로 셔틀버스 이용 가능
-            </Typography>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-              ※ 시외버스터미널 ⭢ 두정역 ⭢ 비렌티
-            </Typography>
-            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
-              ※ 자세한 운영시간은 문의 예약실 (041-554-5500)
-            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>※</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, lineHeight: 1.6 }}>
+                예식시간 1시간 전부터 30분 간격으로 셔틀버스 이용 가능
+                <br />
+                시외버스터미널 ⭢ 두정역 ⭢ 비렌티
+                <br />
+                자세한 운영시간은 문의 예약실 (041-554-5500)
+              </Typography>
+            </Box>
           </Stack>
         </Stack>
       </Stack>
