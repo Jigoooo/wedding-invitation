@@ -36,7 +36,7 @@ function AccountAccordion({
 }) {
   return (
     <Accordion
-      sx={{ width: '90%', backgroundColor: '#eeeeee', borderRadius: 8 }}
+      sx={{ width: '90%', backgroundColor: '#eaeaea', borderRadius: 8 }}
       expanded={isExpanded}
       onChange={handleChange}
     >
@@ -66,8 +66,6 @@ function AccountAccordion({
       <AccordionDetails
         sx={{
           backgroundColor: '#ffffff',
-          borderBottomLeftRadius: 8,
-          borderBottomRightRadius: 8,
         }}
       >
         {accounts.map((account, index) => {
@@ -194,6 +192,13 @@ export function InvitationAccounts() {
             },
             [`& .${accordionDetailsClasses.content}`]: {
               padding: 0,
+              [`&.${accordionDetailsClasses.expanded}`]: {
+                borderLeft: '1px solid #dddddd',
+                borderRight: '1px solid #dddddd',
+                borderBottom: '1px solid #dddddd',
+                borderBottomLeftRadius: 8,
+                borderBottomRightRadius: 8,
+              },
             },
           })}
           transition={{
