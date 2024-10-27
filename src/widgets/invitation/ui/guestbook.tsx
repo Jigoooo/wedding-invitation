@@ -87,14 +87,14 @@ export function Guestbook() {
         <AnimatedSection>
           <Stack sx={{ width: '100%', gap: 1.4 }}>
             <AnimatePresence initial={false}>
-              {guestbookItems.slice(0, displayCount).map((guestbookItem) => {
+              {guestbookItems.slice(0, displayCount).map((guestbookItem, index) => {
                 return (
                   <motion.div
                     key={guestbookItem.id}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
                     layout
                     style={{
                       overflow: 'hidden',
