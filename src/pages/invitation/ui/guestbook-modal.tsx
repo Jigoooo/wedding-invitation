@@ -8,7 +8,7 @@ export function GuestbookModal() {
         <OutlinedInput
           sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
           focusWithin={false}
-          placeholder={'작성자명을 입력해 주세요.'}
+          placeholder={'10자 이내로 입력해 주세요.'}
         />
       </CustomedFormControl>
       <CustomedFormControl label={'비밀번호'} required={true}>
