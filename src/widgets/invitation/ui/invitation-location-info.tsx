@@ -201,12 +201,54 @@ export function InvitationLocationInfo({
           </Box>
         </AnimatedSection>
       </Stack>
-      <Stack sx={{ width: '90%', pt: 4, gap: 3.5 }}>
+      <Stack sx={{ width: '90%', pt: 4, gap: 2.4 }}>
         <Divider />
-        <Stack sx={{ width: '100%' }}>
-          <Typography sx={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'left' }}>
+        <Stack sx={{ width: '100%', gap: 1 }}>
+          <Typography sx={{ fontSize: '0.9rem', fontWeight: 900, textAlign: 'left' }}>
             자가용
           </Typography>
+          <Stack sx={{ width: '100%', gap: 0.6 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➀</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
+                천안 IC 진출 후 평택/천안아산 방향으로 고가 진입
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➁</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
+                천안터널 통과 후 평택/성환 방면 고가 옆길전로 진입하여 곧바로 우회전
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>➂</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900, pt: 0.2 }}>
+                평택방향으로 직진 후 육교 지나서 300m 전방에 비렌티웨딩홀 입구 안내 보이면 우회전
+              </Typography>
+            </Box>
+          </Stack>
+          <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>※ 주차안내</Typography>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>주차</Typography>
+          </Stack>
         </Stack>
         <Divider />
         <Stack sx={{ width: '100%' }}>
@@ -215,10 +257,47 @@ export function InvitationLocationInfo({
           </Typography>
         </Stack>
         <Divider />
-        <Stack sx={{ width: '100%' }}>
+        <Stack sx={{ width: '100%', gap: 1 }}>
           <Typography sx={{ fontSize: '0.9rem', fontWeight: 800, textAlign: 'left' }}>
             셔틀버스
           </Typography>
+          <Stack sx={{ width: '100%', gap: 0.6 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                천안종합터미널 - 신세계백화점 - 올리브영 & 스타벅스 건물 앞 횡단보도
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 0.6,
+              }}
+            >
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 700 }}>•</Typography>
+              <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+                두정역 - 1번 출구에서 나와서 오른쪽으로 50m 지점 파란색 셔틀버스 승강장
+              </Typography>
+            </Box>
+          </Stack>
+          <Stack sx={{ width: '100%', gap: 0.6, pt: 3 }}>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+              ※ 예식시간 1시간 전부터 30분 간격으로 셔틀버스 이용 가능
+            </Typography>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+              ※ 시외버스터미널 ⭢ 두정역 ⭢ 비렌티
+            </Typography>
+            <Typography sx={{ fontSize: '0.75rem', fontWeight: 900 }}>
+              ※ 자세한 운영시간은 문의 예약실 (041-554-5500)
+            </Typography>
+          </Stack>
         </Stack>
       </Stack>
     </Stack>
