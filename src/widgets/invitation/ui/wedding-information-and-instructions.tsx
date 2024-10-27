@@ -1,13 +1,23 @@
 import { Box, Stack, Typography } from '@mui/joy';
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export function WeddingInformationAndInstructions() {
   const [activeTab, setActiveTab] = useState(0);
 
+  const [contentHeight, setContentHeight] = useState('auto');
+
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
   const handleTabClick = (tabIndex: number) => {
     setActiveTab(tabIndex);
   };
+
+  useEffect(() => {
+    if (contentRefs.current[activeTab]) {
+      setContentHeight(`${contentRefs.current[activeTab]?.offsetHeight}px`);
+    }
+  }, [activeTab]);
 
   const tabContents = [
     {
@@ -76,23 +86,34 @@ export function WeddingInformationAndInstructions() {
               justifyContent: 'space-between',
               alignItems: 'center',
               gap: 0.5,
+              border: '1px solid #dadada',
+              borderBottom: 'none',
+              borderTopLeftRadius: 8,
+              borderTopRightRadius: 8,
             }}
           >
             {tabContents.map((tab, index) => (
               <Box
                 key={index}
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  padding: 1,
-                  backgroundColor: activeTab === index ? '#e0e0e0' : 'transparent',
-                  borderRadius: 1,
-                  width: '50%',
-                }}
+                sx={[
+                  {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    padding: 1,
+                    backgroundColor: activeTab === index ? 'transparent' : '#eeeeee',
+                    width: '50%',
+                  },
+                  index === 0 && {
+                    borderTopLeftRadius: 8,
+                  },
+                  index === tabContents.length - 1 && {
+                    borderTopRightRadius: 8,
+                  },
+                ]}
                 onClick={() => handleTabClick(index)}
               >
-                <Typography>{tab.label}</Typography>
+                <Typography sx={{ fontSize: '0.9rem', fontWeight: 900 }}>{tab.label}</Typography>
               </Box>
             ))}
           </Box>
@@ -102,12 +123,22 @@ export function WeddingInformationAndInstructions() {
               width: '100%',
               overflow: 'hidden',
               position: 'relative',
-              height: '250px',
+              height: contentHeight,
+              border: '1px solid #dadada',
+              borderTop: 'none',
+              borderBottomLeftRadius: 8,
+              borderBottomRightRadius: 8,
+              transition: 'height 0.5s ease',
             }}
           >
             {tabContents.map((tab, index) => (
               <Box
                 key={index}
+                ref={(el) => {
+                  if (el instanceof HTMLDivElement) {
+                    contentRefs.current[index] = el;
+                  }
+                }}
                 sx={{
                   width: '100%',
                   position: 'absolute',
