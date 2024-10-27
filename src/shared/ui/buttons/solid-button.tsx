@@ -4,6 +4,7 @@ import { darken } from 'polished';
 
 interface FuturButtonProps extends ButtonProps {
   noAnimation?: boolean;
+  noHighlight?: boolean;
   buttonColor?: string;
 }
 
@@ -11,6 +12,7 @@ export function SolidButton({
   children = '',
   sx = [],
   noAnimation = false,
+  noHighlight = false,
   type = 'button',
   fullWidth = false,
   onClick,
@@ -53,6 +55,22 @@ export function SolidButton({
             },
           },
         },
+        noHighlight &&
+          buttonColor && {
+            [`&.${buttonClasses.root}`]: {
+              '@media (hover: hover) and (pointer: fine)': {
+                '&:hover': {
+                  backgroundColor: 'none !important',
+                },
+              },
+              '&:focus': {
+                backgroundColor: `${buttonColor} !important`,
+              },
+              '&:active': {
+                backgroundColor: `${buttonColor} !important`,
+              },
+            },
+          },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       color={color}

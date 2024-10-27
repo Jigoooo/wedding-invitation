@@ -8,10 +8,15 @@ export type MarriedPersons = {
 };
 
 type MarriedPersonsInfo = {
+  role: string;
   name: string;
   subName: string;
   phoneNumber: string;
-  account: string;
+  account: {
+    bank: string;
+    accountHolder: string;
+    accountNumber: string;
+  };
 };
 
 export type CallInfo = {
