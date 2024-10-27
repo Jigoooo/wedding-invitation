@@ -128,7 +128,7 @@ function AccountAccordion({
 export function InvitationAccounts() {
   const [accordionStates, setAccordionStates] = useState([
     {
-      expanded: false,
+      expanded: true,
       accordionTitle: '신랑측 계좌번호',
       accounts: [
         marriedPersons.groom.account,
