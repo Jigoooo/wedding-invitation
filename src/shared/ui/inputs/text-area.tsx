@@ -3,6 +3,10 @@ import { useColorScheme } from '@mui/joy/styles';
 
 import { colors } from '@/shared/constants';
 
+interface CustomedTextareaProps extends TextareaProps {
+  focusWithin?: boolean;
+}
+
 export function TextArea({
   readOnly,
   sx,
@@ -16,7 +20,8 @@ export function TextArea({
   onClick,
   error,
   variant,
-}: Readonly<TextareaProps>) {
+  focusWithin,
+}: Readonly<CustomedTextareaProps>) {
   const { mode } = useColorScheme();
 
   const errorStyle = error
@@ -41,6 +46,7 @@ export function TextArea({
       sx={[
         {
           transition: 'border-color 0.2s ease-in-out',
+          borderColor: '#e9e9e9',
         },
         variant === 'soft'
           ? {
@@ -49,13 +55,7 @@ export function TextArea({
               '&::before': {
                 display: 'none',
               },
-              '&:focus-within': {
-                border: `2px solid ${focusedHighlightColor}`,
-              },
-              '&:hover': {
-                borderColor: error ? modeBackgroundColor : colors.primary[400],
-              },
-              '& .MuiInput-input::placeholder': {
+              '& .MuiTextarea-textarea::placeholder': {
                 color: placeholderColor,
                 fontSize: '14px',
               },
@@ -67,19 +67,21 @@ export function TextArea({
                 '&::before': {
                   display: 'none',
                 },
-                '&:focus-within': {
-                  border: `2px solid ${focusedHighlightColor}`,
-                },
-                '&:hover': {
-                  borderColor: error ? modeBackgroundColor : colors.primary[400],
-                },
-                '& .MuiInput-input::placeholder': {
+                '& .MuiTextarea-textarea::placeholder': {
                   color: placeholderColor,
                   fontSize: '14px',
                 },
               }
             : {},
         errorStyle,
+        focusWithin && {
+          '&:focus-within': {
+            boxShadow: `inset 0 0 0 2px ${focusedHighlightColor} !important`,
+          },
+          '&:hover': {
+            boxShadow: `inset 0 0 0 2px ${error ? modeBackgroundColor : colors.primary[200]}`,
+          },
+        },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
       startDecorator={startDecorator}

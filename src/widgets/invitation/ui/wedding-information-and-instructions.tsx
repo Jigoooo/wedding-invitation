@@ -113,7 +113,15 @@ export function WeddingInformationAndInstructions() {
                 ]}
                 onClick={() => handleTabClick(index)}
               >
-                <Typography sx={{ fontSize: '0.9rem', fontWeight: 900 }}>{tab.label}</Typography>
+                <Typography
+                  sx={{
+                    fontSize: '0.9rem',
+                    fontWeight: 900,
+                    color: activeTab === index ? '#000000' : '#999999',
+                  }}
+                >
+                  {tab.label}
+                </Typography>
               </Box>
             ))}
           </Box>

@@ -90,7 +90,7 @@ function AttendanceConfirmationModal({
     <TranslucentMobileModal
       title={
         <Stack>
-          <Typography sx={{ color: '#333333', fontSize: '1.2rem', fontWeight: 800 }}>
+          <Typography sx={{ color: '#333333', fontSize: '1.1rem', fontWeight: 800 }}>
             참석 의사 전달
           </Typography>
         </Stack>

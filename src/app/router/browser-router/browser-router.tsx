@@ -2,7 +2,12 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { RouterName } from '@/shared/enum';
 import { RouteErrorPage } from '@/shared/components';
-import { AttendanceConfirmation, Invitation, InvitationCallInfo } from '@/pages/invitation';
+import {
+  AttendanceConfirmation,
+  GuestbookModal,
+  Invitation,
+  InvitationCallInfo,
+} from '@/pages/invitation';
 
 export const browserRouter = createBrowserRouter([
   {
@@ -17,6 +22,10 @@ export const browserRouter = createBrowserRouter([
       {
         path: RouterName.ATTENDANCE_CONFIRMATION,
         element: <AttendanceConfirmation />,
+      },
+      {
+        path: RouterName.GUESTBOOK,
+        element: <GuestbookModal />,
       },
     ],
   },

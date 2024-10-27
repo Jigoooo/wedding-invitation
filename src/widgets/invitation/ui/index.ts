@@ -7,3 +7,4 @@ export { WeddingCalendar } from './wedding-calendar.tsx';
 export { AttendanceSection } from './attendance-section.tsx';
 export { InvitationFooter } from './invitation-footer.tsx';
 export { WeddingInformationAndInstructions } from './wedding-information-and-instructions.tsx';
+export { Guestbook } from './guestbook.tsx';

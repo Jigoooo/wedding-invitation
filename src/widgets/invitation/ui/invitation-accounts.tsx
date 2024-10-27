@@ -204,17 +204,16 @@ export function InvitationAccounts() {
             [`& .${accordionDetailsClasses.content}`]: {
               padding: 0,
               [`&.${accordionDetailsClasses.expanded}`]: {
-                borderLeft: '1px solid #dddddd',
-                borderRight: '1px solid #dddddd',
-                borderBottom: '1px solid #dddddd',
+                boxShadow:
+                  'inset 1px 0px 0px #dddddd, inset -1px 0px 0px #dddddd, inset 0px -1px 0px #dddddd',
                 borderBottomLeftRadius: 8,
                 borderBottomRightRadius: 8,
               },
             },
           })}
           transition={{
-            initial: '0.3s ease-out',
-            expanded: '0.3s ease',
+            initial: '0.3s ease-in-out',
+            expanded: '0.3s ease-in-out',
           }}
         >
           {accordionStates.map((accordionState, index) => (

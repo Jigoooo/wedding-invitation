@@ -6,6 +6,7 @@ import { parse } from 'date-fns';
 import {
   AttendanceSection,
   FallingAnimation,
+  Guestbook,
   IntroAnimation,
   InvitationFooter,
   InvitationHeader,
@@ -79,11 +80,7 @@ export function Invitation() {
 
           <InvitationAccounts />
 
-          <AnimatedSection>
-            <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              <SectionHeader engTitle={'GUESTBOOK'} korTitle={'방명록'} />
-            </Stack>
-          </AnimatedSection>
+          <Guestbook />
 
           <AttendanceSection />
         </Stack>
