@@ -211,6 +211,7 @@ function CallInfoModal({
       isOpen={isCallInfoOpen}
       onClose={onClose}
       sx={{ backgroundColor: 'rgba(128,128,128,0.5)', backdropFilter: 'blur(10px)' }}
+      isCloseButtonVisible={false}
     >
       <Outlet />
     </TranslucentMobileModal>

@@ -14,6 +14,7 @@ type ModalType = {
   title: ReactNode;
   sx?: SxProps;
   closeIconColor?: string;
+  isCloseButtonVisible?: boolean;
   children: ReactNode;
 };
 
@@ -25,6 +26,7 @@ export function TranslucentMobileModal({
   title,
   sx,
   closeIconColor,
+  isCloseButtonVisible = true,
   children,
 }: ModalType) {
   useBackKeyToClose(isOpen, onClose);
@@ -97,7 +99,12 @@ export function TranslucentMobileModal({
                 ...(Array.isArray(sx) ? sx : [sx]),
               ]}
             >
-              <ModalHeader title={title} onClose={onClose} closeIconColor={closeIconColor} />
+              <ModalHeader
+                title={title}
+                onClose={onClose}
+                closeIconColor={closeIconColor}
+                isCloseButtonVisible={isCloseButtonVisible}
+              />
               <Divider />
               <Box
                 sx={{
@@ -119,10 +126,12 @@ function ModalHeader({
   title,
   onClose,
   closeIconColor = '#ffffff',
+  isCloseButtonVisible,
 }: {
   title: ReactNode;
   onClose: () => void;
   closeIconColor?: string;
+  isCloseButtonVisible?: boolean;
 }) {
   return (
     <Box
@@ -137,11 +146,13 @@ function ModalHeader({
       }}
     >
       {title}
-      <Tooltip title={'닫기'} placement={'top'}>
-        <IconButton onClick={onClose} color={'neutral'}>
-          <CloseIcon style={{ color: closeIconColor, fontSize: 28 }} />
-        </IconButton>
-      </Tooltip>
+      {isCloseButtonVisible && (
+        <Tooltip title={'닫기'} placement={'top'}>
+          <IconButton onClick={onClose} color={'neutral'}>
+            <CloseIcon style={{ color: closeIconColor, fontSize: 28 }} />
+          </IconButton>
+        </Tooltip>
+      )}
     </Box>
   );
 }

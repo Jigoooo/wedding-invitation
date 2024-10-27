@@ -99,6 +99,7 @@ function AttendanceConfirmationModal({
       onClose={onClose}
       sx={{ backgroundColor: '#ffffff' }}
       closeIconColor={'#999999'}
+      isCloseButtonVisible={false}
     >
       <Outlet />
     </TranslucentMobileModal>
