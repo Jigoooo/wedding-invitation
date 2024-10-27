@@ -15,8 +15,9 @@ import {
   WeddingCalendar,
   WeddingInformationAndInstructions,
 } from '@/widgets/invitation';
-import { AnimatedSection, marriedPersons, SectionHeader } from '@/entities/invitation';
+import { marriedPersons } from '@/entities/invitation';
 import { InvitationAccounts } from '@/widgets/invitation/ui/invitation-accounts.tsx';
+import { Gallery } from '@/widgets/invitation/ui/gallery.tsx';
 
 const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());
 
@@ -62,11 +63,7 @@ export function Invitation() {
         <Stack component={'main'} sx={{ width: '100%', alignItems: 'center', gap: 14, pb: 10 }}>
           <InvitationIntroduction marriedPersons={marriedPersons} />
 
-          <AnimatedSection>
-            <Stack component={'section'} sx={{ width: '100%', alignItems: 'center' }}>
-              <SectionHeader engTitle={'GALLERY'} korTitle={'갤러리'} />
-            </Stack>
-          </AnimatedSection>
+          <Gallery />
 
           <WeddingCalendar weddingDate={weddingDate} />
 
