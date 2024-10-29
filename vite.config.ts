@@ -7,11 +7,11 @@ import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 export default defineConfig({
   server: {
     proxy: {
-      // '/api': {
-      //   target: 'http://mail.futur-cloud.com:8000',
-      //   changeOrigin: true,
-      //   rewrite: (path) => path.replace(/^\/api/, ''),
-      // },
+      '/wedding': {
+        target: 'http://210.114.22.192:4050',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/wedding/, ''),
+      },
     },
   },
   plugins: [

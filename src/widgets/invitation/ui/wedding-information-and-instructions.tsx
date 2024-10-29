@@ -137,6 +137,7 @@ export function WeddingInformationAndInstructions() {
               borderBottomLeftRadius: 8,
               borderBottomRightRadius: 8,
               transition: 'height 0.5s ease',
+              willChange: 'auto',
             }}
           >
             {tabContents.map((tab, index) => (
@@ -154,6 +155,7 @@ export function WeddingInformationAndInstructions() {
                   top: 0,
                   left: `${index === activeTab ? 0 : index < activeTab ? '-100%' : '100%'}`,
                   transition: 'left 0.5s ease',
+                  willChange: 'auto',
                 }}
               >
                 {activeTab === index && tab.content}

@@ -14,9 +14,9 @@ import {
   InvitationLocationInfo,
   WeddingCalendar,
   WeddingInformationAndInstructions,
+  InvitationAccounts,
 } from '@/widgets/invitation';
 import { marriedPersons } from '@/entities/invitation';
-import { InvitationAccounts } from '@/widgets/invitation/ui/invitation-accounts.tsx';
 import { Gallery } from '@/widgets/invitation/ui/gallery.tsx';
 
 const weddingDate = parse('2024.12.14 13:00:00', 'yyyy.MM.dd HH:mm:ss', new Date());

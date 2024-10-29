@@ -1,26 +1,28 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Grid, Stack, Typography } from '@mui/joy';
+import { motion } from 'framer-motion';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
 
+const galleryItems = [
+  { id: 1, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 2, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
+  { id: 3, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
+  { id: 4, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 5, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 6, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 7, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 8, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 9, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+  { id: 10, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
+];
+
 export function Gallery() {
   const defaultMaxHeight = '625px';
 
-  const [galleryItems] = useState([
-    { id: 1, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 2, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
-    { id: 3, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
-    { id: 4, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 5, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 6, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 7, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 8, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 9, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-    { id: 10, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  ]);
   const renderedGalleryItems = useMemo(() => {
     return galleryItems.map((galleryItem) => {
       return (
@@ -46,7 +48,7 @@ export function Gallery() {
         </Box>
       );
     });
-  }, [galleryItems]);
+  }, []);
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState(defaultMaxHeight);
@@ -57,7 +59,7 @@ export function Gallery() {
       const fullHeight = containerRef.current.scrollHeight;
       setMaxHeight(`${fullHeight}px`);
     }
-  }, [galleryItems]);
+  }, []);
 
   const handleIsExpanded = (state: boolean) => {
     setIsExpanded(state);
@@ -69,15 +71,12 @@ export function Gallery() {
         <SectionHeader engTitle={'GALLERY'} korTitle={'갤러리'} />
       </AnimatedSection>
 
-      <Stack
-        sx={{
-          position: 'relative',
-          width: '100%',
-          overflow: 'hidden',
-          maxHeight: isExpanded ? maxHeight : defaultMaxHeight,
-          transition: 'max-height 0.5s ease-in',
-        }}
+      <motion.div
+        initial={{ height: defaultMaxHeight }}
+        animate={{ height: isExpanded ? maxHeight : defaultMaxHeight }}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
         ref={containerRef}
+        style={{ width: '100%', overflow: 'hidden' }}
       >
         <Grid
           container
@@ -91,7 +90,7 @@ export function Gallery() {
         >
           {renderedGalleryItems}
         </Grid>
-      </Stack>
+      </motion.div>
       <AnimatedSection>
         <Box
           sx={{
