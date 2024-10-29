@@ -15,7 +15,7 @@ export function GuestbookModal() {
         <OutlinedInput
           sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
           focusWithin={false}
-          placeholder={'작성자명을 입력해 주세요.'}
+          placeholder={'방명록 비밀번호를 입력해 주세요.'}
         />
       </CustomedFormControl>
       <CustomedFormControl label={'내용'} required={true}>
