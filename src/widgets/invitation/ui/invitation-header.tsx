@@ -2,52 +2,15 @@ import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-import { getWeddingImageSrc, MarriedPersons } from '@/entities/invitation';
+import { getWeddingImageSrc, useWeddingInfo } from '@/entities/invitation';
+import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
 
-// const maskLinearGradientStyle = {
-//   maskImage: `linear-gradient(180deg,
-//     transparent 0%,
-//     rgba(0, 0, 0, 0.1) 2%,
-//     rgba(0, 0, 0, 0.3) 4%,
-//     rgba(0, 0, 0, 0.5) 6%,
-//     rgba(0, 0, 0, 0.7) 8%,
-//     rgba(0, 0, 0, 0.9) 10%,
-//     #000 12%,
-//     #000 88%,
-//     rgba(0, 0, 0, 0.9) 90%,
-//     rgba(0, 0, 0, 0.7) 92%,
-//     rgba(0, 0, 0, 0.5) 94%,
-//     rgba(0, 0, 0, 0.3) 96%,
-//     rgba(0, 0, 0, 0.1) 98%,
-//     transparent 100%)`,
-//   WebkitMaskImage: `linear-gradient(180deg,
-//     transparent 0%,
-//     rgba(0, 0, 0, 0.1) 2%,
-//     rgba(0, 0, 0, 0.3) 4%,
-//     rgba(0, 0, 0, 0.5) 6%,
-//     rgba(0, 0, 0, 0.7) 8%,
-//     rgba(0, 0, 0, 0.9) 10%,
-//     #000 12%,
-//     #000 88%,
-//     rgba(0, 0, 0, 0.9) 90%,
-//     rgba(0, 0, 0, 0.7) 92%,
-//     rgba(0, 0, 0, 0.5) 94%,
-//     rgba(0, 0, 0, 0.3) 96%,
-//     rgba(0, 0, 0, 0.1) 98%,
-//     transparent 100%)`,
-// };
+export function InvitationHeader() {
+  const weddingInfo = useWeddingInfo();
+  const marriedPersons = useMarriedPersons();
 
-export function InvitationHeader({
-  weddingDate,
-  weddingLocationName,
-  marriedPersons,
-}: {
-  weddingDate: Date;
-  weddingLocationName: string;
-  marriedPersons: MarriedPersons;
-}) {
-  const formattedDate = format(weddingDate, 'yyyy년 M월 d일', { locale: ko });
-  const formattedTime = format(weddingDate, 'a h시', { locale: ko });
+  const formattedDate = format(weddingInfo.weddingDateTime, 'yyyy년 M월 d일', { locale: ko });
+  const formattedTime = format(weddingInfo.weddingDateTime, 'a h시', { locale: ko });
 
   const fullFormattedDate = `${formattedDate} ${formattedTime}`;
 
@@ -65,7 +28,7 @@ export function InvitationHeader({
             letterSpacing: 1.6,
           }}
         >
-          {format(weddingDate, 'yyyy / MM / dd')}
+          {format(weddingInfo.weddingDateTime, 'yyyy / MM / dd')}
         </Typography>
         <Typography
           sx={{
@@ -76,7 +39,7 @@ export function InvitationHeader({
             letterSpacing: 2,
           }}
         >
-          {format(weddingDate, 'EEEE').toUpperCase()}
+          {format(weddingInfo.weddingDateTime, 'EEEE').toUpperCase()}
         </Typography>
       </Stack>
       <img
@@ -130,7 +93,7 @@ export function InvitationHeader({
         >
           {fullFormattedDate}
           <br />
-          {weddingLocationName}
+          {weddingInfo.weddingHallNameDetail}
         </Typography>
       </Stack>
     </Stack>

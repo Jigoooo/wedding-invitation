@@ -9,7 +9,7 @@ import {
 } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
-import { AnimatedSection } from '@/entities/invitation';
+import { AnimatedSection, useWeddingInfo } from '@/entities/invitation';
 
 const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 const calendarData = [
@@ -20,11 +20,13 @@ const calendarData = [
   [29, 30, 31, null, null, null, null],
 ];
 
-export function WeddingCalendar({ weddingDate }: { weddingDate: Date }) {
-  const weddingDay = getDate(weddingDate);
+export function WeddingCalendar() {
+  const weddingInfo = useWeddingInfo();
 
-  const formattedTime = format(weddingDate, 'a h시', { locale: ko });
-  const dayOfWeek = format(weddingDate, 'EEEE', { locale: ko });
+  const weddingDay = getDate(weddingInfo.weddingDateTime);
+
+  const formattedTime = format(weddingInfo.weddingDateTime, 'a h시', { locale: ko });
+  const dayOfWeek = format(weddingInfo.weddingDateTime, 'EEEE', { locale: ko });
 
   const formattedDate = `${dayOfWeek} ${formattedTime}`;
 
@@ -44,7 +46,7 @@ export function WeddingCalendar({ weddingDate }: { weddingDate: Date }) {
         <AnimatedSection>
           <Box sx={{ textAlign: 'center', mb: 3 }}>
             <Typography sx={{ fontSize: '1.3rem', letterSpacing: 1.8, fontWeight: 800 }}>
-              {format(weddingDate, 'yyyy. MM. dd.')}
+              {format(weddingInfo.weddingDateTime, 'yyyy. MM. dd.')}
             </Typography>
             <Typography
               sx={{ fontSize: '0.9rem', letterSpacing: 1.8, fontWeight: 800, marginTop: 1 }}
@@ -124,7 +126,7 @@ export function WeddingCalendar({ weddingDate }: { weddingDate: Date }) {
         </AnimatedSection>
 
         <AnimatedSection>
-          <WeddingCountdownTimer weddingDate={weddingDate} />
+          <WeddingCountdownTimer weddingDate={weddingInfo.weddingDateTime} />
         </AnimatedSection>
       </Stack>
     </Stack>

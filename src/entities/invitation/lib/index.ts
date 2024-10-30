@@ -1,1 +1,1 @@
-export { getWeddingImageSrc, marriedPersons } from './constant.ts';
+export { getWeddingImageSrc } from './constant.ts';

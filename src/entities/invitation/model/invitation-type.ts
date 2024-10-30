@@ -25,3 +25,21 @@ export type CallInfo = {
   subName: string;
   phoneNumber: string;
 };
+
+export type InvitationStates = {
+  weddingInfo: WeddingInfo;
+  marriedPersons: MarriedPersons;
+};
+
+type WeddingInfo = {
+  weddingDateTime: Date;
+  weddingDateTimeString: string;
+  weddingHallAddress: string;
+  weddingHallName: string;
+  weddingHallNameDetail: string;
+};
+
+export type TInvitation = {
+  state: InvitationStates;
+  actions: object;
+};

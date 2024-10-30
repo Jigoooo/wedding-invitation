@@ -15,11 +15,12 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-import { AnimatedSection, marriedPersons, SectionHeader } from '@/entities/invitation';
+import { AnimatedSection, SectionHeader } from '@/entities/invitation';
 import { OutlinedButton } from '@/shared/ui';
 // import KakaoPayIcon from '@/shared/assets/images/kakao-pay-icon.svg?react';
 import { copyToClipboard } from '@/shared/lib';
 import { showSnackBar } from '@/shared/components';
+import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
 
 function AccountAccordion({
   accordionTitle,
@@ -126,6 +127,8 @@ function AccountAccordion({
 }
 
 export function InvitationAccounts() {
+  const marriedPersons = useMarriedPersons();
+
   const [accordionStates, setAccordionStates] = useState([
     {
       expanded: true,

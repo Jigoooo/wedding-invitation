@@ -6,16 +6,14 @@ import CallIcon from '@mui/icons-material/Call';
 
 import { SoftButton } from '@/shared/ui';
 import { RouterName } from '@/shared/enum';
-import {
-  AnimatedSection,
-  getWeddingImageSrc,
-  MarriedPersons,
-  SectionHeader,
-} from '@/entities/invitation';
+import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
+import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
 
-export function InvitationIntroduction({ marriedPersons }: { marriedPersons: MarriedPersons }) {
+export function InvitationIntroduction() {
   const navigate = useNavigate();
+
+  const marriedPersons = useMarriedPersons();
 
   const [isCallInfoOpen, setIsCallInfoOpen] = useState(false);
   const toggleCallInfo = () => {

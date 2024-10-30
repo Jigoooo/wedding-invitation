@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
-import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
+import {
+  AnimatedSection,
+  getWeddingImageSrc,
+  SectionHeader,
+  useWeddingInfo,
+} from '@/entities/invitation';
 import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { Container as MapDiv, Marker, NaverMap, useNavermaps } from 'react-naver-maps';
-import { SoftButton } from '@/shared/ui';
+import { SxProps } from '@mui/joy/styles/types';
 
+import { SoftButton } from '@/shared/ui';
 import ExploreIcon from '@mui/icons-material/Explore';
 import NaverMapIcon from '@/shared/assets/images/naver-map-icon.png';
 import TMapIcon from '@/shared/assets/images/t-map-icon.png';
 import KakaoMapIcon from '@/shared/assets/images/kakao-map-icon.png';
 import { openKakaoMap, openNaverMap, openTMap } from '@/shared/lib';
-import { SxProps } from '@mui/joy/styles/types';
 
 function ListItem({
   icon,
@@ -37,15 +42,8 @@ function ListItem({
   );
 }
 
-export function InvitationLocationInfo({
-  weddingAddress,
-  weddingLocationName,
-  weddingPlaceName,
-}: {
-  weddingAddress: string;
-  weddingLocationName: string;
-  weddingPlaceName: string;
-}) {
+export function InvitationLocationInfo() {
+  const weddingInfo = useWeddingInfo();
   const naverMaps = useNavermaps();
 
   const [center, setCenter] = useState(new naverMaps.LatLng(37.5666805, 126.9784147));
@@ -55,7 +53,7 @@ export function InvitationLocationInfo({
   useEffect(() => {
     naverMaps.Service.geocode(
       {
-        address: weddingAddress,
+        address: weddingInfo.weddingHallAddress,
       },
       (status: any, response: any) => {
         if (status !== naverMaps.Service.Status.OK) {
@@ -75,7 +73,7 @@ export function InvitationLocationInfo({
         }
       },
     );
-  }, [map, naverMaps, weddingAddress]);
+  }, [map, naverMaps, weddingInfo.weddingHallAddress]);
 
   return (
     <Stack component={'section'} sx={{ width: '100%', alignItems: 'center', gap: 3 }}>
@@ -87,12 +85,12 @@ export function InvitationLocationInfo({
           <Typography
             sx={{ color: '#3f3f3f', fontSize: '1.2rem', fontWeight: 800, letterSpacing: 1.2 }}
           >
-            {weddingLocationName}
+            {weddingInfo.weddingHallNameDetail}
           </Typography>
           <Typography
             sx={{ color: '#666666', fontSize: '0.9rem', fontWeight: 600, letterSpacing: 1 }}
           >
-            {weddingAddress}
+            {weddingInfo.weddingHallAddress}
           </Typography>
         </Stack>
       </AnimatedSection>
@@ -120,7 +118,7 @@ export function InvitationLocationInfo({
             mapDataControl={true}
             mapTypeControl={true}
           >
-            <Marker position={center} clickable={true} title={weddingAddress} />
+            <Marker position={center} clickable={true} title={weddingInfo.weddingHallAddress} />
           </NaverMap>
         </Box>
       </AnimatedSection>
@@ -156,7 +154,7 @@ export function InvitationLocationInfo({
                   openNaverMap({
                     latitude: center.lat(),
                     longitude: center.lng(),
-                    placeName: weddingPlaceName,
+                    placeName: weddingInfo.weddingHallName,
                     webUrl: 'https://map.naver.com/p/entry/place/1150314863?c=15.00,0,0,0,dh',
                   })
                 }
@@ -181,7 +179,7 @@ export function InvitationLocationInfo({
                   openTMap({
                     latitude: center.lat(),
                     longitude: center.lng(),
-                    placeName: weddingPlaceName,
+                    placeName: weddingInfo.weddingHallName,
                   })
                 }
                 sx={{

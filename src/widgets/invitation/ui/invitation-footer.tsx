@@ -1,15 +1,18 @@
 import { Box, Stack, Typography } from '@mui/joy';
 
+import LinkIcon from '@mui/icons-material/Link';
+
 import KakaoTalkIcon from '@/shared/assets/images/kakao-talk-icon.png';
 import FuturIcon from '@/shared/assets/images/futur_logo.svg?react';
-import LinkIcon from '@mui/icons-material/Link';
 import { copyToClipboard } from '@/shared/lib';
 import { showSnackBar } from '@/shared/components';
 import { useShareKakao } from '@/entities/kakao';
 
-export function InvitationFooter({ linkUrl }: { linkUrl: string }) {
+const LINK_URL = import.meta.env.VITE_INVITATION_SERVER_URL;
+
+export function InvitationFooter() {
   const shareKakao = useShareKakao({
-    targetUrl: linkUrl,
+    targetUrl: LINK_URL,
   });
 
   return (
@@ -24,7 +27,7 @@ export function InvitationFooter({ linkUrl }: { linkUrl: string }) {
         <Box
           sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
           onClick={() =>
-            copyToClipboard(linkUrl, () => {
+            copyToClipboard(LINK_URL, () => {
               showSnackBar({
                 message: '링크 주소가 복사되었습니다.',
                 variant: 'plain',
