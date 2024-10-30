@@ -26,6 +26,10 @@ export type CallInfo = {
   phoneNumber: string;
 };
 
+export type RGuestbook = {
+  content: string;
+};
+
 export type InvitationStates = {
   weddingInfo: WeddingInfo;
   marriedPersons: MarriedPersons;

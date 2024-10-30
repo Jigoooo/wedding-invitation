@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box, Stack, Typography, Card } from '@mui/joy';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -9,15 +9,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import { RouterName } from '@/shared/enum';
-import { AnimatedSection, SectionHeader } from '@/entities/invitation';
+import { AnimatedSection, SectionHeader, useFetchGuestbook } from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
 import { SoftButton } from '@/shared/ui';
-import { customedAxios, setupInterceptors } from '@/shared/api';
 
 const defaultDisplayCount = 3;
 
 export function Guestbook() {
   const navigate = useNavigate();
+  const guestbooks = useFetchGuestbook();
+  console.log(guestbooks.data?.data);
 
   const [guestbookItems] = useState([
     {
@@ -78,12 +79,6 @@ export function Guestbook() {
   const handleShowMore = () => {
     setDisplayCount(guestbookItems.length);
   };
-
-  useEffect(() => {
-    setupInterceptors(customedAxios())
-      .get('/api/guestbook')
-      .then((data) => console.log(data.data));
-  }, []);
 
   return (
     <Stack component={'section'} sx={{ width: '100%', alignItems: 'center', gap: 3 }}>
