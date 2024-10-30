@@ -26,7 +26,7 @@ export const FallingAnimation = memo(() => {
       speed={snowSpeed}
       wind={[-0.5, 1.0]}
       snowflakeCount={100}
-      color={'#d3d9f3'}
+      color={'#d1d7f3'}
     />
   );
 });

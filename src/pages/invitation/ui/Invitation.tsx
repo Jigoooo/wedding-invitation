@@ -35,7 +35,7 @@ export function Invitation() {
         width: '100vw',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f1f1f1',
+        backgroundColor: '#f3f3f3',
       }}
     >
       <Stack
