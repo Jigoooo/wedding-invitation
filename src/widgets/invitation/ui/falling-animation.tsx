@@ -1,8 +1,9 @@
 import Snowfall from 'react-snowfall';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
+
 import { timeoutAction } from '@/shared/lib';
 
-export function FallingAnimation() {
+export const FallingAnimation = memo(() => {
   const [snowSpeed, setSnowSpeed] = useState<[number, number]>([5.0, 6.0]);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export function FallingAnimation() {
         top: 0,
         left: 0,
         zIndex: 300,
-        height: '100%',
+        height: 7200,
         width: '100%',
         background: 'transparent',
       }}
@@ -28,4 +29,6 @@ export function FallingAnimation() {
       color={'#d3d9f3'}
     />
   );
-}
+});
+
+FallingAnimation.displayName = 'FallingAnimation';

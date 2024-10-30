@@ -72,11 +72,12 @@ export function Gallery() {
       </AnimatedSection>
 
       <motion.div
+        layout
         initial={{ height: defaultMaxHeight }}
         animate={{ height: isExpanded ? maxHeight : defaultMaxHeight }}
-        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        transition={{ duration: 0.25, ease: 'easeInOut' }}
         ref={containerRef}
-        style={{ width: '100%', overflow: 'hidden' }}
+        style={{ width: '100%', overflow: 'hidden', willChange: 'height' }}
       >
         <Grid
           container
