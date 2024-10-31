@@ -3,11 +3,10 @@ import { Adapter, ApiResponseType, ResponseAdapter } from '@/shared/class';
 import { RGuestbook } from '@/entities/invitation';
 import { GUESTBOOK } from '@/shared/constants';
 
-export const getGuestbookApi = async (): Promise<ApiResponseType<RGuestbook[] | null>> => {
+export const getGuestbookApi = async () => {
   try {
     const response = await setupInterceptors(customedAxios()).get(GUESTBOOK);
-    console.log(response);
-    return Adapter.from(response.data).to((item: ApiResponseType<RGuestbook[]>) =>
+    return Adapter.from(response).to((item: ApiResponseType<RGuestbook[]>) =>
       new ResponseAdapter(item).adapt(),
     );
   } catch (error) {

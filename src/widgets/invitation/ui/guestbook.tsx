@@ -17,46 +17,13 @@ const defaultDisplayCount = 3;
 
 export function Guestbook() {
   const navigate = useNavigate();
-  const guestbooks = useFetchGuestbook();
-  console.log(guestbooks.data?.data);
+  const guestbookResponse = useFetchGuestbook();
+  const guestbooks = guestbookResponse.data?.data ?? [];
 
-  const [guestbookItems] = useState([
-    {
-      id: 1,
-      name: '이름',
-      content:
-        '결혼축하\n결혼축하결혼축하결혼축하결혼축하\n결혼축하결혼축하\n결혼축하결혼축하결혼축하결\n혼축하',
-      date: '2024.12.14',
-    },
-    {
-      id: 2,
-      name: '이름',
-      content: '내용',
-      date: '2024.12.14',
-    },
-    {
-      id: 3,
-      name: '이름',
-      content: '내용',
-      date: '2024.12.14',
-    },
-    {
-      id: 4,
-      name: '이름',
-      content: '내용',
-      date: '2024.12.14',
-    },
-    {
-      id: 5,
-      name: '이름',
-      content: '내용',
-      date: '2024.12.14',
-    },
-  ]);
   const [displayCount, setDisplayCount] = useState(defaultDisplayCount);
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false);
 
-  const isExpanded = guestbookItems.length > displayCount;
+  const isExpanded = guestbooks.length > displayCount;
 
   const toggleAttendanceConfirmation = () => {
     setIsGuestbookOpen(!isGuestbookOpen);
@@ -77,7 +44,7 @@ export function Guestbook() {
   };
 
   const handleShowMore = () => {
-    setDisplayCount(guestbookItems.length);
+    setDisplayCount(guestbooks.length);
   };
 
   return (
@@ -89,10 +56,10 @@ export function Guestbook() {
         <AnimatedSection>
           <Stack sx={{ width: '100%', gap: 1.4 }}>
             <AnimatePresence initial={false}>
-              {guestbookItems.slice(0, displayCount).map((guestbookItem, index) => {
+              {guestbooks.slice(0, displayCount).map((guestbook, index) => {
                 return (
                   <motion.div
-                    key={guestbookItem.id}
+                    key={guestbook.userIdx}
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
@@ -107,7 +74,7 @@ export function Guestbook() {
                     <Card sx={{ position: 'relative' }} variant={'plain'}>
                       <Stack sx={{ width: '100%', gap: 0.8 }}>
                         <Typography sx={{ width: '70%', fontSize: '0.84rem', fontWeight: 900 }}>
-                          {guestbookItem.name}
+                          {guestbook.userName}
                         </Typography>
                         <Typography
                           sx={{
@@ -117,7 +84,7 @@ export function Guestbook() {
                             whiteSpace: 'pre-line',
                           }}
                         >
-                          {guestbookItem.content}
+                          {guestbook.content}
                         </Typography>
                       </Stack>
 
@@ -134,7 +101,7 @@ export function Guestbook() {
                         }}
                       >
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700, color: '#999999' }}>
-                          {guestbookItem.date}
+                          {guestbook.insertDt}
                         </Typography>
                         <CloseIcon
                           sx={{

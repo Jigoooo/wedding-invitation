@@ -27,7 +27,13 @@ export type CallInfo = {
 };
 
 export type RGuestbook = {
+  userIdx: number;
+  userName: string;
+  password: string;
   content: string;
+  delYn: string;
+  insertDt: string;
+  updateDt: string;
 };
 
 export type InvitationStates = {

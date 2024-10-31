@@ -1,6 +1,6 @@
 export type ApiResponseType<T> = {
-  code: number;
-  msg: string;
+  status: number;
+  statusText: string;
   data?: T;
   success: boolean;
 };
@@ -14,8 +14,8 @@ export class ResponseAdapter<T> {
 
   adapt() {
     return {
-      code: this.value.code,
-      msg: this.value.msg,
+      code: this.value.status,
+      msg: this.value.statusText,
       data: this.value.data,
       success: this.value.success,
     };
