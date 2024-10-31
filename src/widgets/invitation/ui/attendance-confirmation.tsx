@@ -1,13 +1,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { Box, Stack, Typography } from '@mui/joy';
 
-import {
-  CustomedFormControl,
-  FuturRadioGroup,
-  OutlinedInput,
-  SolidButton,
-  ToggleButtonGroup,
-} from '@/shared/ui';
+import { CustomedFormControl, FuturRadioGroup, OutlinedInput, SolidButton } from '@/shared/ui';
 import { TranslucentMobileModal } from '@/shared/components';
 
 export function AttendanceConfirmationModal({
@@ -18,7 +12,7 @@ export function AttendanceConfirmationModal({
   onClose: () => void;
 }) {
   const stackRef = useRef<HTMLDivElement>(null);
-  const [stackWidth, setStackWidth] = useState(180);
+  const [, setStackWidth] = useState(200);
 
   useLayoutEffect(() => {
     const handleResize = () => {
@@ -68,33 +62,49 @@ export function AttendanceConfirmationModal({
         }}
       >
         <CustomedFormControl label={'참석 가능 여부'}>
-          <ToggleButtonGroup
-            label={''}
+          {/*<ToggleButtonGroup*/}
+          {/*  label={''}*/}
+          {/*  options={[*/}
+          {/*    { key: 1, value: '가능' },*/}
+          {/*    { key: 2, value: '불가능' },*/}
+          {/*  ]}*/}
+          {/*  colors={{*/}
+          {/*    1: '#81b631',*/}
+          {/*    2: '#f15151',*/}
+          {/*  }}*/}
+          {/*  groupKey={1}*/}
+          {/*  buttonWidth={stackWidth / 2}*/}
+          {/*/>*/}
+          <FuturRadioGroup
+            defaultValue={1}
             options={[
-              { key: 1, value: '가능' },
-              { key: 2, value: '불가능' },
+              { key: 1, value: 1, label: '가능' },
+              { key: 2, value: 2, label: '불가능' },
             ]}
-            colors={{
-              1: '#81b631',
-              2: '#f15151',
-            }}
-            groupKey={1}
-            buttonWidth={stackWidth / 2}
+            color={'neutral'}
           />
         </CustomedFormControl>
         <CustomedFormControl label={'하객 구분'}>
-          <ToggleButtonGroup
-            label={''}
+          {/*<ToggleButtonGroup*/}
+          {/*  label={''}*/}
+          {/*  options={[*/}
+          {/*    { key: 1, value: '신랑측' },*/}
+          {/*    { key: 2, value: '신부측' },*/}
+          {/*  ]}*/}
+          {/*  colors={{*/}
+          {/*    1: '#3891ec',*/}
+          {/*    2: '#ec77ad',*/}
+          {/*  }}*/}
+          {/*  groupKey={1}*/}
+          {/*  buttonWidth={stackWidth / 2}*/}
+          {/*/>*/}
+          <FuturRadioGroup
+            defaultValue={1}
             options={[
-              { key: 1, value: '신랑측' },
-              { key: 2, value: '신부측' },
+              { key: 1, value: 1, label: '신랑측' },
+              { key: 2, value: 2, label: '신부측' },
             ]}
-            colors={{
-              1: '#3891ec',
-              2: '#ec77ad',
-            }}
-            groupKey={1}
-            buttonWidth={stackWidth / 2}
+            color={'neutral'}
           />
         </CustomedFormControl>
         <CustomedFormControl label={'성함'} required={true}>

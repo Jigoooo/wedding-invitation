@@ -19,7 +19,7 @@ export type CallInfoSectionProps = {
 
 function CallInfoSection({ title, icon: Icon, color, callInfo }: CallInfoSectionProps) {
   return (
-    <Stack sx={{ width: '100%', px: 2, gap: 3 }}>
+    <Stack sx={{ width: '100%', px: 1, gap: 3 }}>
       <Stack sx={{ width: '100%', gap: 1 }}>
         <Typography sx={{ color, fontSize: '0.9rem', fontWeight: 800 }}>{title}</Typography>
         <Divider sx={{ backgroundColor: color }} />
@@ -38,7 +38,7 @@ function CallInfoSection({ title, icon: Icon, color, callInfo }: CallInfoSection
             sx={{
               display: 'flex',
               alignItems: 'center',
-              width: '25%',
+              width: '30%',
               gap: 0.5,
             }}
           >
