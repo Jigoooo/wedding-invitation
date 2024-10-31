@@ -66,7 +66,6 @@ export function GuestbookModal({
       onClose={onClose}
       sx={{ backgroundColor: '#ffffff' }}
       closeIconColor={'#999999'}
-      isCloseButtonVisible={false}
     >
       <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2 }}>
         <CustomedFormControl

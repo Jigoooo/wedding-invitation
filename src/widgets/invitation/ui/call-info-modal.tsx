@@ -135,7 +135,6 @@ export function CallInfoModal({
       isOpen={isCallInfoOpen}
       onClose={onClose}
       sx={{ backgroundColor: 'rgba(128,128,128,0.5)', backdropFilter: 'blur(10px)' }}
-      isCloseButtonVisible={false}
     >
       <Stack sx={{ width: '100%', height: '100%', alignItems: 'center', pt: 14, gap: 10 }}>
         <CallInfoSection

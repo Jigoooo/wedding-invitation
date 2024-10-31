@@ -17,5 +17,3 @@ export function useBackKeyToClose(isOpen: boolean, onClose: () => void) {
     };
   }, [isOpen, onClose]);
 }
-
-useBackKeyToClose;
