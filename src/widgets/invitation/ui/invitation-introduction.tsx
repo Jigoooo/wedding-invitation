@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
 import { Box, Stack, Typography } from '@mui/joy';
 
 import CallIcon from '@mui/icons-material/Call';
 
 import { SoftButton } from '@/shared/ui';
-import { RouterName } from '@/shared/enum';
-import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
-import { TranslucentMobileModal } from '@/shared/components';
-import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
+import {
+  AnimatedSection,
+  getWeddingImageSrc,
+  SectionHeader,
+  useMarriedPersons,
+} from '@/entities/invitation';
+import { CallInfoModal } from './call-info-modal.tsx';
 
 export function InvitationIntroduction() {
-  const navigate = useNavigate();
-
   const marriedPersons = useMarriedPersons();
 
   const [isCallInfoOpen, setIsCallInfoOpen] = useState(false);
@@ -22,12 +22,10 @@ export function InvitationIntroduction() {
 
   const openCallInfo = () => {
     toggleCallInfo();
-    navigate(RouterName.CALL_INFO);
   };
 
   const closeCallInfo = () => {
     toggleCallInfo();
-    navigate(RouterName.INVITATION);
   };
 
   return (
@@ -186,32 +184,5 @@ export function InvitationIntroduction() {
       </AnimatedSection>
       <CallInfoModal isCallInfoOpen={isCallInfoOpen} onClose={closeCallInfo} />
     </Stack>
-  );
-}
-
-function CallInfoModal({
-  isCallInfoOpen,
-  onClose,
-}: {
-  isCallInfoOpen: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <TranslucentMobileModal
-      title={
-        <Stack>
-          <Typography sx={{ color: '#bbbbbb', fontFamily: 'Crimson Pro', fontSize: '1rem' }}>
-            Contact
-          </Typography>
-          <Typography sx={{ color: '#eeeeee', fontSize: '1.1rem' }}>연락처 정보</Typography>
-        </Stack>
-      }
-      isOpen={isCallInfoOpen}
-      onClose={onClose}
-      sx={{ backgroundColor: 'rgba(128,128,128,0.5)', backdropFilter: 'blur(10px)' }}
-      isCloseButtonVisible={false}
-    >
-      <Outlet />
-    </TranslucentMobileModal>
   );
 }

@@ -134,6 +134,22 @@ export function createValidator(value: any) {
       }
       return validator;
     },
+    minLength(lengthValue: number, { message }: { message?: string } = {}) {
+      if (error) return validator;
+      if (typeof value !== 'string' || value.length < lengthValue) {
+        error = true;
+        errorMessage = message ?? `문자열의 길이는 ${lengthValue}이상이어야 합니다.`;
+      }
+      return validator;
+    },
+    maxLength(lengthValue: number, { message }: { message?: string } = {}) {
+      if (error) return validator;
+      if (typeof value !== 'string' || value.length > lengthValue) {
+        error = true;
+        errorMessage = message ?? `문자열의 길이는 ${lengthValue}이하여야 합니다.`;
+      }
+      return validator;
+    },
     length(lengthValue: number, { message }: { message?: string } = {}) {
       if (error) return validator;
       if (typeof value !== 'string' || value.length !== lengthValue) {

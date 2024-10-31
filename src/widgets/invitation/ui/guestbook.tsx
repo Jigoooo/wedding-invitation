@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Box, Stack, Typography, Card } from '@mui/joy';
-import { Outlet, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import EditIcon from '@mui/icons-material/Edit';
@@ -8,20 +7,18 @@ import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import { RouterName } from '@/shared/enum';
 import {
   AnimatedSection,
   SectionHeader,
   useDeleteGuestbook,
   useFetchGuestbook,
 } from '@/entities/invitation';
-import { TranslucentMobileModal } from '@/shared/components';
 import { SoftButton } from '@/shared/ui';
+import { GuestbookModal } from './guestbook-modal.tsx';
 
 const defaultDisplayCount = 3;
 
 export function Guestbook() {
-  const navigate = useNavigate();
   const guestbookResponse = useFetchGuestbook();
   const deleteGuestbook = useDeleteGuestbook();
   const guestbooks = guestbookResponse.data?.data ?? [];
@@ -37,12 +34,10 @@ export function Guestbook() {
 
   const openGuestbook = () => {
     toggleAttendanceConfirmation();
-    navigate(RouterName.GUESTBOOK);
   };
 
   const closeGuestbook = () => {
     toggleAttendanceConfirmation();
-    navigate(RouterName.INVITATION);
   };
 
   const initialDisplayCount = () => {
@@ -174,32 +169,5 @@ export function Guestbook() {
 
       <GuestbookModal isGuestbookOpen={isGuestbookOpen} onClose={closeGuestbook} />
     </Stack>
-  );
-}
-
-function GuestbookModal({
-  isGuestbookOpen,
-  onClose,
-}: {
-  isGuestbookOpen: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <TranslucentMobileModal
-      title={
-        <Stack>
-          <Typography sx={{ color: '#333333', fontSize: '1.1rem', fontWeight: 800 }}>
-            방명록 등록
-          </Typography>
-        </Stack>
-      }
-      isOpen={isGuestbookOpen}
-      onClose={onClose}
-      sx={{ backgroundColor: '#ffffff' }}
-      closeIconColor={'#999999'}
-      isCloseButtonVisible={false}
-    >
-      <Outlet />
-    </TranslucentMobileModal>
   );
 }

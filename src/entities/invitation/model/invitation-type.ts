@@ -36,6 +36,12 @@ export type RGuestbook = {
   updateDt: string;
 };
 
+export type PRegisterGuestbook = {
+  userName: string;
+  password: string;
+  content: string;
+};
+
 export type PDeleteGuestbook = {
   userIdx: number;
   password: string;

@@ -2,8 +2,7 @@ import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-import { getWeddingImageSrc, useWeddingInfo } from '@/entities/invitation';
-import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
+import { getWeddingImageSrc, useWeddingInfo, useMarriedPersons } from '@/entities/invitation';
 
 export function InvitationHeader() {
   const weddingInfo = useWeddingInfo();

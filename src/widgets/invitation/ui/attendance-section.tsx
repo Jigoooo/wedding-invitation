@@ -1,17 +1,13 @@
 import { Box, Stack, Typography } from '@mui/joy';
-import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 
 import { AnimatedSection, SectionHeader } from '@/entities/invitation';
-import { TranslucentMobileModal } from '@/shared/components';
-import { RouterName } from '@/shared/enum';
 import { SoftButton } from '@/shared/ui';
+import { AttendanceConfirmationModal } from './attendance-confirmation.tsx';
 
 export function AttendanceSection() {
-  const navigate = useNavigate();
-
   const [isAttendanceConfirmationOpen, setIsAttendanceConfirmationOpen] = useState(false);
   const toggleAttendanceConfirmation = () => {
     setIsAttendanceConfirmationOpen(!isAttendanceConfirmationOpen);
@@ -19,12 +15,10 @@ export function AttendanceSection() {
 
   const openAttendanceConfirmation = () => {
     toggleAttendanceConfirmation();
-    navigate(RouterName.ATTENDANCE_CONFIRMATION);
   };
 
   const closeAttendanceConfirmation = () => {
     toggleAttendanceConfirmation();
-    navigate(RouterName.INVITATION);
   };
 
   return (
@@ -76,32 +70,5 @@ export function AttendanceSection() {
         />
       </Stack>
     </AnimatedSection>
-  );
-}
-
-function AttendanceConfirmationModal({
-  isAttendanceConfirmationOpen,
-  onClose,
-}: {
-  isAttendanceConfirmationOpen: boolean;
-  onClose: () => void;
-}) {
-  return (
-    <TranslucentMobileModal
-      title={
-        <Stack>
-          <Typography sx={{ color: '#333333', fontSize: '1.1rem', fontWeight: 800 }}>
-            참석의사 전달
-          </Typography>
-        </Stack>
-      }
-      isOpen={isAttendanceConfirmationOpen}
-      onClose={onClose}
-      sx={{ backgroundColor: '#ffffff' }}
-      closeIconColor={'#999999'}
-      isCloseButtonVisible={false}
-    >
-      <Outlet />
-    </TranslucentMobileModal>
   );
 }

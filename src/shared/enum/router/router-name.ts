@@ -1,8 +1,5 @@
 export const RouterName = {
   INVITATION: '/',
-  CALL_INFO: 'call-info',
-  ATTENDANCE_CONFIRMATION: 'attendance-confirmation',
-  GUESTBOOK: 'guestbook',
 } as const;
 
 export type RouterNameKey = keyof typeof RouterName;

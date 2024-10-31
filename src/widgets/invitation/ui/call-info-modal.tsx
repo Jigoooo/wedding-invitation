@@ -1,12 +1,14 @@
+import React from 'react';
 import { Box, Divider, Stack, Typography } from '@mui/joy';
+
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import Face6Icon from '@mui/icons-material/Face6';
 import Face3Icon from '@mui/icons-material/Face3';
+
 import { openPhoneApp, openSmsApp } from '@/shared/lib';
-import { CallInfo } from '@/entities/invitation';
-import React from 'react';
-import { useMarriedPersons } from '@/entities/invitation/model/invitaion-store.ts';
+import { CallInfo, useMarriedPersons } from '@/entities/invitation';
+import { TranslucentMobileModal } from '@/shared/components';
 
 export type CallInfoSectionProps = {
   title: string;
@@ -69,7 +71,13 @@ function CallInfoSection({ title, icon: Icon, color, callInfo }: CallInfoSection
   );
 }
 
-export function InvitationCallInfo() {
+export function CallInfoModal({
+  isCallInfoOpen,
+  onClose,
+}: {
+  isCallInfoOpen: boolean;
+  onClose: () => void;
+}) {
   const marriedPersons = useMarriedPersons();
 
   const callInfoGroom: CallInfo[] = [
@@ -115,9 +123,34 @@ export function InvitationCallInfo() {
   ];
 
   return (
-    <Stack sx={{ width: '100%', height: '100%', alignItems: 'center', pt: 14, gap: 10 }}>
-      <CallInfoSection title='신랑측' icon={Face6Icon} color={'#5ba2ed'} callInfo={callInfoGroom} />
-      <CallInfoSection title='신부측' icon={Face3Icon} color={'#e392b8'} callInfo={callInfoBride} />
-    </Stack>
+    <TranslucentMobileModal
+      title={
+        <Stack>
+          <Typography sx={{ color: '#bbbbbb', fontFamily: 'Crimson Pro', fontSize: '1rem' }}>
+            Contact
+          </Typography>
+          <Typography sx={{ color: '#eeeeee', fontSize: '1.1rem' }}>연락처 정보</Typography>
+        </Stack>
+      }
+      isOpen={isCallInfoOpen}
+      onClose={onClose}
+      sx={{ backgroundColor: 'rgba(128,128,128,0.5)', backdropFilter: 'blur(10px)' }}
+      isCloseButtonVisible={false}
+    >
+      <Stack sx={{ width: '100%', height: '100%', alignItems: 'center', pt: 14, gap: 10 }}>
+        <CallInfoSection
+          title='신랑측'
+          icon={Face6Icon}
+          color={'#5ba2ed'}
+          callInfo={callInfoGroom}
+        />
+        <CallInfoSection
+          title='신부측'
+          icon={Face3Icon}
+          color={'#e392b8'}
+          callInfo={callInfoBride}
+        />
+      </Stack>
+    </TranslucentMobileModal>
   );
 }
