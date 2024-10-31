@@ -12,7 +12,7 @@ export function GuestbookModal({
   isGuestbookOpen: boolean;
   onClose: () => void;
 }) {
-  const registerGuestbook = useRegisterGuestbook(() => window.history.back());
+  const registerGuestbook = useRegisterGuestbook();
   const userName = useValidatedInput('', (value) => createValidator(value).required());
   const password = useValidatedInput('', (value) =>
     createValidator(value)
@@ -36,11 +36,21 @@ export function GuestbookModal({
       return;
     }
 
-    registerGuestbook.mutate({
-      userName: userName.value,
-      password: password.value,
-      content: content.value,
-    });
+    registerGuestbook.mutate(
+      {
+        userName: userName.value,
+        password: password.value,
+        content: content.value,
+      },
+      {
+        onSuccess: () => {
+          userName.onChange('');
+          password.onChange('');
+          content.onChange('');
+          onClose();
+        },
+      },
+    );
   };
 
   return (

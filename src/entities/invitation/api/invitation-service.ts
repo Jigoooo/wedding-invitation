@@ -14,18 +14,16 @@ export function useFetchGuestbook() {
   });
 }
 
-export function useRegisterGuestbook(onSuccess: () => void) {
+export function useRegisterGuestbook() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (params: PRegisterGuestbook) => registerGuestbookApi(params),
     onMutate: () => {},
-    onSuccess: (data) => {
-      console.log(JSON.stringify(data));
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [GET_GUESTBOOK],
       });
-      onSuccess();
     },
     onError: () => {},
     onSettled: () => {},
