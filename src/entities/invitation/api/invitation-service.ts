@@ -6,7 +6,6 @@ import {
   PDeleteGuestbook,
   PRegisterGuestbook,
 } from '@/entities/invitation/model/invitation-type.ts';
-import { showSnackBar } from '@/shared/components';
 
 export function useFetchGuestbook() {
   return useQuery({
@@ -21,14 +20,12 @@ export function useRegisterGuestbook(onSuccess: () => void) {
   return useMutation({
     mutationFn: (params: PRegisterGuestbook) => registerGuestbookApi(params),
     onMutate: () => {},
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(JSON.stringify(data));
       queryClient.invalidateQueries({
         queryKey: [GET_GUESTBOOK],
       });
       onSuccess();
-      showSnackBar({
-        message: '전송완료',
-      });
     },
     onError: () => {},
     onSettled: () => {},
