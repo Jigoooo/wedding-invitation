@@ -9,7 +9,12 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import { RouterName } from '@/shared/enum';
-import { AnimatedSection, SectionHeader, useFetchGuestbook } from '@/entities/invitation';
+import {
+  AnimatedSection,
+  SectionHeader,
+  useDeleteGuestbook,
+  useFetchGuestbook,
+} from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
 import { SoftButton } from '@/shared/ui';
 
@@ -18,6 +23,7 @@ const defaultDisplayCount = 3;
 export function Guestbook() {
   const navigate = useNavigate();
   const guestbookResponse = useFetchGuestbook();
+  const deleteGuestbook = useDeleteGuestbook();
   const guestbooks = guestbookResponse.data?.data ?? [];
 
   const [displayCount, setDisplayCount] = useState(defaultDisplayCount);
@@ -99,6 +105,12 @@ export function Guestbook() {
                           fontSize: 18,
                           color: '#999999',
                         }}
+                        onClick={() =>
+                          deleteGuestbook.mutate({
+                            userIdx: guestbook.userIdx,
+                            password: guestbook.password,
+                          })
+                        }
                       >
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700, color: '#999999' }}>
                           {guestbook.insertDt}

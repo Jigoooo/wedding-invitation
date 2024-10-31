@@ -1,2 +1,1 @@
-export { getGuestbookApi } from './invitaion-api.ts';
-export { useFetchGuestbook } from './invitation-service.ts';
+export { useFetchGuestbook, useDeleteGuestbook } from './invitation-service.ts';

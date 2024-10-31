@@ -36,6 +36,11 @@ export type RGuestbook = {
   updateDt: string;
 };
 
+export type PDeleteGuestbook = {
+  userIdx: number;
+  password: string;
+};
+
 export type InvitationStates = {
   weddingInfo: WeddingInfo;
   marriedPersons: MarriedPersons;
