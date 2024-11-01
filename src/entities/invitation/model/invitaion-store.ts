@@ -42,9 +42,9 @@ const invitationInitialState: InvitationStates = {
       subName: '',
       phoneNumber: '010-2634-7934',
       account: {
-        bank: '국민은행',
+        bank: '농협',
         accountHolder: '최정남',
-        accountNumber: '123-123-123',
+        accountNumber: '510-01-005666',
       },
     },
     bride: {
@@ -53,9 +53,9 @@ const invitationInitialState: InvitationStates = {
       subName: '',
       phoneNumber: '010-2034-1618',
       account: {
-        bank: '국민은행',
+        bank: '카카오뱅크',
         accountHolder: '김지영',
-        accountNumber: '123-123-123',
+        accountNumber: '3333-03-7546413',
       },
     },
     bridesFather: {
@@ -64,9 +64,9 @@ const invitationInitialState: InvitationStates = {
       subName: '',
       phoneNumber: '010-6404-1618',
       account: {
-        bank: '국민은행',
+        bank: '농협',
         accountHolder: '김상돈',
-        accountNumber: '123-123-123',
+        accountNumber: '485818-52-018192',
       },
     },
     bridesMother: {
@@ -75,9 +75,9 @@ const invitationInitialState: InvitationStates = {
       subName: '경이',
       phoneNumber: '010-2856-3567',
       account: {
-        bank: '국민은행',
+        bank: '농협',
         accountHolder: '박지효',
-        accountNumber: '123-123-123',
+        accountNumber: '469-12-149806',
       },
     },
   },

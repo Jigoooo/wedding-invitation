@@ -74,13 +74,13 @@ function AccountAccordion({
           return (
             <Stack key={index} sx={{ position: 'relative', width: '100%' }}>
               <Stack sx={{ width: '100%', p: 1.4, gap: 0.8 }}>
-                <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', gap: 1.4 }}>
+                <Box sx={{ display: 'flex', width: '100%', alignItems: 'center', gap: 1 }}>
                   <Typography sx={{ fontSize: '0.8rem', fontWeight: 800 }}>
                     {account.bank}
                   </Typography>
                   <Divider
                     orientation={'vertical'}
-                    sx={{ height: 20, alignSelf: 'center', backgroundColor: '#dddddd' }}
+                    sx={{ height: 15, alignSelf: 'center', backgroundColor: '#dddddd' }}
                   />
                   <Typography sx={{ fontSize: '0.9rem', fontWeight: 800 }}>
                     {account.accountNumber}
