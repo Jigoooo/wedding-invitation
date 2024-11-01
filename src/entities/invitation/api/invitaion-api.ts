@@ -5,9 +5,11 @@ import {
   PDeleteGuestbook,
   PRegisterGuestbook,
   PVerifyGuestbookPassword,
+  PRegisterWeddingAttendance,
 } from '@/entities/invitation';
 import { GUESTBOOK } from '@/shared/constants';
 import { RVerifyGuestbookPassword } from '@/entities/invitation/model/invitation-type.ts';
+import { WEDDING_ATTENDANCE } from '@/shared/constants/api/api.ts';
 
 export const getGuestbooksApi = async () => {
   try {
@@ -79,6 +81,23 @@ export const deleteGuestbookApi = async (params: PDeleteGuestbook) => {
         },
       },
     );
+    return Adapter.from(response).to((item: ApiResponseType<null>) =>
+      new ResponseAdapter(item).adapt(),
+    );
+  } catch (error) {
+    console.log(error);
+    return {
+      code: -1,
+      msg: '',
+      success: false,
+      data: null,
+    };
+  }
+};
+
+export const registerWeddingAttendanceApi = async (params: PRegisterWeddingAttendance) => {
+  try {
+    const response = await setupInterceptors(customedAxios()).post(WEDDING_ATTENDANCE, params);
     return Adapter.from(response).to((item: ApiResponseType<null>) =>
       new ResponseAdapter(item).adapt(),
     );

@@ -5,11 +5,13 @@ import {
   deleteGuestbookApi,
   registerGuestbookApi,
   verifyGuestbookPasswordApi,
+  registerWeddingAttendanceApi,
 } from './invitaion-api.ts';
 import { GET_GUESTBOOK } from './invitation-query-key.ts';
 import {
   PDeleteGuestbook,
   PRegisterGuestbook,
+  PRegisterWeddingAttendance,
   PVerifyGuestbookPassword,
 } from '@/entities/invitation/model/invitation-type.ts';
 import { showSnackBar } from '@/shared/components';
@@ -58,6 +60,20 @@ export function useDeleteGuestbook() {
       });
       queryClient.invalidateQueries({
         queryKey: [GET_GUESTBOOK],
+      });
+    },
+    onError: () => {},
+    onSettled: () => {},
+  });
+}
+
+export function useRegisterWeddingAttendance() {
+  return useMutation({
+    mutationFn: (params: PRegisterWeddingAttendance) => registerWeddingAttendanceApi(params),
+    onMutate: () => {},
+    onSuccess: () => {
+      showSnackBar({
+        message: '저장되었습니다.',
       });
     },
     onError: () => {},

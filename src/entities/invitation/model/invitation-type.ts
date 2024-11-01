@@ -56,6 +56,12 @@ export type PDeleteGuestbook = {
   password: string;
 };
 
+export type PRegisterWeddingAttendance = {
+  attendanceName: string;
+  telNo: string;
+  headCount: number;
+};
+
 export type InvitationStates = {
   weddingInfo: WeddingInfo;
   marriedPersons: MarriedPersons;
