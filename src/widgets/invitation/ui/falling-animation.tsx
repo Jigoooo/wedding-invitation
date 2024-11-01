@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from 'react';
 import { timeoutAction } from '@/shared/lib';
 
 export const FallingAnimation = memo(() => {
-  const [snowSpeed, setSnowSpeed] = useState<[number, number]>([5.0, 6.0]);
+  const [snowSpeed, setSnowSpeed] = useState<[number, number]>([6.0, 7.0]);
 
   useEffect(() => {
     timeoutAction(() => setSnowSpeed([1.0, 2.0]), 300);
@@ -21,10 +21,10 @@ export const FallingAnimation = memo(() => {
         width: '100%',
         background: 'transparent',
       }}
-      radius={[1, 2]}
+      radius={[1, 2.5]}
       rotationSpeed={[-1.0, 1.0]}
       speed={snowSpeed}
-      wind={[-0.5, 1.0]}
+      wind={[-0.5, 1.5]}
       snowflakeCount={100}
       color={'#d1d7f3'}
     />

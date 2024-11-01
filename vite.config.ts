@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/wedding': {
-        target: 'http://210.114.22.192:4050',
+        target: 'https://wedding.midolog.cc',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/wedding/, ''),
       },
