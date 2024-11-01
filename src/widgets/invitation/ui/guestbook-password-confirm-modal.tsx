@@ -3,19 +3,18 @@ import { CustomedFormControl, OutlinedInput, SolidButton } from '@/shared/ui';
 import { useValidatedInput } from '@/shared/hooks';
 import { createValidator } from '@/shared/lib';
 import { openDialog, TranslucentMobileModal } from '@/shared/components';
-import { useDeleteGuestbook } from '@/entities/invitation';
+import { useDeleteGuestbook, useVerifyGuestbookPassword } from '@/entities/invitation';
 
 export function GuestbookPasswordConfirmModal({
   targetUserIdx,
-  targetPassword,
   isGuestbookPasswordConfirmOpen,
   onClose,
 }: {
   targetUserIdx: number;
-  targetPassword: string;
   isGuestbookPasswordConfirmOpen: boolean;
   onClose: () => void;
 }) {
+  const verifyGuestbookPassword = useVerifyGuestbookPassword();
   const deleteGuestbook = useDeleteGuestbook();
 
   const password = useValidatedInput('', (value) => createValidator(value).required());
@@ -25,16 +24,21 @@ export function GuestbookPasswordConfirmModal({
     onClose();
   };
 
-  const onClickGuestbookSend = () => {
+  const onClickGuestbookSend = async () => {
     password.initialValidate();
 
     if (password.error) {
       return;
     }
 
-    if (password.value !== targetPassword) {
+    const verifyResponse = await verifyGuestbookPassword.mutateAsync({
+      userIdx: targetUserIdx,
+      password: password.value,
+    });
+
+    if (!verifyResponse?.data?.success) {
       openDialog({
-        contents: '비밀번호가 맞지 않습니다.',
+        contents: verifyResponse?.data?.message,
         color: 'warning',
       });
       return;

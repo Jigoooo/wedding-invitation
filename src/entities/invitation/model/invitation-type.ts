@@ -29,7 +29,6 @@ export type CallInfo = {
 export type RGuestbook = {
   userIdx: number;
   userName: string;
-  password: string;
   content: string;
   delYn: string;
   insertDt: string;
@@ -40,6 +39,16 @@ export type PRegisterGuestbook = {
   userName: string;
   password: string;
   content: string;
+};
+
+export type PVerifyGuestbookPassword = {
+  userIdx: number;
+  password: string;
+};
+
+export type RVerifyGuestbookPassword = {
+  success: boolean;
+  message: string;
 };
 
 export type PDeleteGuestbook = {

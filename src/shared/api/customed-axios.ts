@@ -18,6 +18,8 @@ export const customedAxios = ({ isMock = false }: { isMock?: boolean } = {}) => 
           return true;
         case 400:
           return true;
+        case 401:
+          return true;
         case 404:
           return true;
         default:

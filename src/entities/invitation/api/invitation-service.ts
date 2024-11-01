@@ -1,10 +1,16 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { getGuestbooksApi, deleteGuestbookApi, registerGuestbookApi } from './invitaion-api.ts';
+import {
+  getGuestbooksApi,
+  deleteGuestbookApi,
+  registerGuestbookApi,
+  verifyGuestbookPasswordApi,
+} from './invitaion-api.ts';
 import { GET_GUESTBOOK } from './invitation-query-key.ts';
 import {
   PDeleteGuestbook,
   PRegisterGuestbook,
+  PVerifyGuestbookPassword,
 } from '@/entities/invitation/model/invitation-type.ts';
 import { showSnackBar } from '@/shared/components';
 
@@ -31,6 +37,12 @@ export function useRegisterGuestbook() {
     },
     onError: () => {},
     onSettled: () => {},
+  });
+}
+
+export function useVerifyGuestbookPassword() {
+  return useMutation({
+    mutationFn: (params: PVerifyGuestbookPassword) => verifyGuestbookPasswordApi(params),
   });
 }
 

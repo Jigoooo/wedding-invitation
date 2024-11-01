@@ -1,7 +1,13 @@
 import { customedAxios, setupInterceptors } from '@/shared/api';
 import { Adapter, ApiResponseType, ResponseAdapter } from '@/shared/class';
-import { RGuestbook, PDeleteGuestbook, PRegisterGuestbook } from '@/entities/invitation';
+import {
+  RGuestbook,
+  PDeleteGuestbook,
+  PRegisterGuestbook,
+  PVerifyGuestbookPassword,
+} from '@/entities/invitation';
 import { GUESTBOOK } from '@/shared/constants';
+import { RVerifyGuestbookPassword } from '@/entities/invitation/model/invitation-type.ts';
 
 export const getGuestbooksApi = async () => {
   try {
@@ -33,6 +39,32 @@ export const registerGuestbookApi = async (params: PRegisterGuestbook) => {
       msg: '',
       success: false,
       data: null,
+    };
+  }
+};
+
+export const verifyGuestbookPasswordApi = async (params: PVerifyGuestbookPassword) => {
+  try {
+    const response = await setupInterceptors(customedAxios()).post(
+      `${GUESTBOOK}/${params.userIdx}/verify-password`,
+      {
+        password: params.password,
+      },
+    );
+
+    return Adapter.from(response).to((item: ApiResponseType<RVerifyGuestbookPassword>) =>
+      new ResponseAdapter(item).adapt(),
+    );
+  } catch (error) {
+    console.log(error);
+    return {
+      code: -1,
+      msg: '',
+      success: false,
+      data: {
+        success: false,
+        message: '',
+      },
     };
   }
 };

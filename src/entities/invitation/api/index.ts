@@ -1,1 +1,6 @@
-export { useFetchGuestbook, useDeleteGuestbook } from './invitation-service.ts';
+export {
+  useFetchGuestbook,
+  useRegisterGuestbook,
+  useVerifyGuestbookPassword,
+  useDeleteGuestbook,
+} from './invitation-service.ts';

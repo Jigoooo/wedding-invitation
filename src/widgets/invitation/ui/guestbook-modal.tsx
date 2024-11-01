@@ -1,8 +1,9 @@
 import { Box, Stack, Typography } from '@mui/joy';
+
 import { CustomedFormControl, OutlinedInput, SolidButton, TextArea } from '@/shared/ui';
 import { useValidatedInput } from '@/shared/hooks';
 import { createValidator } from '@/shared/lib';
-import { useRegisterGuestbook } from '@/entities/invitation/api/invitation-service.ts';
+import { useRegisterGuestbook } from '@/entities/invitation';
 import { TranslucentMobileModal } from '@/shared/components';
 
 export function GuestbookModal({

@@ -21,10 +21,7 @@ export function Guestbook() {
   const [displayCount, setDisplayCount] = useState(defaultDisplayCount);
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false);
   const [isGuestbookPasswordConfirmOpen, setIsGuestbookPasswordConfirmOpen] = useState(false);
-  const [passwordConfirmObj, setPasswordConfirmObj] = useState({
-    targetUserIdx: 0,
-    targetPassword: '',
-  });
+  const [targetUserIdx, setTargetUserIdx] = useState(0);
 
   const isExpanded = guestbooks.length > displayCount;
 
@@ -35,18 +32,12 @@ export function Guestbook() {
     setIsGuestbookOpen(false);
   };
 
-  const openGuestbookPasswordConfirm = (targetUserIdx: number, targetPassword: string) => {
-    setPasswordConfirmObj((prevState) => {
-      return {
-        ...prevState,
-        targetUserIdx,
-        targetPassword,
-      };
-    });
+  const openGuestbookPasswordConfirm = (targetUserIdx: number) => {
+    setTargetUserIdx(targetUserIdx);
     setIsGuestbookPasswordConfirmOpen(true);
   };
   const closeGuestbookPasswordConfirm = () => {
-    setPasswordConfirmObj({ targetUserIdx: 0, targetPassword: '' });
+    setTargetUserIdx(0);
     setIsGuestbookPasswordConfirmOpen(false);
   };
 
@@ -110,9 +101,7 @@ export function Guestbook() {
                           fontSize: 18,
                           color: '#999999',
                         }}
-                        onClick={() =>
-                          openGuestbookPasswordConfirm(guestbook.userIdx, guestbook.password)
-                        }
+                        onClick={() => openGuestbookPasswordConfirm(guestbook.userIdx)}
                       >
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700, color: '#999999' }}>
                           {guestbook.insertDt}
@@ -176,8 +165,7 @@ export function Guestbook() {
 
       <GuestbookModal isGuestbookOpen={isGuestbookOpen} onClose={closeGuestbook} />
       <GuestbookPasswordConfirmModal
-        targetUserIdx={passwordConfirmObj.targetUserIdx}
-        targetPassword={passwordConfirmObj.targetPassword}
+        targetUserIdx={targetUserIdx}
         isGuestbookPasswordConfirmOpen={isGuestbookPasswordConfirmOpen}
         onClose={closeGuestbookPasswordConfirm}
       />
