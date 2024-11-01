@@ -6,6 +6,7 @@ import {
   PDeleteGuestbook,
   PRegisterGuestbook,
 } from '@/entities/invitation/model/invitation-type.ts';
+import { showSnackBar } from '@/shared/components';
 
 export function useFetchGuestbook() {
   return useQuery({
@@ -21,6 +22,9 @@ export function useRegisterGuestbook() {
     mutationFn: (params: PRegisterGuestbook) => registerGuestbookApi(params),
     onMutate: () => {},
     onSuccess: () => {
+      showSnackBar({
+        message: '저장되었습니다.',
+      });
       queryClient.invalidateQueries({
         queryKey: [GET_GUESTBOOK],
       });
@@ -37,6 +41,9 @@ export function useDeleteGuestbook() {
     mutationFn: (params: PDeleteGuestbook) => deleteGuestbookApi(params),
     onMutate: () => {},
     onSuccess: () => {
+      showSnackBar({
+        message: '삭제되었습니다.',
+      });
       queryClient.invalidateQueries({
         queryKey: [GET_GUESTBOOK],
       });

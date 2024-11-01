@@ -7,37 +7,47 @@ import CloseIcon from '@mui/icons-material/Close';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import {
-  AnimatedSection,
-  SectionHeader,
-  useDeleteGuestbook,
-  useFetchGuestbook,
-} from '@/entities/invitation';
+import { AnimatedSection, SectionHeader, useFetchGuestbook } from '@/entities/invitation';
 import { SoftButton } from '@/shared/ui';
 import { GuestbookModal } from './guestbook-modal.tsx';
+import { GuestbookPasswordConfirmModal } from '@/widgets/invitation';
 
 const defaultDisplayCount = 3;
 
 export function Guestbook() {
   const guestbookResponse = useFetchGuestbook();
-  const deleteGuestbook = useDeleteGuestbook();
   const guestbooks = guestbookResponse.data?.data ?? [];
 
   const [displayCount, setDisplayCount] = useState(defaultDisplayCount);
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false);
+  const [isGuestbookPasswordConfirmOpen, setIsGuestbookPasswordConfirmOpen] = useState(false);
+  const [passwordConfirmObj, setPasswordConfirmObj] = useState({
+    targetUserIdx: 0,
+    targetPassword: '',
+  });
 
   const isExpanded = guestbooks.length > displayCount;
 
-  const toggleAttendanceConfirmation = () => {
-    setIsGuestbookOpen(!isGuestbookOpen);
-  };
-
   const openGuestbook = () => {
-    toggleAttendanceConfirmation();
+    setIsGuestbookOpen(true);
+  };
+  const closeGuestbook = () => {
+    setIsGuestbookOpen(false);
   };
 
-  const closeGuestbook = () => {
-    toggleAttendanceConfirmation();
+  const openGuestbookPasswordConfirm = (targetUserIdx: number, targetPassword: string) => {
+    setPasswordConfirmObj((prevState) => {
+      return {
+        ...prevState,
+        targetUserIdx,
+        targetPassword,
+      };
+    });
+    setIsGuestbookPasswordConfirmOpen(true);
+  };
+  const closeGuestbookPasswordConfirm = () => {
+    setPasswordConfirmObj({ targetUserIdx: 0, targetPassword: '' });
+    setIsGuestbookPasswordConfirmOpen(false);
   };
 
   const initialDisplayCount = () => {
@@ -101,10 +111,7 @@ export function Guestbook() {
                           color: '#999999',
                         }}
                         onClick={() =>
-                          deleteGuestbook.mutate({
-                            userIdx: guestbook.userIdx,
-                            password: guestbook.password,
-                          })
+                          openGuestbookPasswordConfirm(guestbook.userIdx, guestbook.password)
                         }
                       >
                         <Typography sx={{ fontSize: '0.76rem', fontWeight: 700, color: '#999999' }}>
@@ -168,6 +175,12 @@ export function Guestbook() {
       </Stack>
 
       <GuestbookModal isGuestbookOpen={isGuestbookOpen} onClose={closeGuestbook} />
+      <GuestbookPasswordConfirmModal
+        targetUserIdx={passwordConfirmObj.targetUserIdx}
+        targetPassword={passwordConfirmObj.targetPassword}
+        isGuestbookPasswordConfirmOpen={isGuestbookPasswordConfirmOpen}
+        onClose={closeGuestbookPasswordConfirm}
+      />
     </Stack>
   );
 }

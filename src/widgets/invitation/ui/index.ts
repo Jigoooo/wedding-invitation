@@ -9,3 +9,4 @@ export { InvitationFooter } from './invitation-footer.tsx';
 export { WeddingInformationAndInstructions } from './wedding-information-and-instructions.tsx';
 export { Guestbook } from './guestbook.tsx';
 export { InvitationAccounts } from './invitation-accounts.tsx';
+export { GuestbookPasswordConfirmModal } from './guestbook-password-confirm-modal.tsx';
