@@ -5,3 +5,4 @@ export { useSizeMatch } from './use-size-match.ts';
 export { useTimer } from './use-timer.ts';
 export { useHandleClickOutsideRef } from './use-handle-click-outside-ref.ts';
 export { useBeforeUnload } from './use-before-unload.ts';
+export { useDimensions } from './use-dimension.ts';

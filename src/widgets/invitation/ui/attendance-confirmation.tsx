@@ -3,7 +3,7 @@ import { Box, Stack, Typography } from '@mui/joy';
 import { CustomedFormControl, FuturRadioGroup, OutlinedInput, SolidButton } from '@/shared/ui';
 import { TranslucentMobileModal } from '@/shared/components';
 import { useValidatedForm } from '@/shared/hooks/form/use-validated-form.ts';
-import { createValidator, formatPhoneNumber } from '@/shared/lib';
+import { createValidator } from '@/shared/lib';
 import { PRegisterWeddingAttendance, useRegisterWeddingAttendance } from '@/entities/invitation';
 
 export function AttendanceConfirmationModal({
@@ -19,17 +19,18 @@ export function AttendanceConfirmationModal({
     attendanceName: '',
     guestSide: 'groom',
     isAttending: 1,
-    telNo: '',
     headCount: 1,
     mealStatus: 'planned',
   };
 
   const { values, errors, errorMessages, onChange, initValues, isTouched, hasErrors } =
     useValidatedForm(defaultValues, {
-      attendanceName: (value) => createValidator(value).required(),
+      attendanceName: (value) =>
+        createValidator(value).required({
+          message: '성함을 입력해 주세요.',
+        }),
       guestSide: (value) => createValidator(value).required(),
       isAttending: (value) => createValidator(value).required(),
-      telNo: (value) => createValidator(value),
       headCount: (value) =>
         createValidator(value)
           .number({
@@ -57,7 +58,6 @@ export function AttendanceConfirmationModal({
         isAttending: Number(values.isAttending),
         guestSide: values.guestSide,
         attendanceName: values.attendanceName,
-        telNo: values.telNo,
         headCount: Number(values.headCount),
         mealStatus: values.mealStatus,
       },
@@ -143,20 +143,6 @@ export function AttendanceConfirmationModal({
             placeholder={'대표자 한 분의 성함을 입력해 주세요.'}
             value={values.attendanceName}
             onChange={(event) => onChange('attendanceName', event.target.value)}
-          />
-        </CustomedFormControl>
-        <CustomedFormControl
-          label={'연락처'}
-          error={errors.telNo}
-          errorMessage={errorMessages.telNo}
-          isExternalTouched={isTouched.telNo}
-        >
-          <OutlinedInput
-            sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
-            focusWithin={false}
-            placeholder={'대표자 분의 휴대폰번호를 입력해 주세요.'}
-            value={values.telNo}
-            onChange={(event) => onChange('telNo', formatPhoneNumber(event.target.value))}
           />
         </CustomedFormControl>
         <CustomedFormControl

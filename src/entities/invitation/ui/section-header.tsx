@@ -8,7 +8,7 @@ export function SectionHeader({ engTitle, korTitle }: { engTitle: string; korTit
           fontSize: '0.9rem',
           fontWeight: 400,
           fontFamily: 'Crimson Pro',
-          color: '#f79e9e',
+          color: '#f38585',
           letterSpacing: 2,
         }}
       >
@@ -18,7 +18,7 @@ export function SectionHeader({ engTitle, korTitle }: { engTitle: string; korTit
         sx={{
           fontSize: '1.1rem',
           fontWeight: 800,
-          color: '#f79e9e',
+          color: '#f38585',
           letterSpacing: 2.6,
         }}
       >

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Box, Stack, Typography, Card } from '@mui/joy';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -16,12 +16,22 @@ const defaultDisplayCount = 3;
 
 export function Guestbook() {
   const guestbookResponse = useFetchGuestbook();
-  const guestbooks = guestbookResponse.data?.data ?? [];
+  const guestbooks = useMemo(() => {
+    return guestbookResponse.data?.data || [];
+  }, [guestbookResponse.data?.data]);
 
   const [displayCount, setDisplayCount] = useState(defaultDisplayCount);
   const [isGuestbookOpen, setIsGuestbookOpen] = useState(false);
   const [isGuestbookPasswordConfirmOpen, setIsGuestbookPasswordConfirmOpen] = useState(false);
   const [targetUserIdx, setTargetUserIdx] = useState(0);
+
+  const [initialExpandable, setInitialExpandable] = useState(false);
+
+  useEffect(() => {
+    if (initialExpandable) {
+      setDisplayCount(guestbooks.length);
+    }
+  }, [guestbooks, initialExpandable]);
 
   const isExpanded = guestbooks.length > displayCount;
 
@@ -46,6 +56,7 @@ export function Guestbook() {
   };
 
   const handleShowMore = () => {
+    setInitialExpandable(true);
     setDisplayCount(guestbooks.length);
   };
 
@@ -54,26 +65,39 @@ export function Guestbook() {
       <AnimatedSection>
         <SectionHeader engTitle={'GUESTBOOK'} korTitle={'방명록'} />
       </AnimatedSection>
-      <Stack sx={{ width: '100%', px: 3, gap: 2 }}>
+      <Stack sx={{ width: '100%', px: 2, gap: 2 }}>
         <AnimatedSection>
-          <Stack sx={{ width: '100%', gap: 1.4 }}>
-            <AnimatePresence initial={false}>
-              {guestbooks.slice(0, displayCount).map((guestbook, index) => {
+          <motion.div
+            transition={{ duration: 0.6 }}
+            layout
+            style={{
+              padding: 8,
+              width: '100%',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 8,
+            }}
+          >
+            <AnimatePresence>
+              {guestbooks.slice(0, displayCount).map((guestbook) => {
                 return (
                   <motion.div
                     key={guestbook.userIdx}
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
                     layout
-                    style={{
-                      overflow: 'hidden',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
-                      borderRadius: 8,
-                    }}
                   >
-                    <Card sx={{ position: 'relative' }} variant={'plain'}>
+                    <Card
+                      sx={{
+                        position: 'relative',
+                        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                        borderRadius: 8,
+                      }}
+                      variant={'plain'}
+                    >
                       <Stack sx={{ width: '100%', gap: 0.8 }}>
                         <Typography sx={{ width: '70%', fontSize: '0.84rem', fontWeight: 900 }}>
                           {guestbook.userName}
@@ -118,32 +142,40 @@ export function Guestbook() {
                 );
               })}
             </AnimatePresence>
-          </Stack>
+          </motion.div>
         </AnimatedSection>
-        {isExpanded && (
-          <AnimatedSection>
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                width: '100%',
-                justifyContent: 'center',
-                gap: 0.4,
-                py: 1,
-              }}
-              onClick={isExpanded ? handleShowMore : initialDisplayCount}
-            >
-              <Typography sx={{ fontSize: '0.84rem' }}>
-                {isExpanded ? '전체보기' : '숨기기'}
-              </Typography>
-              {isExpanded ? (
-                <ExpandMoreIcon style={{ fontSize: '1rem' }} />
-              ) : (
-                <ExpandLessIcon style={{ fontSize: '1rem' }} />
-              )}
-            </Box>
-          </AnimatedSection>
-        )}
+        <AnimatedSection>
+          <AnimatePresence>
+            {isExpanded && (
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, height: 'auto' }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.5 }}
+                layout
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '100%',
+                  justifyContent: 'center',
+                  gap: 0.4,
+                  px: 1,
+                }}
+                onClick={isExpanded ? handleShowMore : initialDisplayCount}
+              >
+                <Typography sx={{ fontSize: '0.84rem' }}>
+                  {isExpanded ? '전체보기' : '숨기기'}
+                </Typography>
+                {isExpanded ? (
+                  <ExpandMoreIcon style={{ fontSize: '1rem' }} />
+                ) : (
+                  <ExpandLessIcon style={{ fontSize: '1rem' }} />
+                )}
+              </Box>
+            )}
+          </AnimatePresence>
+        </AnimatedSection>
         <AnimatedSection>
           <Box sx={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
             <SoftButton

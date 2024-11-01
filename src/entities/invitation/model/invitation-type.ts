@@ -60,7 +60,6 @@ export type PRegisterWeddingAttendance = {
   isAttending: number;
   guestSide: 'groom' | 'bride';
   attendanceName: string;
-  telNo: string;
   headCount: number;
   mealStatus: 'planned' | 'not_planned' | 'undecided';
 };
