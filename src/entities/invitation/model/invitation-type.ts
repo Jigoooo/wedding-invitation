@@ -58,11 +58,11 @@ export type PDeleteGuestbook = {
 
 export type PRegisterWeddingAttendance = {
   isAttending: number;
-  guestSide: string;
+  guestSide: 'groom' | 'bride';
   attendanceName: string;
   telNo: string;
   headCount: number;
-  mealStatus: string;
+  mealStatus: 'planned' | 'not_planned' | 'undecided';
 };
 
 export type InvitationStates = {

@@ -24,7 +24,7 @@ export function createValidator(value: any) {
     },
     number({ message }: { message?: string } = {}) {
       if (error) return validator;
-      if (typeof value !== 'number') {
+      if (isNaN(Number(value))) {
         error = true;
         errorMessage = message ?? '숫자여야 합니다.';
       }
@@ -147,6 +147,22 @@ export function createValidator(value: any) {
       if (typeof value !== 'string' || value.length > lengthValue) {
         error = true;
         errorMessage = message ?? `문자열의 길이는 ${lengthValue}이하여야 합니다.`;
+      }
+      return validator;
+    },
+    greaterThanOrEqual(minValue: number, { message }: { message?: string } = {}) {
+      if (error) return validator;
+      if (isNaN(Number(value)) || Number(value) < minValue) {
+        error = true;
+        errorMessage = message ?? `값은 ${minValue} 이상이어야 합니다.`;
+      }
+      return validator;
+    },
+    lessThanOrEqual(maxValue: number, { message }: { message?: string } = {}) {
+      if (error) return validator;
+      if (isNaN(Number(value)) || Number(value) > maxValue) {
+        error = true;
+        errorMessage = message ?? `값은 ${maxValue} 이하여야 합니다.`;
       }
       return validator;
     },

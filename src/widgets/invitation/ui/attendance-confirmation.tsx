@@ -3,8 +3,8 @@ import { Box, Stack, Typography } from '@mui/joy';
 import { CustomedFormControl, FuturRadioGroup, OutlinedInput, SolidButton } from '@/shared/ui';
 import { TranslucentMobileModal } from '@/shared/components';
 import { useValidatedForm } from '@/shared/hooks/form/use-validated-form.ts';
-import { createValidator } from '@/shared/lib';
-import { useRegisterWeddingAttendance } from '@/entities/invitation';
+import { createValidator, formatPhoneNumber } from '@/shared/lib';
+import { PRegisterWeddingAttendance, useRegisterWeddingAttendance } from '@/entities/invitation';
 
 export function AttendanceConfirmationModal({
   isAttendanceConfirmationOpen,
@@ -15,25 +15,32 @@ export function AttendanceConfirmationModal({
 }) {
   const registerWeddingAttendance = useRegisterWeddingAttendance();
 
+  const defaultValues: PRegisterWeddingAttendance = {
+    attendanceName: '',
+    guestSide: 'groom',
+    isAttending: 1,
+    telNo: '',
+    headCount: 1,
+    mealStatus: 'planned',
+  };
+
   const { values, errors, errorMessages, onChange, initValues, isTouched, hasErrors } =
-    useValidatedForm(
-      {
-        attendanceName: '',
-        guestSide: 'groom',
-        isAttending: '1',
-        telNo: '',
-        headCount: '0',
-        mealStatus: 'planned',
-      },
-      {
-        attendanceName: (value) => createValidator(value).required(),
-        guestSide: (value) => createValidator(value).required(),
-        isAttending: (value) => createValidator(value).required(),
-        telNo: (value) => createValidator(value),
-        headCount: (value) => createValidator(value).required(),
-        mealStatus: (value) => createValidator(value).required(),
-      },
-    );
+    useValidatedForm(defaultValues, {
+      attendanceName: (value) => createValidator(value).required(),
+      guestSide: (value) => createValidator(value).required(),
+      isAttending: (value) => createValidator(value).required(),
+      telNo: (value) => createValidator(value),
+      headCount: (value) =>
+        createValidator(value)
+          .number({
+            message: '인원수는 숫자만 입력해 주세요.',
+          })
+          .greaterThanOrEqual(1, {
+            message: '인원수는 1명 이상이어야 합니다.',
+          })
+          .required(),
+      mealStatus: (value) => createValidator(value).required(),
+    });
 
   const closeModal = () => {
     initValues();
@@ -147,9 +154,9 @@ export function AttendanceConfirmationModal({
           <OutlinedInput
             sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
             focusWithin={false}
-            placeholder={'대표자 분의 연락처를 입력해 주세요.'}
+            placeholder={'대표자 분의 휴대폰번호를 입력해 주세요.'}
             value={values.telNo}
-            onChange={(event) => onChange('telNo', event.target.value)}
+            onChange={(event) => onChange('telNo', formatPhoneNumber(event.target.value))}
           />
         </CustomedFormControl>
         <CustomedFormControl

@@ -78,7 +78,11 @@ export function formatKrDate(dateStr: string): string {
  * @param targetMinute 목표 분 (0 ~ 59 사이의 값).
  * @returns 변경된 날짜와 시간의 문자열 ('yyyyMMddHHmm' 형식).
  */
-export function convertToSpecificTime(dateStr: string, targetHour: number, targetMinute: number): string {
+export function convertToSpecificTime(
+  dateStr: string,
+  targetHour: number,
+  targetMinute: number,
+): string {
   // 'yyyyMMddHHmm' 형식에 맞춰 문자열에서 Date 객체로 변환합니다.
   const date = parse(dateStr, 'yyyyMMddHHmm', new Date());
 
@@ -90,7 +94,12 @@ export function convertToSpecificTime(dateStr: string, targetHour: number, targe
   return format(finalDate, 'yyyyMMddHHmm');
 }
 
-export function applyMiddleEllipsis(text: string, maxLength: number, frontLength: number, backLength: number) {
+export function applyMiddleEllipsis(
+  text: string,
+  maxLength: number,
+  frontLength: number,
+  backLength: number,
+) {
   if (text.length <= maxLength) {
     return text;
   }
