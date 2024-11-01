@@ -64,7 +64,7 @@ export function GuestbookPasswordConfirmModal({
       }
       isOpen={isGuestbookPasswordConfirmOpen}
       onClose={closeModal}
-      sx={{ backgroundColor: '#ffffff' }}
+      sx={{ backgroundColor: '#ffffff', width: '80%', height: '31%', borderRadius: 16 }}
       closeIconColor={'#999999'}
     >
       <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2 }}>
