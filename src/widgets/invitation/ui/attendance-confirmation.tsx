@@ -1,8 +1,10 @@
-import { useLayoutEffect, useRef, useState } from 'react';
 import { Box, Stack, Typography } from '@mui/joy';
 
 import { CustomedFormControl, FuturRadioGroup, OutlinedInput, SolidButton } from '@/shared/ui';
 import { TranslucentMobileModal } from '@/shared/components';
+import { useValidatedForm } from '@/shared/hooks/form/use-validated-form.ts';
+import { createValidator } from '@/shared/lib';
+import { useRegisterWeddingAttendance } from '@/entities/invitation';
 
 export function AttendanceConfirmationModal({
   isAttendanceConfirmationOpen,
@@ -11,31 +13,56 @@ export function AttendanceConfirmationModal({
   isAttendanceConfirmationOpen: boolean;
   onClose: () => void;
 }) {
-  const stackRef = useRef<HTMLDivElement>(null);
-  const [, setStackWidth] = useState(200);
+  const registerWeddingAttendance = useRegisterWeddingAttendance();
 
-  useLayoutEffect(() => {
-    const handleResize = () => {
-      if (stackRef.current) {
-        setStackWidth(stackRef.current.offsetWidth);
-      }
-    };
-    handleResize();
+  const { values, errors, errorMessages, onChange, initValues, isTouched, hasErrors } =
+    useValidatedForm(
+      {
+        attendanceName: '',
+        guestSide: 'groom',
+        isAttending: '1',
+        telNo: '',
+        headCount: '0',
+        mealStatus: 'planned',
+      },
+      {
+        attendanceName: (value) => createValidator(value).required(),
+        guestSide: (value) => createValidator(value).required(),
+        isAttending: (value) => createValidator(value).required(),
+        telNo: (value) => createValidator(value),
+        headCount: (value) => createValidator(value).required(),
+        mealStatus: (value) => createValidator(value).required(),
+      },
+    );
 
-    const resizeObserver = new ResizeObserver(() => {
-      handleResize();
-    });
+  const closeModal = () => {
+    initValues();
+    onClose();
+  };
 
-    if (stackRef.current) {
-      resizeObserver.observe(stackRef.current);
+  const onClickRegisterWeddingAttendance = () => {
+    if (hasErrors()) {
+      return;
     }
 
-    return () => {
-      if (stackRef.current) {
-        resizeObserver.unobserve(stackRef.current);
-      }
-    };
-  }, []);
+    registerWeddingAttendance.mutate(
+      {
+        isAttending: Number(values.isAttending),
+        guestSide: values.guestSide,
+        attendanceName: values.attendanceName,
+        telNo: values.telNo,
+        headCount: Number(values.headCount),
+        mealStatus: values.mealStatus,
+      },
+      {
+        onSuccess(data) {
+          if (data.code === 200) {
+            closeModal();
+          }
+        },
+      },
+    );
+  };
 
   return (
     <TranslucentMobileModal
@@ -47,12 +74,11 @@ export function AttendanceConfirmationModal({
         </Stack>
       }
       isOpen={isAttendanceConfirmationOpen}
-      onClose={onClose}
+      onClose={closeModal}
       sx={{ backgroundColor: '#ffffff' }}
       closeIconColor={'#999999'}
     >
       <Stack
-        ref={stackRef}
         sx={{
           position: 'relative',
           width: '100%',
@@ -61,83 +87,104 @@ export function AttendanceConfirmationModal({
           gap: 3,
         }}
       >
-        <CustomedFormControl label={'참석 가능 여부'}>
-          {/*<ToggleButtonGroup*/}
-          {/*  label={''}*/}
-          {/*  options={[*/}
-          {/*    { key: 1, value: '가능' },*/}
-          {/*    { key: 2, value: '불가능' },*/}
-          {/*  ]}*/}
-          {/*  colors={{*/}
-          {/*    1: '#81b631',*/}
-          {/*    2: '#f15151',*/}
-          {/*  }}*/}
-          {/*  groupKey={1}*/}
-          {/*  buttonWidth={stackWidth / 2}*/}
-          {/*/>*/}
+        <CustomedFormControl
+          label={'참석 가능 여부'}
+          required={true}
+          error={errors.isAttending}
+          errorMessage={errorMessages.isAttending}
+          isExternalTouched={isTouched.isAttending}
+        >
           <FuturRadioGroup
-            defaultValue={1}
             options={[
-              { key: 1, value: 1, label: '가능' },
-              { key: 2, value: 2, label: '불가능' },
+              { key: '1', value: '1', label: '가능' },
+              { key: '0', value: '0', label: '불가능' },
             ]}
+            defaultValue={'1'}
+            value={values.isAttending}
+            onChange={(event) => onChange('isAttending', event.target.value)}
             color={'neutral'}
           />
         </CustomedFormControl>
-        <CustomedFormControl label={'하객 구분'}>
-          {/*<ToggleButtonGroup*/}
-          {/*  label={''}*/}
-          {/*  options={[*/}
-          {/*    { key: 1, value: '신랑측' },*/}
-          {/*    { key: 2, value: '신부측' },*/}
-          {/*  ]}*/}
-          {/*  colors={{*/}
-          {/*    1: '#3891ec',*/}
-          {/*    2: '#ec77ad',*/}
-          {/*  }}*/}
-          {/*  groupKey={1}*/}
-          {/*  buttonWidth={stackWidth / 2}*/}
-          {/*/>*/}
+        <CustomedFormControl
+          label={'하객 구분'}
+          required={true}
+          error={errors.guestSide}
+          errorMessage={errorMessages.guestSide}
+          isExternalTouched={isTouched.guestSide}
+        >
           <FuturRadioGroup
-            defaultValue={1}
             options={[
-              { key: 1, value: 1, label: '신랑측' },
-              { key: 2, value: 2, label: '신부측' },
+              { key: 'groom', value: 'groom', label: '신랑측' },
+              { key: 'bride', value: 'bride', label: '신부측' },
             ]}
+            defaultValue={'groom'}
+            value={values.guestSide}
+            onChange={(event) => onChange('guestSide', event.target.value)}
             color={'neutral'}
           />
         </CustomedFormControl>
-        <CustomedFormControl label={'성함'} required={true}>
+        <CustomedFormControl
+          label={'성함'}
+          required={true}
+          error={errors.attendanceName}
+          errorMessage={errorMessages.attendanceName}
+          isExternalTouched={isTouched.attendanceName}
+        >
           <OutlinedInput
             sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
             focusWithin={false}
             placeholder={'대표자 한 분의 성함을 입력해 주세요.'}
+            value={values.attendanceName}
+            onChange={(event) => onChange('attendanceName', event.target.value)}
           />
         </CustomedFormControl>
-        <CustomedFormControl label={'연락처'}>
+        <CustomedFormControl
+          label={'연락처'}
+          error={errors.telNo}
+          errorMessage={errorMessages.telNo}
+          isExternalTouched={isTouched.telNo}
+        >
           <OutlinedInput
             sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
             focusWithin={false}
             placeholder={'대표자 분의 연락처를 입력해 주세요.'}
+            value={values.telNo}
+            onChange={(event) => onChange('telNo', event.target.value)}
           />
         </CustomedFormControl>
-        <CustomedFormControl label={'총 인원'} required={true}>
+        <CustomedFormControl
+          label={'총 인원'}
+          required={true}
+          error={errors.headCount}
+          errorMessage={errorMessages.headCount}
+          isExternalTouched={isTouched.headCount}
+        >
           <OutlinedInput
             sx={{ fontFamily: 'Pretendard', fontWeight: 500 }}
             type={'number'}
             focusWithin={false}
             placeholder={'본인 포함 총 인원수를 입력해 주세요.'}
+            value={values.headCount}
+            onChange={(event) => onChange('headCount', event.target.value)}
           />
         </CustomedFormControl>
-        <CustomedFormControl label={'식사여부'} required={true}>
+        <CustomedFormControl
+          label={'식사여부'}
+          required={true}
+          error={errors.mealStatus}
+          errorMessage={errorMessages.mealStatus}
+          isExternalTouched={isTouched.mealStatus}
+        >
           <FuturRadioGroup
-            defaultValue={1}
+            defaultValue={'planned'}
             options={[
-              { key: 1, value: 1, label: '예정' },
-              { key: 2, value: 2, label: '안함' },
-              { key: 3, value: 3, label: '미정' },
+              { key: 'planned', value: 'planned', label: '예정' },
+              { key: 'not_planned', value: 'not_planned', label: '안함' },
+              { key: 'undecided', value: 'undecided', label: '미정' },
             ]}
             color={'neutral'}
+            value={values.mealStatus}
+            onChange={(event) => onChange('mealStatus', event.target.value)}
           />
         </CustomedFormControl>
         <Box
@@ -146,6 +193,7 @@ export function AttendanceConfirmationModal({
           <SolidButton
             sx={{ width: '100%', height: 50, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
             buttonColor={'#000000'}
+            onClick={onClickRegisterWeddingAttendance}
           >
             전송
           </SolidButton>

@@ -71,10 +71,12 @@ export function useRegisterWeddingAttendance() {
   return useMutation({
     mutationFn: (params: PRegisterWeddingAttendance) => registerWeddingAttendanceApi(params),
     onMutate: () => {},
-    onSuccess: () => {
-      showSnackBar({
-        message: '저장되었습니다.',
-      });
+    onSuccess: (data) => {
+      if (data.code === 200) {
+        showSnackBar({
+          message: '저장되었습니다.',
+        });
+      }
     },
     onError: () => {},
     onSettled: () => {},
