@@ -83,6 +83,12 @@ export function useValidatedForm<T extends { [key: string]: any }>(
   };
 
   const initValues = () => {
+    setIsTouched(
+      Object.keys(initialValues).reduce(
+        (acc, key) => ({ ...acc, [key]: false }),
+        {} as { [K in keyof T]: boolean },
+      ),
+    );
     setValues(initialValues);
   };
 
