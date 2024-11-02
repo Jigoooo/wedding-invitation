@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
   AnimatedSection,
+  getReplaceWeddingImageSrc,
   getWeddingImageSrc,
   SectionHeader,
   useWeddingInfo,
@@ -128,7 +129,17 @@ export function InvitationLocationInfo() {
             sx={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center' }}
           >
             <SoftButton
-              onClick={() => window.open(getWeddingImageSrc('sketch-map.png'))}
+              onClick={() => {
+                try {
+                  const newWindow = window.open(getWeddingImageSrc('sketch-map.png'));
+                  if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+                    window.open(getReplaceWeddingImageSrc('sketch-map.png'));
+                  }
+                } catch (error) {
+                  console.log(error);
+                  window.open(getReplaceWeddingImageSrc('sketch-map.png'));
+                }
+              }}
               sx={{ width: '90%', height: 45, color: '#666666', border: '1px solid #dadada' }}
               buttonColor={'#ffffff'}
               startDecorator={<ExploreIcon />}

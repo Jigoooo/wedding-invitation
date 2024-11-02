@@ -6,6 +6,7 @@ import CallIcon from '@mui/icons-material/Call';
 import { SoftButton } from '@/shared/ui';
 import {
   AnimatedSection,
+  getReplaceWeddingImageSrc,
   getWeddingImageSrc,
   SectionHeader,
   useMarriedPersons,
@@ -75,6 +76,9 @@ export function InvitationIntroduction() {
             style={{ width: '100%', borderRadius: 6 }}
             src={getWeddingImageSrc('info-image-origin.webp')}
             alt={'Info'}
+            onError={(e) => {
+              e.currentTarget.src = getReplaceWeddingImageSrc('info-image-origin.webp');
+            }}
           />
         </Box>
         <Stack sx={{ width: '100%', alignItems: 'center', gap: 1, pt: 2 }}>

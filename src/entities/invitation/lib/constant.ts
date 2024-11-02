@@ -53,6 +53,10 @@ export const getWeddingImageSrc = (imageName: string) => {
   return `${import.meta.env.VITE_INVITATION_IMAGE_SERVER_URL}/wedding-image/${imageName}`;
 };
 
+export const getReplaceWeddingImageSrc = (imageName: string) => {
+  return `${import.meta.env.VITE_INVITATION_SERVER_URL}/images/wedding-image/${imageName}`;
+};
+
 const galleryImages = [
   gallery_1,
   gallery_2,

@@ -2,7 +2,12 @@ import { Box, Divider, Stack, Typography } from '@mui/joy';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 
-import { getWeddingImageSrc, useWeddingInfo, useMarriedPersons } from '@/entities/invitation';
+import {
+  getWeddingImageSrc,
+  useWeddingInfo,
+  useMarriedPersons,
+  getReplaceWeddingImageSrc,
+} from '@/entities/invitation';
 
 export function InvitationHeader() {
   const weddingInfo = useWeddingInfo();
@@ -48,6 +53,9 @@ export function InvitationHeader() {
         }}
         alt={'Header'}
         src={getWeddingImageSrc('header-image-origin.webp')}
+        onError={(e) => {
+          e.currentTarget.src = getReplaceWeddingImageSrc('header-image-origin.webp');
+        }}
       />
       <Box
         sx={{
