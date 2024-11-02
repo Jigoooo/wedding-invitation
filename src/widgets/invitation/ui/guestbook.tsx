@@ -99,12 +99,12 @@ export function Guestbook() {
                       variant={'plain'}
                     >
                       <Stack sx={{ width: '100%', gap: 0.8 }}>
-                        <Typography sx={{ width: '70%', fontSize: '0.84rem', fontWeight: 900 }}>
+                        <Typography sx={{ width: '70%', fontSize: '0.9rem', fontWeight: 900 }}>
                           {guestbook.userName}
                         </Typography>
                         <Typography
                           sx={{
-                            fontSize: '0.84rem',
+                            fontSize: '0.86rem',
                             fontWeight: 700,
                             color: '#666666',
                             whiteSpace: 'pre-line',

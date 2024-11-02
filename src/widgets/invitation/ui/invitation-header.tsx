@@ -45,7 +45,6 @@ export function InvitationHeader() {
         style={{
           width: '100%',
           borderRadius: 3,
-          // ...maskLinearGradientStyle,
         }}
         alt={'Header'}
         src={getWeddingImageSrc('header-image-origin.webp')}

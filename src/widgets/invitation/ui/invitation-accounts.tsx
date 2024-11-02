@@ -38,7 +38,7 @@ function AccountAccordion({
 }) {
   return (
     <Accordion
-      sx={{ width: '90%', backgroundColor: '#eaeaea', borderRadius: 8 }}
+      sx={{ width: '90%', backgroundColor: '#f4e5e5', borderRadius: 8 }}
       expanded={isExpanded}
       onChange={handleChange}
     >
@@ -52,7 +52,9 @@ function AccountAccordion({
             alignItems: 'center',
           }}
         >
-          <Typography sx={{ fontSize: '0.9rem', fontWeight: 700 }}>{accordionTitle}</Typography>
+          <Typography sx={{ fontSize: '0.9rem', fontWeight: 700, fontColor: '#cccccc' }}>
+            {accordionTitle}
+          </Typography>
           <ExpandMoreIcon
             sx={{
               position: 'absolute',
@@ -130,7 +132,7 @@ export function InvitationAccounts() {
 
   const [accordionStates, setAccordionStates] = useState([
     {
-      expanded: true,
+      expanded: false,
       accordionTitle: '신랑측 계좌번호',
       accounts: [
         marriedPersons.groom.account,
