@@ -68,10 +68,10 @@ export function GuestbookPasswordConfirmModal({
       }
       isOpen={isGuestbookPasswordConfirmOpen}
       onClose={closeModal}
-      sx={{ backgroundColor: '#ffffff', width: '80%', height: 280, borderRadius: 16 }}
+      sx={{ backgroundColor: '#ffffff', width: '80%', height: 245, borderRadius: 16 }}
       closeIconColor={'#999999'}
     >
-      <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2 }}>
+      <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2, px: 3 }}>
         <CustomedFormControl
           label={'비밀번호'}
           required={true}
@@ -87,11 +87,9 @@ export function GuestbookPasswordConfirmModal({
             onChange={(event) => password.onChange(event.target.value)}
           />
         </CustomedFormControl>
-        <Box
-          sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2, backgroundColor: '#ffffff' }}
-        >
+        <Box sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2 }}>
           <SolidButton
-            sx={{ width: '100%', height: 50, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
+            sx={{ width: '100%', height: 42, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
             color={'danger'}
             onClick={onClickGuestbookSend}
           >

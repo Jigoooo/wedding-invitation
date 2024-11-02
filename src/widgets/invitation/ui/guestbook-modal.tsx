@@ -68,7 +68,7 @@ export function GuestbookModal({
       sx={{ backgroundColor: '#ffffff' }}
       closeIconColor={'#999999'}
     >
-      <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2 }}>
+      <Stack sx={{ position: 'relative', width: '100%', height: '100%', gap: 2, py: 2, px: 3 }}>
         <CustomedFormControl
           label={'작성자'}
           required={true}
@@ -117,9 +117,7 @@ export function GuestbookModal({
             onChange={(event) => content.onChange(event.target.value)}
           />
         </CustomedFormControl>
-        <Box
-          sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2, backgroundColor: '#ffffff' }}
-        >
+        <Box sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2 }}>
           <SolidButton
             sx={{ width: '100%', height: 50, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
             buttonColor={'#000000'}

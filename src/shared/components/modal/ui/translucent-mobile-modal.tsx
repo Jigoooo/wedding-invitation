@@ -89,7 +89,6 @@ export function TranslucentMobileModal({
             <Box
               sx={[
                 {
-                  px: 3,
                   pb: 3,
                   width: '100%',
                   height: '100%',
@@ -105,7 +104,7 @@ export function TranslucentMobileModal({
                 closeIconColor={closeIconColor}
                 isCloseButtonVisible={isCloseButtonVisible}
               />
-              <Divider />
+              <Divider sx={{ mx: 3 }} />
               <Box
                 sx={{
                   overflow: 'auto',
@@ -139,13 +138,14 @@ function ModalHeader({
         cursor: 'pointer',
         pt: 3,
         pb: 1.4,
+        px: 3,
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         height: modalHeaderHeight,
       }}
     >
-      {title}
+      {title && title !== '' ? title : <Box />}
       {isCloseButtonVisible && (
         <Tooltip title={'닫기'} placement={'top'}>
           <IconButton onClick={onClose} color={'neutral'}>

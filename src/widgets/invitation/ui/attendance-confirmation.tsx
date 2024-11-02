@@ -92,6 +92,7 @@ export function AttendanceConfirmationModal({
           height: '100%',
           py: 3,
           gap: 3,
+          px: 3,
         }}
       >
         <CustomedFormControl
@@ -180,9 +181,7 @@ export function AttendanceConfirmationModal({
             onChange={(event) => onChange('mealStatus', event.target.value)}
           />
         </CustomedFormControl>
-        <Box
-          sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2, backgroundColor: '#ffffff' }}
-        >
+        <Box sx={{ position: 'sticky', bottom: 0, width: '100%', pt: 2 }}>
           <SolidButton
             sx={{ width: '100%', height: 50, fontFamily: 'Pretendard', fontSize: '0.9rem' }}
             buttonColor={'#000000'}

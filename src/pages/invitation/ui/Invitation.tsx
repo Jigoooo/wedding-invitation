@@ -14,8 +14,8 @@ import {
   WeddingCalendar,
   WeddingInformationAndInstructions,
   InvitationAccounts,
+  Gallery,
 } from '@/widgets/invitation';
-import { Gallery } from '@/widgets/invitation/ui/gallery.tsx';
 
 const MIN_WIDTH = 360;
 const MAX_WIDTH = 430;

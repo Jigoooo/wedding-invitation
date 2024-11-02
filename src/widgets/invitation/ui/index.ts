@@ -10,3 +10,5 @@ export { WeddingInformationAndInstructions } from './wedding-information-and-ins
 export { Guestbook } from './guestbook.tsx';
 export { InvitationAccounts } from './invitation-accounts.tsx';
 export { GuestbookPasswordConfirmModal } from './guestbook-password-confirm-modal.tsx';
+export { Gallery } from './gallery.tsx';
+export { GalleryPreviewModal } from './gallery-preview-modal.tsx';
