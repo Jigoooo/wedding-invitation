@@ -21,7 +21,7 @@ export function GalleryPreviewModal({
   useEffect(() => {
     setCurrentIndex(targetGalleryIndex);
     timeoutAction(() => {
-      setTransitionTime(200);
+      setTransitionTime(300);
     }, 300);
   }, [targetGalleryIndex]);
 
@@ -44,7 +44,7 @@ export function GalleryPreviewModal({
           showArrows={false}
           showThumbs={false}
           showStatus={false}
-          swipeScrollTolerance={3}
+          swipeScrollTolerance={4}
           selectedItem={currentIndex}
           transitionTime={transitionTime}
           dynamicHeight={true}
