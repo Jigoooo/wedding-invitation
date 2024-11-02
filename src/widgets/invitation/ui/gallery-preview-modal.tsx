@@ -17,12 +17,12 @@ function RenderDots({ currentIndex }: { currentIndex: number }) {
       sx={{
         position: 'absolute',
         bottom: 0,
-        width: 100,
+        width: 90,
         left: '50%',
         overflow: 'hidden',
         whiteSpace: 'nowrap',
         transition: 'transform 0.3s ease-in-out',
-        transform: `translateX(-${currentIndex * (dotSize + dotSpacing)}px)`,
+        transform: 'translateX(-50%)',
       }}
     >
       {Array.from({ length: totalDotCount }, (_, dotIndex) => (
@@ -30,12 +30,14 @@ function RenderDots({ currentIndex }: { currentIndex: number }) {
           key={dotIndex}
           sx={{
             display: 'inline-block',
+            position: 'relative',
             width: dotIndex === currentIndex ? activeDotSize : dotSize,
             height: dotIndex === currentIndex ? activeDotSize : dotSize,
+            left: -(currentIndex * (dotSize + dotSpacing)) + 35,
             borderRadius: '50%',
-            backgroundColor: dotIndex === currentIndex ? '#333' : '#ccc',
             margin: `0 ${dotSpacing / 2}px`,
-            transition: 'width 0.3s, height 0.3s, background-color 0.3s',
+            backgroundColor: dotIndex === currentIndex ? '#333' : '#ccc',
+            transition: 'left 0.2s ease-in-out, width 0.2s, height 0.2s, background-color 0.2s',
           }}
         />
       ))}
