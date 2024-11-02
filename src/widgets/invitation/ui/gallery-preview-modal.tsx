@@ -1,6 +1,9 @@
+import { useEffect, useState } from 'react';
 import { Stack } from '@mui/joy';
 import { TranslucentMobileModal } from '@/shared/components';
 import { galleryItems } from '@/entities/invitation';
+import { Carousel } from 'react-responsive-carousel';
+import { timeoutAction } from '@/shared/lib';
 
 export function GalleryPreviewModal({
   targetGalleryIndex,
@@ -11,10 +14,19 @@ export function GalleryPreviewModal({
   isGalleryPreviewOpen: boolean;
   onClose: () => void;
 }) {
-  console.log(targetGalleryIndex);
-  console.log(galleryItems);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [transitionTime, setTransitionTime] = useState(0);
+
+  useEffect(() => {
+    setCurrentIndex(targetGalleryIndex);
+    timeoutAction(() => {
+      setTransitionTime(200);
+    }, 300);
+  }, [targetGalleryIndex]);
+
   const closeModal = () => {
     onClose();
+    setTransitionTime(0);
   };
 
   return (
@@ -26,15 +38,31 @@ export function GalleryPreviewModal({
       closeIconColor={'#999999'}
     >
       <Stack sx={{ width: '100%', height: '100%' }}>
-        <img
-          src={galleryItems[targetGalleryIndex].src}
-          alt={`gallery-item-${galleryItems[targetGalleryIndex].id}`}
-          style={{
-            width: '100%',
-            height: '80%',
-            objectFit: 'cover',
-          }}
-        />
+        <Carousel
+          showIndicators={false}
+          showArrows={false}
+          showThumbs={false}
+          showStatus={false}
+          swipeScrollTolerance={3}
+          selectedItem={currentIndex}
+          transitionTime={transitionTime}
+          onChange={(index) => setCurrentIndex(index)}
+        >
+          {galleryItems.map((galleryItem) => {
+            return (
+              <img
+                key={galleryItem.id}
+                src={galleryItem.src}
+                alt={`gallery-item-${galleryItem.id}`}
+                style={{
+                  width: '100%',
+                  height: '80%',
+                  objectFit: 'cover',
+                }}
+              />
+            );
+          })}
+        </Carousel>
       </Stack>
     </TranslucentMobileModal>
   );
