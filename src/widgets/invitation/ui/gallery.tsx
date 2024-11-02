@@ -60,10 +60,12 @@ export function Gallery() {
   const defaultMaxHeight = '625px';
 
   const [isExpanded, setIsExpanded] = useState(false);
+  const [wasExpanded, setWasExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState(defaultMaxHeight);
   const [isGalleryPreviewOpen, setIsGalleryPreviewOpen] = useState(false);
   const [targetGalleryIndex, setTargetGalleryIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -71,6 +73,14 @@ export function Gallery() {
       setMaxHeight(`${fullHeight}px`);
     }
   }, []);
+
+  useEffect(() => {
+    if (wasExpanded && !isExpanded && headerRef.current) {
+      headerRef.current.scrollIntoView({ behavior: 'instant', block: 'start' });
+      window.scrollBy(0, -50);
+    }
+    setWasExpanded(isExpanded);
+  }, [isExpanded, wasExpanded]);
 
   const handleIsExpanded = (state: boolean) => {
     setIsExpanded(state);
@@ -86,7 +96,11 @@ export function Gallery() {
   }, []);
 
   return (
-    <Stack component={'section'} sx={{ width: '100%', alignItems: 'center', gap: 3 }}>
+    <Stack
+      ref={headerRef}
+      component={'section'}
+      sx={{ width: '100%', alignItems: 'center', gap: 3 }}
+    >
       <AnimatedSection>
         <SectionHeader engTitle={'GALLERY'} korTitle={'갤러리'} />
       </AnimatedSection>

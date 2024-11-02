@@ -47,6 +47,7 @@ export function GalleryPreviewModal({
           swipeScrollTolerance={3}
           selectedItem={currentIndex}
           transitionTime={transitionTime}
+          dynamicHeight={true}
           onChange={(index) => setCurrentIndex(index)}
         >
           {galleryItems.map((galleryItem) => {
