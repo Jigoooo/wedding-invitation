@@ -58,15 +58,18 @@ export function GalleryPreviewModal({
   const [transitionTime, setTransitionTime] = useState(0);
 
   useEffect(() => {
-    setCurrentIndex(targetGalleryIndex);
-    timeoutAction(() => {
-      setTransitionTime(300);
-    }, 300);
-  }, [targetGalleryIndex]);
+    if (isGalleryPreviewOpen) {
+      setCurrentIndex(targetGalleryIndex);
+      timeoutAction(() => {
+        setTransitionTime(300);
+      }, 300);
+    }
+  }, [isGalleryPreviewOpen, targetGalleryIndex]);
 
   const closeModal = () => {
     onClose();
     setTransitionTime(0);
+    setCurrentIndex(0);
   };
 
   return (
