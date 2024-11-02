@@ -79,7 +79,7 @@ export function Gallery() {
         layout
         initial={{ height: defaultMaxHeight }}
         animate={{ height: isExpanded ? maxHeight : defaultMaxHeight }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
         ref={containerRef}
         style={{ width: '100%', overflow: 'hidden', willChange: 'height' }}
       >
