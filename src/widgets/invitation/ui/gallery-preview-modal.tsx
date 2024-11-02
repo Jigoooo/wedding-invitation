@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Stack } from '@mui/joy';
+import { Carousel } from 'react-responsive-carousel';
+
 import { TranslucentMobileModal } from '@/shared/components';
 import { galleryItems } from '@/entities/invitation';
-import { Carousel } from 'react-responsive-carousel';
 import { timeoutAction } from '@/shared/lib';
 
 export function GalleryPreviewModal({
