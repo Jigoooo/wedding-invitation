@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import { Box, Divider, Tooltip } from '@mui/joy';
 import { AnimatePresence, motion } from 'framer-motion';
 import CloseIcon from '@mui/icons-material/Close';
@@ -31,17 +31,14 @@ export function TranslucentMobileModal({
 }: ModalType) {
   useBackKeyToClose(isOpen, onClose);
 
-  useEffect(() => {
-    if (isOpen) {
-      window.history.pushState(null, '', window.location.pathname);
-    }
-  }, [isOpen]);
+  const hasPushedState = useRef(false);
 
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen && !hasPushedState.current) {
       window.history.pushState(null, '', window.location.pathname);
+      hasPushedState.current = true; // 항목이 추가되었음을 기록
       document.body.style.overflow = 'hidden';
-    } else {
+    } else if (!isOpen) {
       document.body.style.overflow = '';
     }
 
@@ -50,6 +47,13 @@ export function TranslucentMobileModal({
     };
   }, [isOpen]);
 
+  const handleClose = () => {
+    if (hasPushedState.current) {
+      window.history.back();
+      hasPushedState.current = false;
+    }
+    onClose();
+  };
   return (
     <AnimatePresence>
       {isOpen && (
@@ -100,7 +104,7 @@ export function TranslucentMobileModal({
             >
               <ModalHeader
                 title={title}
-                onClose={onClose}
+                onClose={handleClose}
                 closeIconColor={closeIconColor}
                 isCloseButtonVisible={isCloseButtonVisible}
               />
