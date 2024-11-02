@@ -1,28 +1,13 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Grid, Stack, Typography } from '@mui/joy';
 import { motion } from 'framer-motion';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-import { AnimatedSection, getWeddingImageSrc, SectionHeader } from '@/entities/invitation';
+import { AnimatedSection, galleryItems, SectionHeader } from '@/entities/invitation';
 
-const galleryItems = [
-  { id: 1, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 2, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
-  { id: 3, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 2 },
-  { id: 4, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 5, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 6, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 7, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 8, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 9, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-  { id: 10, src: getWeddingImageSrc('header-image-origin.webp'), cols: 1, rows: 1 },
-];
-
-export function Gallery() {
-  const defaultMaxHeight = '625px';
-
+const GalleryItems = memo(() => {
   const renderedGalleryItems = useMemo(() => {
     return galleryItems.map((galleryItem) => {
       return (
@@ -49,6 +34,25 @@ export function Gallery() {
       );
     });
   }, []);
+
+  return (
+    <Grid
+      container
+      sx={{
+        display: 'grid',
+        px: 2,
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gridAutoRows: '150px',
+        gap: '8px',
+      }}
+    >
+      {renderedGalleryItems}
+    </Grid>
+  );
+});
+
+export function Gallery() {
+  const defaultMaxHeight = '625px';
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [maxHeight, setMaxHeight] = useState(defaultMaxHeight);
@@ -79,18 +83,7 @@ export function Gallery() {
         ref={containerRef}
         style={{ width: '100%', overflow: 'hidden', willChange: 'height' }}
       >
-        <Grid
-          container
-          sx={{
-            display: 'grid',
-            px: 2,
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gridAutoRows: '150px',
-            gap: '8px',
-          }}
-        >
-          {renderedGalleryItems}
-        </Grid>
+        <GalleryItems />
       </motion.div>
       <AnimatedSection>
         <Box
@@ -115,3 +108,5 @@ export function Gallery() {
     </Stack>
   );
 }
+
+GalleryItems.displayName = 'GalleryItems';
