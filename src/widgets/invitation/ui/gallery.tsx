@@ -82,6 +82,26 @@ export function Gallery() {
     setWasExpanded(isExpanded);
   }, [isExpanded, wasExpanded]);
 
+  useEffect(() => {
+    history.pushState({ page: 1 }, '', '');
+
+    const handlePopState = (event: PopStateEvent) => {
+      if (isExpanded) {
+        setIsExpanded(false);
+        history.pushState({ page: 1 }, '', '');
+        event.preventDefault();
+      } else {
+        window.history.back();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [isExpanded]);
+
   const handleIsExpanded = (state: boolean) => {
     setIsExpanded(state);
   };
