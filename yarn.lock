@@ -10039,6 +10039,11 @@ react-lazy-load-image-component@^1.6.2:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
 
+react-medium-image-zoom@^5.2.10:
+  version "5.2.10"
+  resolved "https://registry.yarnpkg.com/react-medium-image-zoom/-/react-medium-image-zoom-5.2.10.tgz#5e913804bc282a165b18d46a06aa3035bcc7b946"
+  integrity sha512-JBYf4u0zsocezIDtrjwStD+8sX+c8XuLsdz+HxPbojRj0sCicua0XOQKysuPetoFyX+YgStfj+vEtZ+699O/pg==
+
 react-naver-maps@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/react-naver-maps/-/react-naver-maps-0.1.3.tgz#242da4556799e7a854cc0fe5f061c188919f32c7"
