@@ -84,24 +84,6 @@ export function Gallery() {
     setWasExpanded(isExpanded);
   }, [isExpanded, wasExpanded]);
 
-  const handlePopState = useCallback(
-    (event: PopStateEvent) => {
-      if (isModalOpenState.current) {
-        event.preventDefault();
-        return;
-      }
-
-      if (isExpanded) {
-        setIsExpanded(false);
-        history.pushState({ page: 1 }, '', '');
-        event.preventDefault();
-      } else {
-        window.history.back();
-      }
-    },
-    [isExpanded],
-  );
-
   useEffect(() => {
     history.pushState({ page: 1 }, '', '');
 
