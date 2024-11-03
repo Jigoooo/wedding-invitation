@@ -2,6 +2,12 @@ html, body {
   overscroll-behavior: none;
 }
 
+@media (max-width: 325px) {
+  html {
+    font-size: 13px;
+  }
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;

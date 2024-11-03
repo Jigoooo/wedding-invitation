@@ -17,7 +17,7 @@ import {
   Gallery,
 } from '@/widgets/invitation';
 
-const MIN_WIDTH = 360;
+const MIN_WIDTH = 310;
 const MAX_WIDTH = 430;
 
 const BACKGROUND_COLOR = '#f3f3f3';

@@ -2,9 +2,11 @@ import Snowfall from 'react-snowfall';
 import { memo, useEffect, useState } from 'react';
 
 import { timeoutAction } from '@/shared/lib';
+import { useSizeMatch } from '@/shared/hooks';
 
 export const FallingAnimation = memo(() => {
   const [snowSpeed, setSnowSpeed] = useState<[number, number]>([6.0, 7.0]);
+  const isMinSizeMatch = useSizeMatch(326);
 
   useEffect(() => {
     timeoutAction(() => setSnowSpeed([1.0, 2.0]), 300);
@@ -17,7 +19,7 @@ export const FallingAnimation = memo(() => {
         top: 0,
         left: 0,
         zIndex: 300,
-        height: 6600,
+        height: isMinSizeMatch ? 6200 : 6600,
         width: '100%',
         background: 'transparent',
       }}
