@@ -4,31 +4,31 @@
     font-family: 'Maruburi';
     font-weight: 100;
     font-display: swap;
-    src: local('MaruBuriOTF ExtraLight')
+    src: local('MaruBuriOTF ExtraLight'), url('../fonts/Maruburi/MaruBuri-ExtraLight.otf') format('opentype')
 }
 @font-face {
     font-family: 'Maruburi';
     font-weight: 300;
     font-display: swap;
-    src: local('MaruBuriOTF Light')
+    src: local('MaruBuriOTF Light'), url('../fonts/Maruburi/MaruBuri-Light.otf') format('opentype')
 }
 @font-face {
     font-family: 'Maruburi';
     font-weight: 500;
     font-display: swap;
-    src: local('MaruBuriOTF Regular')
+    src: local('MaruBuriOTF Regular'), url('../fonts/Maruburi/MaruBuri-Regular.otf') format('opentype')
 }
 @font-face {
     font-family: 'Maruburi';
     font-weight: 700;
     font-display: swap;
-    src: local('MaruBuriOTF SemiBold')
+    src: local('MaruBuriOTF SemiBold'), url('../fonts/Maruburi/MaruBuri-SemiBold.otf') format('opentype')
 }
 @font-face {
     font-family: 'Maruburi';
     font-weight: 900;
     font-display: swap;
-    src: local('MaruBuriOTF Bold')
+    src: local('MaruBuriOTF Bold'), url('../fonts/Maruburi/MaruBuri-Bold.otf') format('opentype')
 }
 
 @font-face {
