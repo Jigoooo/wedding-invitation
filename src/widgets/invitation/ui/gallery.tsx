@@ -67,6 +67,8 @@ export function Gallery() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
 
+  const isModalOpenState = useRef(false);
+
   useEffect(() => {
     if (containerRef.current) {
       const fullHeight = containerRef.current.scrollHeight;
@@ -82,10 +84,34 @@ export function Gallery() {
     setWasExpanded(isExpanded);
   }, [isExpanded, wasExpanded]);
 
+  const handlePopState = useCallback(
+    (event: PopStateEvent) => {
+      if (isModalOpenState.current) {
+        event.preventDefault();
+        return;
+      }
+
+      if (isExpanded) {
+        setIsExpanded(false);
+        history.pushState({ page: 1 }, '', '');
+        event.preventDefault();
+      } else {
+        window.history.back();
+      }
+    },
+    [isExpanded],
+  );
+
   useEffect(() => {
     history.pushState({ page: 1 }, '', '');
 
     const handlePopState = (event: PopStateEvent) => {
+      console.log(isModalOpenState.current);
+      if (isModalOpenState.current) {
+        event.preventDefault();
+        return;
+      }
+
       if (isExpanded) {
         setIsExpanded(false);
         history.pushState({ page: 1 }, '', '');
@@ -109,10 +135,12 @@ export function Gallery() {
   const openGalleryPreview = useCallback((galleryIndex: number) => {
     setTargetGalleryIndex(galleryIndex);
     setIsGalleryPreviewOpen((prevState) => !prevState);
+    isModalOpenState.current = true;
   }, []);
 
   const closeGalleryPreview = useCallback(() => {
     setIsGalleryPreviewOpen(false);
+    isModalOpenState.current = false;
   }, []);
 
   return (

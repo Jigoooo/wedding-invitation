@@ -79,6 +79,7 @@ export function GalleryPreviewModal({
       onClose={closeModal}
       sx={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}
       closeIconColor={'#999999'}
+      isCloseButtonVisible={false}
     >
       <Stack sx={{ position: 'relative', width: '100%', height: '100%' }}>
         <Carousel
