@@ -13,11 +13,9 @@ const LINK_URL = import.meta.env.VITE_INVITATION_SERVER_URL;
 
 export function InvitationFooter() {
   const [searchParams] = useSearchParams();
-  const shareKakao = useShareKakao({
-    targetUrl: LINK_URL,
-  });
-
   const isCompanyFooterHide = searchParams.get('isCompanyFooterHide') === 'Y';
+  const targetUrl = isCompanyFooterHide ? `${LINK_URL}?isCompanyFooterHide=Y` : LINK_URL;
+  const shareKakao = useShareKakao({ targetUrl });
 
   return (
     <Stack sx={{ width: '100%', alignItems: 'center', gap: 3, py: 2 }}>
