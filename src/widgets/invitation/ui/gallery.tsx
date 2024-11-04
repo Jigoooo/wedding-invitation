@@ -177,7 +177,7 @@ export function Gallery() {
             exit={{ opacity: 0 }}
             sx={{
               position: 'fixed',
-              bottom: 10,
+              bottom: 20,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -185,7 +185,7 @@ export function Gallery() {
             }}
           >
             <SolidButton
-              sx={{ width: 150, borderRadius: 24, fontWeight: 900 }}
+              sx={{ width: 250, borderRadius: 24, fontWeight: 900 }}
               buttonColor={'#f38585'}
               onClick={() => handleIsExpanded(false)}
             >
