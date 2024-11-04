@@ -7,6 +7,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
 import { AnimatedSection, galleryItems, SectionHeader } from '@/entities/invitation';
 import { GalleryPreviewModal } from '@/widgets/invitation';
+import { timeoutAction } from '@/shared/lib';
 
 const GalleryItems = memo(
   ({ openGalleryPreview }: { openGalleryPreview: (galleryIndex: number) => void }) => {
@@ -64,10 +65,9 @@ export function Gallery() {
   const [maxHeight, setMaxHeight] = useState(defaultMaxHeight);
   const [isGalleryPreviewOpen, setIsGalleryPreviewOpen] = useState(false);
   const [targetGalleryIndex, setTargetGalleryIndex] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
-
-  const isModalOpenState = useRef(false);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -84,46 +84,22 @@ export function Gallery() {
     setWasExpanded(isExpanded);
   }, [isExpanded, wasExpanded]);
 
-  useEffect(() => {
-    history.pushState({ page: 1 }, '', '');
-
-    const handlePopState = (event: PopStateEvent) => {
-      console.log(isModalOpenState.current);
-      if (isModalOpenState.current) {
-        event.preventDefault();
-        return;
-      }
-
-      if (isExpanded) {
-        setIsExpanded(false);
-        history.pushState({ page: 1 }, '', '');
-        event.preventDefault();
-      } else {
-        window.history.back();
-      }
-    };
-
-    window.addEventListener('popstate', handlePopState);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, [isExpanded]);
-
   const handleIsExpanded = (state: boolean) => {
     setIsExpanded(state);
   };
 
   const openGalleryPreview = useCallback((galleryIndex: number) => {
+    setScrollPosition(window.scrollY);
     setTargetGalleryIndex(galleryIndex);
     setIsGalleryPreviewOpen((prevState) => !prevState);
-    isModalOpenState.current = true;
   }, []);
 
   const closeGalleryPreview = useCallback(() => {
     setIsGalleryPreviewOpen(false);
-    isModalOpenState.current = false;
-  }, []);
+    timeoutAction(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 10);
+  }, [scrollPosition]);
 
   return (
     <Stack

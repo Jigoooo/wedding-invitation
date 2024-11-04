@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { TranslucentMobileModal } from '@/shared/components';
 import { galleryItems } from '@/entities/invitation';
 import { timeoutAction } from '@/shared/lib';
+import { AnimatePresence, motion } from 'framer-motion';
 
 function RenderDots({ currentIndex }: { currentIndex: number }) {
   const totalDotCount = galleryItems.length;
@@ -56,13 +57,17 @@ export function GalleryPreviewModal({
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transitionTime, setTransitionTime] = useState(0);
+  const [isBackgroundVisible, setIsBackgroundVisible] = useState(true);
 
   useEffect(() => {
     if (isGalleryPreviewOpen) {
       setCurrentIndex(targetGalleryIndex);
       timeoutAction(() => {
         setTransitionTime(300);
-      }, 300);
+      }, 600);
+      timeoutAction(() => {
+        setIsBackgroundVisible(false);
+      }, 200);
     }
   }, [isGalleryPreviewOpen, targetGalleryIndex]);
 
@@ -70,6 +75,7 @@ export function GalleryPreviewModal({
     onClose();
     setTransitionTime(0);
     setCurrentIndex(0);
+    setIsBackgroundVisible(true);
   };
 
   return (
@@ -77,11 +83,35 @@ export function GalleryPreviewModal({
       title={''}
       isOpen={isGalleryPreviewOpen}
       onClose={closeModal}
-      sx={{ backgroundColor: '#ffffff', width: '100%', height: '100%' }}
+      sx={{ position: 'relative', backgroundColor: '#ffffff', width: '100%', height: '100%' }}
       closeIconColor={'#999999'}
       isCloseButtonVisible={false}
     >
-      <Stack sx={{ position: 'relative', width: '100%', height: '100%' }}>
+      <AnimatePresence initial={false}>
+        {isBackgroundVisible && (
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            sx={{
+              position: 'absolute',
+              top: 0,
+              width: '100%',
+              height: '100%',
+              zIndex: 99999,
+              backgroundColor: '#ffffff',
+            }}
+          />
+        )}
+      </AnimatePresence>
+      <Stack
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+        }}
+      >
         <Carousel
           showIndicators={false}
           showArrows={false}
