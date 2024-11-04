@@ -1,6 +1,6 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Grid, Stack, Typography } from '@mui/joy';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
@@ -8,6 +8,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { AnimatedSection, galleryItems, SectionHeader } from '@/entities/invitation';
 import { GalleryPreviewModal } from '@/widgets/invitation';
 import { timeoutAction } from '@/shared/lib';
+import { SolidButton } from '@/shared/ui';
 
 const GalleryItems = memo(
   ({ openGalleryPreview }: { openGalleryPreview: (galleryIndex: number) => void }) => {
@@ -66,6 +67,7 @@ export function Gallery() {
   const [isGalleryPreviewOpen, setIsGalleryPreviewOpen] = useState(false);
   const [targetGalleryIndex, setTargetGalleryIndex] = useState(0);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isHideButtonVisible, setIsHideButtonVisible] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const headerRef = useRef<HTMLDivElement | null>(null);
 
@@ -100,6 +102,24 @@ export function Gallery() {
       window.scrollTo(0, scrollPosition);
     }, 10);
   }, [scrollPosition]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        const headerTop = headerRef.current.getBoundingClientRect().top;
+        const headerBottom = headerRef.current.getBoundingClientRect().bottom;
+        const viewportHeight = window.innerHeight;
+
+        setIsHideButtonVisible(headerBottom > viewportHeight && headerTop < viewportHeight);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <Stack
@@ -147,6 +167,33 @@ export function Gallery() {
         isGalleryPreviewOpen={isGalleryPreviewOpen}
         onClose={closeGalleryPreview}
       />
+
+      <AnimatePresence initial={false}>
+        {isExpanded && isHideButtonVisible && (
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            sx={{
+              position: 'fixed',
+              bottom: 10,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: '100%',
+            }}
+          >
+            <SolidButton
+              sx={{ width: 150, borderRadius: 24, fontWeight: 900 }}
+              buttonColor={'#f38585'}
+              onClick={() => handleIsExpanded(false)}
+            >
+              숨기기
+            </SolidButton>
+          </Box>
+        )}
+      </AnimatePresence>
     </Stack>
   );
 }
