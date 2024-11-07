@@ -4,7 +4,7 @@ import { Box, Stack, Typography } from '@mui/joy';
 import LinkIcon from '@mui/icons-material/Link';
 
 import KakaoTalkIcon from '@/shared/assets/images/kakao-talk-icon.png';
-import FuturIcon from '@/shared/assets/images/futur_logo.svg?react';
+// import FuturIcon from '@/shared/assets/images/futur_logo.svg?react';
 import { copyToClipboard } from '@/shared/lib';
 import { showSnackBar } from '@/shared/components';
 import { useShareKakao } from '@/entities/kakao';
@@ -42,22 +42,22 @@ export function InvitationFooter() {
           <Typography sx={{ fontSize: '0.85rem', fontWeight: 500 }}>링크주소 복사하기</Typography>
         </Box>
       </Stack>
-      {!isCompanyFooterHide && (
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Typography
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 0.5,
-              fontSize: '0.7rem',
-              fontWeight: 600,
-              color: '#666666',
-            }}
-          >
-            ⓒ 2024. CopyRight <FuturIcon width={16} height={16} /> Futur All Rights Reserved.
-          </Typography>
-        </Box>
-      )}
+      {/*{!isCompanyFooterHide && (*/}
+      {/*  <Box sx={{ display: 'flex', alignItems: 'center' }}>*/}
+      {/*    <Typography*/}
+      {/*      sx={{*/}
+      {/*        display: 'flex',*/}
+      {/*        alignItems: 'center',*/}
+      {/*        gap: 0.5,*/}
+      {/*        fontSize: '0.7rem',*/}
+      {/*        fontWeight: 600,*/}
+      {/*        color: '#666666',*/}
+      {/*      }}*/}
+      {/*    >*/}
+      {/*      ⓒ 2024. CopyRight <FuturIcon width={16} height={16} /> Futur All Rights Reserved.*/}
+      {/*    </Typography>*/}
+      {/*  </Box>*/}
+      {/*)}*/}
     </Stack>
   );
 }

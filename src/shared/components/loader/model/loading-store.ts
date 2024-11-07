@@ -5,10 +5,9 @@ import { LoadingType, LoadingTypeBase } from '@/shared/enum';
 import { LoadingStates, LoadingStoreInterface } from './loading-interfaces.ts';
 
 const loadingInitialState: LoadingStates = {
-  loadingStatuses: Object.fromEntries(Object.values(LoadingType).map((type) => [type, false])) as Record<
-    LoadingTypeBase,
-    boolean
-  >,
+  loadingStatuses: Object.fromEntries(
+    Object.values(LoadingType).map((type) => [type, false]),
+  ) as Record<LoadingTypeBase, boolean>,
   isActiveOverlay: false,
   syncLoadingText: '',
 };
@@ -41,6 +40,10 @@ export const useLoading = (type: LoadingTypeBase) =>
 export const useActiveOverlay = () => useLoadingStore((state) => state.isActiveOverlay);
 export const useSyncLoadingText = () => useLoadingStore((state) => state.syncLoadingText);
 
-export const showLoading = (type: LoadingTypeBase, syncLoadingText?: string, isActiveOverlay?: boolean) =>
-  useLoadingStore.getState().actions.showLoading(type, syncLoadingText, isActiveOverlay);
-export const hideLoading = (type: LoadingTypeBase) => useLoadingStore.getState().actions.hideLoading(type);
+export const showLoading = (
+  type: LoadingTypeBase,
+  syncLoadingText?: string,
+  isActiveOverlay?: boolean,
+) => useLoadingStore.getState().actions.showLoading(type, syncLoadingText, isActiveOverlay);
+export const hideLoading = (type: LoadingTypeBase) =>
+  useLoadingStore.getState().actions.hideLoading(type);
