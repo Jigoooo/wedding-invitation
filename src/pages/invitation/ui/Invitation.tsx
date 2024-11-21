@@ -27,6 +27,7 @@ export function Invitation() {
   return (
     <Stack
       sx={{
+        position: 'relative',
         minHeight: '100vh',
         width: '100vw',
         justifyContent: 'center',
