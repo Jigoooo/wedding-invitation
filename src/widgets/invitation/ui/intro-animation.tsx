@@ -1,7 +1,6 @@
 import { Box, Stack, Typography } from '@mui/joy';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import { timeoutAction } from '@/shared/lib';
+import { useState } from 'react';
 
 export function IntroAnimation() {
   const [isVisible, setIsVisible] = useState(true);
@@ -9,20 +8,6 @@ export function IntroAnimation() {
   const handleAnimationComplete = () => {
     setIsVisible(false);
   };
-
-  useEffect(() => {
-    if (isVisible) {
-      timeoutAction(() => {
-        document.body.style.overflow = 'hidden';
-      }, 100);
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isVisible, document.body]);
 
   return (
     <>
@@ -37,7 +22,7 @@ export function IntroAnimation() {
             position: 'fixed',
             top: 0,
             left: 0,
-            zIndex: 99999,
+            zIndex: 100,
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
             backdropFilter: 'blur(5px)',
             width: '100%',

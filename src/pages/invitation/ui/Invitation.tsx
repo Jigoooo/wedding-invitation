@@ -15,6 +15,7 @@ import {
   WeddingInformationAndInstructions,
   InvitationAccounts,
   Gallery,
+  BackgroundMusic,
 } from '@/widgets/invitation';
 
 const MIN_WIDTH = 310;
@@ -33,6 +34,8 @@ export function Invitation() {
         backgroundColor: BACKGROUND_COLOR,
       }}
     >
+      <BackgroundMusic />
+
       <Stack
         className={'selection-none'}
         sx={{

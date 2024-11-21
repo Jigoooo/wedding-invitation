@@ -18,7 +18,7 @@ export const FallingAnimation = memo(() => {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 300,
+        zIndex: 99,
         height: isMinSizeMatch ? 6200 : 6600,
         width: '100%',
         background: 'transparent',

@@ -57,7 +57,9 @@ export function WeddingInformationAndInstructions() {
             lineHeight: 2,
           }}
         >
-          식사는 결혼식 및 사진촬영이 끝난 후
+          식사는 본식 30분 전부터
+          <br />
+          2시간 동안 이용가능하며
           <br />
           웨딩홀 2층에서 뷔페식으로 진행됩니다.
           <br />
